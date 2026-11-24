@@ -1,0 +1,31 @@
+{
+  "name": "fde-vimsenterprise-landing",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Forward Deployment Engineer (FDE) Tamil Cohort Landing Page & Razorpay Pixel Funnel for fde.vimsenterprise.com",
+  "scripts": {
+    "dev:api": "node server/index.mjs",
+    "dev:web": "vite --host 127.0.0.1 --port 4173",
+    "dev": "concurrently -k \"npm:dev:api\" \"npm:dev:web\"",
+    "build": "tsc --noEmit && vite build",
+    "preview": "node server/index.mjs",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "concurrently": "^9.1.2",
+    "tailwindcss": "^4.1.14",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3"
+  }
+}
