@@ -1,21 +1,19 @@
 /**
- * Full-Funnel Meta Pixel ("Pixel Method") + Visitor Journey Telemetry Engine
+ * Full-Funnel Meta Pixel Engine
+ * Active Datasets:
+ * - 4439327462948047 (Existing VIMS Pixel 1)
+ * - 1395642289095466 (Existing VIMS Pixel 2)
+ * - 1606721668164457 ("VIMS FDE Course" Dataset)
  *
- * Tracks the complete ad-click to payment funnel:
- * 1. PageView (automatic on entry with UTM + fbclid capture)
- * 2. ViewContent (Course offer loaded with INR value)
- * 3. FDE_SectionView & FDE_ScrollDepth (25%, 50%, 75%, 100% + exact sections viewed)
- * 4. FDE_RegisterClick (records exact CTA button clicked)
- * 5. Lead (fires immediately when student submits Name + Phone + Email in Step 1)
- * 6. InitiateCheckout (fires when Razorpay order opens for Rs. 2,999 + GST)
- * 7. Purchase & CompleteRegistration (fires ONLY after signature-verified payment, deduplicated by eventID)
- * 8. FDE_PaymentDropoff (fires if checkout modal is closed without completing payment)
+ * Guarantees exactly ONE PageView per page load (fired synchronously in index.html <head>
+ * and guarded via window.__fdePageViewFired so React mount never double-fires PageView).
  */
 
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
     _fbq?: unknown;
+    __fdePageViewFired?: boolean;
     __fdePixelLog?: Array<{
       timestamp: string;
       type: "standard" | "custom";
@@ -37,7 +35,12 @@ export interface UtmAttribution {
   landing_url?: string;
 }
 
-const DEFAULT_PIXEL_IDS = ["4439327462948047", "1395642289095466"];
+export const ACTIVE_PIXEL_IDS = [
+  "4439327462948047",
+  "1395642289095466",
+  "1606721668164457"
+];
+
 const VISITOR_KEY = "vims_fde_visitor_id";
 const UTM_KEY = "vims_fde_utm";
 
@@ -47,13 +50,16 @@ const firedScrollThresholds = new Set<number>();
 
 export function getPixelIds(): string[] {
   const raw = import.meta.env.VITE_META_PIXEL_IDS as string | undefined;
+  const merged = new Set<string>(ACTIVE_PIXEL_IDS);
   if (raw && raw.trim().length > 0) {
-    return raw
-      .split(",")
-      .map((id) => id.trim())
-      .filter((id) => /^\d{8,20}$/.test(id));
+    for (const id of raw.split(",")) {
+      const clean = id.trim();
+      if (/^\d{8,20}$/.test(clean)) {
+        merged.add(clean);
+      }
+    }
   }
-  return DEFAULT_PIXEL_IDS;
+  return Array.from(merged);
 }
 
 export function getVisitorId(): string {
@@ -150,7 +156,6 @@ export function initMetaPixels(basePriceInr = 2999) {
   captureUtmAttribution();
   const pixelIds = getPixelIds();
 
-  // Inject official Meta fbevents.js snippet safely
   if (!window.fbq) {
     const n: (...args: unknown[]) => void = function (...args: unknown[]) {
       // @ts-expect-error Meta queue convention
@@ -176,27 +181,24 @@ export function initMetaPixels(basePriceInr = 2999) {
     const script = document.createElement("script");
     script.async = true;
     script.src = "https://connect.facebook.net/en_US/fbevents.js";
-    const firstScript = document.getElementsByTagName("script")[0];
-    if (firstScript?.parentNode) {
-      firstScript.parentNode.insertBefore(script, firstScript);
-    } else {
-      document.head.appendChild(script);
+    document.head.appendChild(script);
+
+    for (const id of pixelIds) {
+      window.fbq?.("init", id);
     }
   }
 
-  for (const id of pixelIds) {
-    window.fbq?.("init", id);
+  // Only fire PageView here if index.html <head> did not already fire it (guarantees 1 PageView/load)
+  if (!window.__fdePageViewFired) {
+    window.fbq?.("track", "PageView");
+    window.__fdePageViewFired = true;
   }
+  recordLocalPixelLog("standard", "PageView", { pixels: pixelIds });
 
-  // 1. PageView
-  window.fbq?.("track", "PageView");
-  recordLocalPixelLog("standard", "PageView");
-
-  // 2. ViewContent (Course landing page viewed)
   const viewParams = {
-    content_name: "Forward Deployment Engineer (FDE) - 8 Week Tamil Cohort",
-    content_category: "AI Engineering Course",
-    content_ids: ["vims-fde-tamil-8w"],
+    content_name: "VIMS FDE Course - Starts 12th December",
+    content_category: "AI Engineering Program",
+    content_ids: ["vims-fde-dec12"],
     content_type: "product",
     value: basePriceInr,
     currency: "INR"
@@ -210,10 +212,7 @@ export function trackSectionReached(sectionId: string) {
   if (firedSections.has(sectionId)) return;
   firedSections.add(sectionId);
 
-  const params = {
-    section: sectionId,
-    program: "VIMS_FDE_TAMIL"
-  };
+  const params = { section: sectionId, program: "VIMS_FDE_COURSE" };
   window.fbq?.("trackCustom", "FDE_SectionView", params);
   recordLocalPixelLog("custom", "FDE_SectionView", params);
   void sendTelemetry({ event: "section_view", section: sectionId });
@@ -223,22 +222,14 @@ export function trackScrollMilestone(percent: 25 | 50 | 75 | 100) {
   if (firedScrollThresholds.has(percent)) return;
   firedScrollThresholds.add(percent);
 
-  const params = {
-    scroll_percent: percent,
-    program: "VIMS_FDE_TAMIL"
-  };
+  const params = { scroll_percent: percent, program: "VIMS_FDE_COURSE" };
   window.fbq?.("trackCustom", `FDE_Scroll_${percent}`, params);
   recordLocalPixelLog("custom", `FDE_Scroll_${percent}`, params);
   void sendTelemetry({ event: "scroll_depth", scrollDepth: percent });
 }
 
 export function trackRegisterCtaClick(placement: string, remainingSeats: number) {
-  const params = {
-    placement,
-    remaining_seats: remainingSeats,
-    value: 2999,
-    currency: "INR"
-  };
+  const params = { placement, remaining_seats: remainingSeats, value: 2999, currency: "INR" };
   window.fbq?.("trackCustom", "FDE_RegisterClick", params);
   recordLocalPixelLog("custom", "FDE_RegisterClick", params);
   void sendTelemetry({ event: "cta_click", ctaSource: placement });
@@ -246,7 +237,7 @@ export function trackRegisterCtaClick(placement: string, remainingSeats: number)
 
 export function trackLeadSubmitted(eventId: string, profile: string) {
   const params = {
-    content_name: "Forward Deployment Engineer (FDE) Lead",
+    content_name: "VIMS FDE Course Registration Lead",
     content_category: profile,
     value: 2999,
     currency: "INR"
@@ -257,8 +248,8 @@ export function trackLeadSubmitted(eventId: string, profile: string) {
 
 export function trackInitiateCheckout(eventId: string, totalInr: number) {
   const params = {
-    content_name: "Forward Deployment Engineer (FDE) Seat Enrollment",
-    content_ids: ["vims-fde-tamil-8w"],
+    content_name: "VIMS FDE Course Seat Enrollment",
+    content_ids: ["vims-fde-dec12"],
     num_items: 1,
     value: totalInr,
     currency: "INR"
@@ -274,8 +265,8 @@ export function trackVerifiedPurchase(
   seatNumber: number
 ) {
   const purchaseParams = {
-    content_name: "Forward Deployment Engineer (FDE) - 8 Week Tamil Cohort",
-    content_ids: ["vims-fde-tamil-8w"],
+    content_name: "VIMS FDE Course - Starts 12th December",
+    content_ids: ["vims-fde-dec12"],
     content_type: "product",
     value: totalInr,
     currency: "INR",
@@ -290,7 +281,7 @@ export function trackVerifiedPurchase(
     "track",
     "CompleteRegistration",
     {
-      content_name: "FDE Cohort Seat Confirmed",
+      content_name: "VIMS FDE Course Seat Confirmed",
       status: "confirmed",
       value: totalInr,
       currency: "INR"
@@ -301,7 +292,7 @@ export function trackVerifiedPurchase(
 }
 
 export function trackPaymentDropoff(reason: string) {
-  const params = { reason, program: "VIMS_FDE_TAMIL" };
+  const params = { reason, program: "VIMS_FDE_COURSE" };
   window.fbq?.("trackCustom", "FDE_PaymentDropoff", params);
   recordLocalPixelLog("custom", "FDE_PaymentDropoff", params);
 }

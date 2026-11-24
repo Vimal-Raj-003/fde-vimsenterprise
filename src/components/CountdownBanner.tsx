@@ -1,69 +1,49 @@
 import { useEffect, useState } from "react";
 
 interface CountdownProps {
-  startIso: string;
-  endIso: string;
+  targetIso: string;
+  enrolledSeats: number;
+  totalSeats: number;
+  compact?: boolean;
 }
 
-interface TimeParts {
-  phase: "upcoming" | "active" | "closed";
+interface TimeLeft {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
 }
 
-function computeTimeParts(startIso: string, endIso: string): TimeParts {
-  const now = Date.now();
-  const startMs = new Date(startIso).getTime();
-  const endMs = new Date(endIso).getTime();
-
-  let targetMs = endMs;
-  let phase: TimeParts["phase"] = "active";
-
-  if (now < startMs) {
-    phase = "upcoming";
-    targetMs = startMs;
-  } else if (now >= endMs) {
-    phase = "closed";
-    return { phase, days: 0, hours: 0, minutes: 0, seconds: 0 };
-  }
-
-  const diff = Math.max(0, targetMs - now);
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-
-  return { phase, days, hours, minutes, seconds };
+function getTimeLeft(targetIso: string): TimeLeft {
+  const diff = Math.max(0, new Date(targetIso).getTime() - Date.now());
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60)
+  };
 }
 
 function pad2(n: number): string {
   return String(n).padStart(2, "0");
 }
 
-/**
- * Shown EXCLUSIVELY inside the Registration Modal when the user clicks "Register Now".
- */
-export function ModalCohortStatusPanel({
-  startIso,
-  endIso,
+export function LiveSeatAndCountdownCard({
+  targetIso,
   enrolledSeats,
-  totalSeats
-}: CountdownProps & {
-  enrolledSeats: number;
-  totalSeats: number;
-}) {
-  const [time, setTime] = useState<TimeParts>(() => computeTimeParts(startIso, endIso));
+  totalSeats,
+  compact = false
+}: CountdownProps) {
+  const [time, setTime] = useState<TimeLeft>(() => getTimeLeft(targetIso));
   const remaining = Math.max(0, totalSeats - enrolledSeats);
   const fillPercent = Math.min(100, Math.round((enrolledSeats / totalSeats) * 100));
 
   useEffect(() => {
     const id = window.setInterval(() => {
-      setTime(computeTimeParts(startIso, endIso));
+      setTime(getTimeLeft(targetIso));
     }, 1000);
     return () => window.clearInterval(id);
-  }, [startIso, endIso]);
+  }, [targetIso]);
 
   const boxes = [
     { value: pad2(time.days), label: "Days" },
@@ -73,16 +53,23 @@ export function ModalCohortStatusPanel({
   ];
 
   return (
-    <div className="rounded-xl border border-[#D4AF7A]/28 bg-[#0B1310]/85 p-4 space-y-3.5">
-      {/* Live 50-Seat Allocation Meter */}
+    <div
+      className={`rounded-2xl border border-blue-100 bg-white shadow-xs ${
+        compact ? "p-3.5 space-y-3" : "p-4 sm:p-5 space-y-4"
+      }`}
+    >
+      {/* Live Seat Bar */}
       <div>
-        <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-          <span className="flex items-center gap-2 font-medium text-[#F5F1E8]">
-            <span className="h-2 w-2 rounded-full bg-[#52B788] animate-pulse" />
-            Cohort Seat Availability ({totalSeats} Total)
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+          <span className="flex items-center gap-2 font-bold text-slate-900">
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>
+              <span className="tabular-nums">{enrolledSeats}</span> Booked · Only{" "}
+              <span className="text-blue-700 tabular-nums">{remaining} Seats Left</span>
+            </span>
           </span>
-          <span className="font-mono-tech text-xs font-medium text-[#D4AF7A] tabular-nums">
-            {enrolledSeats} Enrolled · {remaining} Seats Left
+          <span className="font-mono-tech text-xs font-semibold text-slate-500 tabular-nums">
+            {enrolledSeats}/{totalSeats} Seats
           </span>
         </div>
 
@@ -91,42 +78,38 @@ export function ModalCohortStatusPanel({
           aria-valuenow={enrolledSeats}
           aria-valuemin={0}
           aria-valuemax={totalSeats}
-          aria-label="Cohort seats filled"
-          className="mt-2 h-2 w-full overflow-hidden rounded-full bg-[#F5F1E8]/10"
+          aria-label="Booked seats"
+          className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-slate-100"
         >
           <div
             style={{ width: `${fillPercent}%` }}
-            className="h-full rounded-full bg-gradient-to-r from-[#C69C63] to-[#E5C594] transition-all duration-500"
+            className="h-full rounded-full bg-gradient-to-r from-blue-600 to-emerald-500 transition-all duration-500"
           />
         </div>
       </div>
 
-      {/* Live Countdown Window (Today 4:00 PM IST -> Next Tue 4:00 PM IST) */}
-      <div className="pt-2.5 border-t border-[#F5F1E8]/10">
-        <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] text-[#B8B2A6] mb-2">
-          <span>
-            {time.phase === "upcoming"
-              ? "Official Window Opens Today 4:00 PM IST (Early Access Active)"
-              : time.phase === "active"
-                ? "Registration Window Closes Next Tuesday 4:00 PM IST"
-                : "Registration Window Closed"}
+      {/* Live Countdown to Dec 12 Class */}
+      <div className="border-t border-slate-100 pt-3">
+        <div className="flex flex-wrap items-center justify-between gap-1 text-xs mb-2">
+          <span className="font-semibold text-slate-700">
+            Batch Starts: <strong className="text-blue-700">12th December 2026</strong>
           </span>
-          <span className="font-mono-tech text-[10px] text-[#D4AF7A]">
-            NOV 24, 4 PM TO DEC 01, 4 PM
+          <span className="font-mono-tech text-[11px] font-semibold text-emerald-700">
+            TIME REMAINING
           </span>
         </div>
 
         <div className="grid grid-cols-4 gap-2">
-          {boxes.map((box) => (
+          {boxes.map((b) => (
             <div
-              key={box.label}
-              className="flex flex-col items-center justify-center rounded-lg border border-[#D4AF7A]/18 bg-[#121F1A] py-2 px-1.5"
+              key={b.label}
+              className="flex flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-slate-50/80 py-2 px-1"
             >
-              <span className="font-luxury text-xl font-semibold text-[#F5F1E8] tabular-nums leading-none">
-                {box.value}
+              <span className="text-lg sm:text-xl font-extrabold text-slate-900 tabular-nums leading-none">
+                {b.value}
               </span>
-              <span className="text-[10px] uppercase tracking-wider text-[#858075] mt-1">
-                {box.label}
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mt-1">
+                {b.label}
               </span>
             </div>
           ))}

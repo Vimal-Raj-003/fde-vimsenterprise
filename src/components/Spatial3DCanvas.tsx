@@ -4,13 +4,6 @@ export function damp(current: number, target: number, rate: number, dt: number):
   return current + (target - current) * (1 - Math.exp(-dt * rate));
 }
 
-export interface Projected3D {
-  x: number;
-  y: number;
-  scale: number;
-  z: number;
-}
-
 export function project3D(
   x: number,
   y: number,
@@ -21,7 +14,7 @@ export function project3D(
   pitch: number,
   focal = 560,
   camZ = 700
-): Projected3D {
+) {
   const cry = Math.cos(yaw);
   const sry = Math.sin(yaw);
   const crx = Math.cos(pitch);
@@ -42,60 +35,36 @@ export function project3D(
   };
 }
 
-interface LuxuryNode {
-  x: number;
-  y: number;
-  z: number;
-  gold: boolean;
-}
-
-interface DustMote {
-  x: number;
-  y: number;
-  z: number;
-  radius: number;
-  driftSpeed: number;
-  phase: number;
-  gold: boolean;
-}
-
-const CONSTELLATION_NODES: LuxuryNode[] = [
-  { x: -320, y: -150, z: -110, gold: true },
-  { x: -170, y: -210, z: 95, gold: false },
-  { x: -230, y: 95, z: 75, gold: false },
-  { x: -45, y: -45, z: -145, gold: true },
-  { x: 35, y: 145, z: 120, gold: false },
-  { x: 155, y: -140, z: 55, gold: true },
-  { x: 215, y: 50, z: -115, gold: false },
-  { x: 330, y: -70, z: 85, gold: true },
-  { x: 310, y: 155, z: -40, gold: false },
-  { x: -95, y: 195, z: -95, gold: true },
-  { x: 90, y: -225, z: -70, gold: false },
-  { x: -345, y: 20, z: -155, gold: false }
+const NODES = [
+  { x: -320, y: -140, z: -100, primary: true },
+  { x: -165, y: -200, z: 90, primary: false },
+  { x: -225, y: 95, z: 75, primary: false },
+  { x: -40, y: -40, z: -135, primary: true },
+  { x: 35, y: 140, z: 115, primary: false },
+  { x: 155, y: -135, z: 55, primary: true },
+  { x: 215, y: 50, z: -110, primary: false },
+  { x: 325, y: -65, z: 85, primary: true },
+  { x: 300, y: 150, z: -40, primary: false },
+  { x: -95, y: 185, z: -90, primary: true }
 ];
 
-const CONSTELLATION_EDGES: Array<[number, number]> = [
+const EDGES: Array<[number, number]> = [
   [0, 1],
-  [0, 11],
-  [11, 2],
+  [0, 2],
   [1, 3],
   [2, 3],
   [2, 4],
   [3, 5],
   [3, 4],
   [4, 6],
-  [5, 10],
-  [10, 7],
   [5, 7],
   [6, 8],
   [7, 8],
-  [9, 4],
-  [9, 6]
+  [9, 4]
 ];
 
 /**
- * Full-Viewport Seamless 3D Luxury Atmospheric Canvas.
- * Fixed across the entire experience so sections flow continuously without a single seam or cut.
+ * Bright, Seamless Light-Mode 3D Atmospheric Canvas (Zero dark gloom, zero section cuts).
  */
 export function FullPageLuxuryCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -112,110 +81,70 @@ export function FullPageLuxuryCanvas() {
     let rafId = 0;
     let lastTime = performance.now();
 
-    let baseYaw = 0.18;
-    let pointerX = 0;
-    let pointerY = 0;
+    let baseYaw = 0.2;
+    let ptrX = 0;
+    let ptrY = 0;
     let smoothX = 0;
     let smoothY = 0;
-    let scrollOffset = 0;
-    let smoothScroll = 0;
 
-    const motes: DustMote[] = Array.from({ length: 34 }).map((_, i) => ({
-      x: ((i * 97) % 100) / 100,
-      y: ((i * 53) % 100) / 100,
-      z: 0.4 + ((i * 31) % 60) / 60,
-      radius: 0.8 + (i % 3) * 0.65,
-      driftSpeed: 0.008 + (i % 5) * 0.003,
-      phase: i * 0.7,
-      gold: i % 2 === 0
-    }));
-
-    const pulses = CONSTELLATION_EDGES.map((_, idx) => ({
+    const pulses = EDGES.map((_, idx) => ({
       edgeIdx: idx,
-      progress: (idx * 0.17) % 1,
-      speed: 0.11 + (idx % 4) * 0.035,
-      gold: idx % 2 === 0
+      progress: (idx * 0.19) % 1,
+      speed: 0.14 + (idx % 4) * 0.04,
+      emerald: idx % 2 === 0
     }));
 
     const onPointerMove = (e: PointerEvent) => {
       if (!width || !height) return;
-      pointerX = (e.clientX / width - 0.5) * 2;
-      pointerY = (e.clientY / height - 0.5) * 2;
-    };
-
-    const onScroll = () => {
-      scrollOffset = window.scrollY * 0.00045;
+      ptrX = (e.clientX / width - 0.5) * 2;
+      ptrY = (e.clientY / height - 0.5) * 2;
     };
 
     window.addEventListener("pointermove", onPointerMove, { passive: true });
-    window.addEventListener("scroll", onScroll, { passive: true });
 
     const paint = (dt: number) => {
       ctx.clearRect(0, 0, width, height);
       if (width < 40 || height < 40) return;
 
-      baseYaw += dt * 0.055;
-      smoothX = damp(smoothX, pointerX, 2.8, dt || 0.016);
-      smoothY = damp(smoothY, pointerY, 2.8, dt || 0.016);
-      smoothScroll = damp(smoothScroll, scrollOffset, 3.2, dt || 0.016);
+      baseYaw += dt * 0.07;
+      smoothX = damp(smoothX, ptrX, 3.0, dt || 0.016);
+      smoothY = damp(smoothY, ptrY, 3.0, dt || 0.016);
 
-      // 1. Soft atmospheric emerald & champagne gold ambient light pools
-      const pool1X = width * (0.72 + smoothX * 0.04);
-      const pool1Y = height * (0.28 + smoothY * 0.04);
-      const grad1 = ctx.createRadialGradient(
-        pool1X,
-        pool1Y,
+      // Soft airy sky-blue & mint-emerald ambient washes
+      const g1 = ctx.createRadialGradient(
+        width * 0.78,
+        height * 0.22,
         20,
-        pool1X,
-        pool1Y,
-        Math.max(width, height) * 0.62
+        width * 0.78,
+        height * 0.22,
+        Math.max(width, height) * 0.55
       );
-      grad1.addColorStop(0, "rgba(38, 88, 68, 0.24)");
-      grad1.addColorStop(0.5, "rgba(21, 48, 38, 0.11)");
-      grad1.addColorStop(1, "rgba(11, 19, 16, 0)");
-      ctx.fillStyle = grad1;
+      g1.addColorStop(0, "rgba(37, 99, 235, 0.075)");
+      g1.addColorStop(0.6, "rgba(16, 185, 129, 0.04)");
+      g1.addColorStop(1, "rgba(246, 248, 251, 0)");
+      ctx.fillStyle = g1;
       ctx.fillRect(0, 0, width, height);
 
-      const pool2X = width * (0.22 - smoothX * 0.03);
-      const pool2Y = height * (0.74 - smoothY * 0.03);
-      const grad2 = ctx.createRadialGradient(
-        pool2X,
-        pool2Y,
-        10,
-        pool2X,
-        pool2Y,
-        Math.max(width, height) * 0.52
+      const g2 = ctx.createRadialGradient(
+        width * 0.18,
+        height * 0.75,
+        20,
+        width * 0.18,
+        height * 0.75,
+        Math.max(width, height) * 0.5
       );
-      grad2.addColorStop(0, "rgba(212, 175, 122, 0.085)");
-      grad2.addColorStop(0.55, "rgba(32, 68, 54, 0.06)");
-      grad2.addColorStop(1, "rgba(11, 19, 16, 0)");
-      ctx.fillStyle = grad2;
+      g2.addColorStop(0, "rgba(5, 150, 105, 0.055)");
+      g2.addColorStop(1, "rgba(246, 248, 251, 0)");
+      ctx.fillStyle = g2;
       ctx.fillRect(0, 0, width, height);
 
-      // 2. Depth-of-field floating luminous gold & jade dust motes
-      for (const m of motes) {
-        m.y -= dt * m.driftSpeed * m.z;
-        if (m.y < -0.05) m.y = 1.05;
-        const mx = (m.x + Math.sin(baseYaw * 2 + m.phase) * 0.015 + smoothX * 0.012 * m.z) * width;
-        const my = ((m.y - (smoothScroll * 0.35 * m.z) % 1 + 1) % 1) * height;
-        const alpha = 0.12 + m.z * 0.22;
+      const yaw = baseYaw + smoothX * 0.2;
+      const pitch = -0.12 + smoothY * 0.12;
+      const cx = width * 0.5;
+      const cy = height * 0.46;
+      const scaleFactor = width < 640 ? 0.68 : 1.08;
 
-        ctx.beginPath();
-        ctx.arc(mx, my, m.radius * m.z * 1.4, 0, Math.PI * 2);
-        ctx.fillStyle = m.gold
-          ? `rgba(212, 175, 122, ${alpha.toFixed(3)})`
-          : `rgba(82, 183, 136, ${(alpha * 0.75).toFixed(3)})`;
-        ctx.fill();
-      }
-
-      // 3. 3D Rotating Architectural Silk Constellation
-      const yaw = baseYaw + smoothX * 0.22 + smoothScroll * 0.65;
-      const pitch = -0.12 + smoothY * 0.14;
-      const cx = width >= 1024 ? width * 0.56 : width * 0.5;
-      const cy = height * 0.48;
-      const scaleFactor = width < 640 ? 0.65 : width < 1024 ? 0.88 : 1.12;
-
-      const projected = CONSTELLATION_NODES.map((n) =>
+      const projected = NODES.map((n) =>
         project3D(
           n.x * scaleFactor,
           n.y * scaleFactor,
@@ -227,69 +156,47 @@ export function FullPageLuxuryCanvas() {
         )
       );
 
-      for (const [aIdx, bIdx] of CONSTELLATION_EDGES) {
+      for (const [aIdx, bIdx] of EDGES) {
         const a = projected[aIdx]!;
         const b = projected[bIdx]!;
         const midX = (a.x + b.x) * 0.5;
-        const midY = (a.y + b.y) * 0.5 - 22 * ((a.scale + b.scale) * 0.5);
-        const alpha = Math.max(0.03, Math.min(0.14, ((a.scale + b.scale) * 0.5) * 0.095));
-
+        const midY = (a.y + b.y) * 0.5 - 18;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.quadraticCurveTo(midX, midY, b.x, b.y);
-        ctx.strokeStyle = `rgba(212, 175, 122, ${alpha.toFixed(3)})`;
-        ctx.lineWidth = 0.9;
+        ctx.strokeStyle = "rgba(30, 58, 138, 0.075)";
+        ctx.lineWidth = 1;
         ctx.stroke();
       }
 
       for (const pkt of pulses) {
         pkt.progress = (pkt.progress + dt * pkt.speed) % 1;
-        const [aIdx, bIdx] = CONSTELLATION_EDGES[pkt.edgeIdx]!;
+        const [aIdx, bIdx] = EDGES[pkt.edgeIdx]!;
         const a = projected[aIdx]!;
         const b = projected[bIdx]!;
         const midX = (a.x + b.x) * 0.5;
-        const midY = (a.y + b.y) * 0.5 - 22 * ((a.scale + b.scale) * 0.5);
-
+        const midY = (a.y + b.y) * 0.5 - 18;
         const u = pkt.progress;
         const q = 1 - u;
         const px = q * q * a.x + 2 * q * u * midX + u * u * b.x;
         const py = q * q * a.y + 2 * q * u * midY + u * u * b.y;
-        const r = Math.max(1.4, 2.5 * ((a.scale + b.scale) * 0.5));
 
         ctx.beginPath();
-        ctx.arc(px, py, r * 2.8, 0, Math.PI * 2);
-        ctx.fillStyle = pkt.gold
-          ? "rgba(212, 175, 122, 0.12)"
-          : "rgba(82, 183, 136, 0.11)";
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(px, py, r, 0, Math.PI * 2);
-        ctx.fillStyle = pkt.gold
-          ? "rgba(229, 197, 148, 0.65)"
-          : "rgba(82, 183, 136, 0.62)";
+        ctx.arc(px, py, 2.4, 0, Math.PI * 2);
+        ctx.fillStyle = pkt.emerald
+          ? "rgba(5, 150, 105, 0.45)"
+          : "rgba(29, 78, 216, 0.45)";
         ctx.fill();
       }
 
       for (let i = 0; i < projected.length; i++) {
         const p = projected[i]!;
-        const node = CONSTELLATION_NODES[i]!;
-        const r = Math.max(1.8, 3.2 * p.scale);
-        const alpha = Math.max(0.12, Math.min(0.46, p.scale * 0.36));
-
+        const node = NODES[i]!;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, r + 3, 0, Math.PI * 2);
-        ctx.strokeStyle = node.gold
-          ? `rgba(212, 175, 122, ${(alpha * 0.55).toFixed(3)})`
-          : `rgba(245, 241, 232, ${(alpha * 0.3).toFixed(3)})`;
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = node.gold
-          ? `rgba(212, 175, 122, ${alpha.toFixed(3)})`
-          : `rgba(245, 241, 232, ${(alpha * 0.7).toFixed(3)})`;
+        ctx.arc(p.x, p.y, 2.8 * p.scale, 0, Math.PI * 2);
+        ctx.fillStyle = node.primary
+          ? "rgba(29, 78, 216, 0.28)"
+          : "rgba(15, 23, 42, 0.18)";
         ctx.fill();
       }
     };
@@ -320,7 +227,6 @@ export function FullPageLuxuryCanvas() {
     return () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("scroll", onScroll);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
@@ -334,20 +240,16 @@ export function FullPageLuxuryCanvas() {
   );
 }
 
-/**
- * Tactile 3D Perspective Specular Tilt Wrapper with Warm Champagne Sheen.
- */
 export function Tilt3DCard({
   children,
   className = "",
-  maxTiltDeg = 4.2
+  maxTiltDeg = 3.5
 }: {
   children: ReactNode;
   className?: string;
   maxTiltDeg?: number;
 }) {
   const cardRef = useRef<HTMLDivElement | null>(null);
-  const sheenRef = useRef<HTMLDivElement | null>(null);
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = cardRef.current;
@@ -360,20 +262,13 @@ export function Tilt3DCard({
     const rotY = (nx - 0.5) * 2 * maxTiltDeg;
     const rotX = (0.5 - ny) * 2 * maxTiltDeg;
 
-    el.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(4px)`;
-    if (sheenRef.current) {
-      sheenRef.current.style.opacity = "1";
-      sheenRef.current.style.background = `radial-gradient(460px circle at ${(nx * 100).toFixed(1)}% ${(ny * 100).toFixed(1)}%, rgba(212,175,122,0.10), transparent 62%)`;
-    }
+    el.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(3px)`;
   };
 
   const handlePointerLeave = () => {
     const el = cardRef.current;
     if (!el) return;
     el.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
-    if (sheenRef.current) {
-      sheenRef.current.style.opacity = "0";
-    }
   };
 
   return (
@@ -383,15 +278,10 @@ export function Tilt3DCard({
       onPointerLeave={handlePointerLeave}
       style={{
         transformStyle: "preserve-3d",
-        transition: "transform 320ms cubic-bezier(0.22, 1, 0.36, 1)"
+        transition: "transform 280ms cubic-bezier(0.22, 1, 0.36, 1)"
       }}
       className={`relative ${className}`}
     >
-      <div
-        ref={sheenRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] opacity-0 transition-opacity duration-300"
-      />
       {children}
     </div>
   );

@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
+import { LiveSeatAndCountdownCard } from "./components/CountdownBanner";
 import FunnelInspectorModal from "./components/FunnelInspectorModal";
 import {
   AutomatedCurriculumCarousel,
-  AutomatedQuotesCarousel,
-  ProductionSystemsCarousel
+  AutomatedQuotesCarousel
 } from "./components/LuxuryCarousels";
-import RegistrationModal from "./components/RegistrationModal";
+import RegistrationModal, { EnrollmentFormWidget } from "./components/RegistrationModal";
 import { FullPageLuxuryCanvas, Tilt3DCard } from "./components/Spatial3DCanvas";
-import { FAQ_ITEMS, MENTORS } from "./data/fdeData";
+import {
+  CLASS_SCHEDULE,
+  CLIENT_LOGOS,
+  FAQ_ITEMS,
+  MENTORS,
+  VISUAL_PROJECTS,
+  WHY_FDE_CARDS
+} from "./data/fdeData";
 import {
   initMetaPixels,
   trackRegisterCtaClick,
@@ -52,18 +59,17 @@ const DEFAULT_COHORT: CohortStatus = {
   },
   window: {
     startIso: (import.meta.env.VITE_REG_START_ISO as string) || "2026-11-24T16:00:00+05:30",
-    endIso: (import.meta.env.VITE_REG_END_ISO as string) || "2026-12-01T16:00:00+05:30"
+    endIso: (import.meta.env.VITE_REG_END_ISO as string) || CLASS_SCHEDULE.targetIso
   },
   paymentMode: "sandbox_ready"
 };
 
 const NAV_LINKS = [
   { href: "#overview", label: "Overview" },
-  { href: "#perspective", label: "Philosophy" },
-  { href: "#curriculum", label: "Curriculum" },
-  { href: "#institution", label: "Institution" },
-  { href: "#mentors", label: "Faculty" },
-  { href: "#enrollment", label: "Tuition" },
+  { href: "#schedule", label: "Date & Timing" },
+  { href: "#projects", label: "What You Build" },
+  { href: "#curriculum", label: "Syllabus" },
+  { href: "#mentors", label: "Mentors" },
   { href: "#faq", label: "FAQ" }
 ];
 
@@ -96,9 +102,15 @@ export default function App() {
         const res = await fetch("/api/fde/cohort-status");
         if (!res.ok) return;
         const data = (await res.json()) as CohortStatus;
-        setCohort(data);
+        setCohort({
+          ...data,
+          window: {
+            ...data.window,
+            endIso: CLASS_SCHEDULE.targetIso
+          }
+        });
       } catch {
-        // Keep graceful fallback
+        // Graceful fallback
       }
     }
 
@@ -110,12 +122,13 @@ export default function App() {
   useEffect(() => {
     const sectionIds = [
       "overview",
-      "perspective",
+      "schedule",
+      "projects",
+      "why-fde",
       "curriculum",
-      "institution",
+      "credibility",
       "mentors",
-      "reflections",
-      "enrollment",
+      "reviews",
       "faq"
     ];
 
@@ -160,37 +173,38 @@ export default function App() {
   }
 
   return (
-    <div id="top" className="relative min-h-screen text-[#F5F1E8]">
-      {/* CONTINUOUS SEAMLESS 3D LUXURY ATMOSPHERIC BACKGROUND (No section seams anywhere) */}
+    <div id="top" className="relative min-h-screen text-slate-900">
+      {/* SEAMLESS LIGHT-MODE 3D BACKGROUND */}
       <FullPageLuxuryCanvas />
 
-      {/* MINIMAL FLOATING GLASS HEADER */}
-      <header className="sticky top-0 z-40 w-full bg-[#0B1310]/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
-          <a
-            href="#top"
-            className="inline-flex min-h-11 shrink-0 items-center gap-3 focus-visible:outline-2 focus-visible:outline-[#D4AF7A]"
-          >
-            <span className="font-luxury flex h-9 w-9 items-center justify-center rounded-full border border-[#D4AF7A]/45 bg-[#121F1A] text-lg font-semibold text-[#D4AF7A]">
-              V
-            </span>
+      {/* CLEAN LIGHT HEADER WITH OFFICIAL VIMS LOGO */}
+      <header className="sticky top-0 z-40 w-full bg-[#F6F8FB]/85 backdrop-blur-xl border-b border-slate-200/60">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          <a href="#top" className="inline-flex items-center gap-2.5 shrink-0">
+            <img
+              src="/images/vims-logo.png"
+              alt="VIMS Enterprise Logo"
+              width={38}
+              height={38}
+              className="h-9 w-9 rounded-lg object-contain"
+            />
             <div className="leading-tight">
-              <div className="font-luxury text-xl font-semibold tracking-wide text-[#F5F1E8]">
-                VIMS <span className="text-[#D4AF7A]">Academy</span>
+              <div className="text-base sm:text-lg font-extrabold tracking-tight text-slate-950">
+                VIMS <span className="text-blue-700">Academy</span>
               </div>
-              <div className="text-[10px] tracking-[0.18em] uppercase text-[#858075]">
-                VIMS Enterprise
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+                Powered by VIMS Enterprise
               </div>
             </div>
           </a>
 
           <nav aria-label="Primary Navigation" className="hidden lg:block">
-            <ul className="flex items-center gap-7">
+            <ul className="flex items-center gap-6">
               {NAV_LINKS.map((link) => (
-                <li key={link.href} className="shrink-0">
+                <li key={link.href}>
                   <a
                     href={link.href}
-                    className="inline-flex min-h-11 items-center whitespace-nowrap text-xs font-medium tracking-[0.12em] uppercase text-[#B8B2A6] transition-colors hover:text-[#D4AF7A] focus-visible:outline-2 focus-visible:outline-[#D4AF7A]"
+                    className="text-sm font-semibold text-slate-600 transition-colors hover:text-blue-700"
                   >
                     {link.label}
                   </a>
@@ -199,20 +213,21 @@ export default function App() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3">
-            <a
-              href="#enrollment"
-              className="hidden sm:inline-flex min-h-10 items-center rounded-full border border-[#D4AF7A]/35 bg-[#D4AF7A]/8 px-5 text-xs font-semibold tracking-[0.1em] uppercase text-[#D4AF7A] transition-colors hover:bg-[#D4AF7A]/18"
+          <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={() => openRegisterModal("header_cta")}
+              className="btn-primary-trust hidden sm:inline-flex min-h-10 cursor-pointer items-center rounded-xl px-5 text-xs sm:text-sm font-bold"
             >
-              Program Details
-            </a>
+              Register Now
+            </button>
 
             <button
               type="button"
               aria-expanded={mobileMenuOpen}
-              aria-label="Toggle navigation menu"
+              aria-label="Toggle menu"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="lg:hidden inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#D4AF7A]/30 bg-[#121F1A] text-sm text-[#F5F1E8]"
+              className="lg:hidden inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700"
             >
               {mobileMenuOpen ? "✕" : "☰"}
             </button>
@@ -220,14 +235,14 @@ export default function App() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#0E1814]/95 backdrop-blur-xl px-5 py-5">
+          <div className="lg:hidden border-t border-slate-200 bg-white px-4 py-4 shadow-lg">
             <ul className="space-y-1">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex min-h-11 items-center rounded-lg px-3 text-xs font-medium tracking-[0.14em] uppercase text-[#F5F1E8] hover:text-[#D4AF7A]"
+                    className="flex min-h-10 items-center rounded-lg px-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
                   >
                     {link.label}
                   </a>
@@ -238,414 +253,372 @@ export default function App() {
         )}
       </header>
 
-      {/* CONTINUOUS FLOWING MAIN EXPERIENCE (Zero horizontal dividers, zero background breaks) */}
-      <main className="relative z-10 space-y-24 sm:space-y-32 pt-8 sm:pt-14 pb-24">
-        {/* 1. EDITORIAL LUXURY HERO + AUTOMATED 3D ARCHITECTURE CAROUSEL */}
-        <section id="overview" className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex flex-wrap items-center gap-2.5 rounded-full border border-[#D4AF7A]/25 bg-[#121F1A]/70 px-4 py-1.5 text-xs">
-                <span className="tracking-[0.14em] uppercase text-[#D4AF7A] font-medium">
-                  8-Week Live Cohort
-                </span>
-                <span className="text-[#F5F1E8]/25">·</span>
-                <span className="text-[#B8B2A6]">Live Sessions Conducted in Tamil</span>
+      {/* SEAMLESS CONTINUOUS FLOWING LIGHT SECTIONS */}
+      <main className="relative z-10 space-y-16 sm:space-y-22 pt-8 sm:pt-12 pb-20">
+        {/* 1. HERO: CLEAR STUDENT/PRO PITCH + VISIBLE SEATS/COUNTDOWN + DIRECT REGISTRATION FORM */}
+        <section id="overview" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+            {/* Left 7 Cols */}
+            <div className="lg:col-span-7 space-y-5">
+              <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-xs font-bold text-blue-800">
+                <span>For College Students &amp; Working Professionals</span>
+                <span>·</span>
+                <span className="text-emerald-700">Live in Tamil</span>
               </div>
 
-              <h1 className="font-luxury text-4xl sm:text-5xl lg:text-[52px] font-semibold text-[#F5F1E8] leading-[1.12]">
-                Architect and deploy the{" "}
-                <span className="italic text-[#D4AF7A]">AI systems</span> that power modern
-                enterprises.
+              <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold tracking-tight text-slate-950 leading-[1.15]">
+                Become a{" "}
+                <span className="text-blue-700">Forward Deployment Engineer (FDE)</span> &amp;
+                Deploy Real-World AI.
               </h1>
 
-              <p className="text-sm sm:text-[15.5px] text-[#B8B2A6] leading-[1.8] max-w-xl">
-                Step into the role of a{" "}
-                <strong className="font-medium text-[#F5F1E8]">
-                  Forward Deployment Engineer (FDE)
-                </strong>
-                . Move beyond isolated prompts and notebooks to build grounded Enterprise RAG,
-                tool-calling AI agents, and resilient cloud APIs. Taught live in{" "}
-                <strong className="font-medium text-[#F5F1E8]">Tamil</strong> by practicing
-                engineers from award-winning{" "}
-                <strong className="font-medium text-[#F5F1E8]">VIMS Enterprise</strong>.
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+                Learn to build <strong className="text-slate-900">LLMs, RAG &amp; AI Agents</strong>{" "}
+                and deploy them into real Cloud &amp; Company environments. Conducted live in{" "}
+                <strong className="text-slate-900">Tamil</strong> by award-winning{" "}
+                <strong className="text-slate-900">VIMS Enterprise</strong> engineers.
               </p>
 
-              {/* Restrained, Calm Pillar Metrics */}
-              <div className="grid grid-cols-3 gap-4 pt-2 max-w-lg">
-                <div>
-                  <div className="font-luxury text-2xl sm:text-3xl font-semibold text-[#D4AF7A]">
-                    8 Weeks
-                  </div>
-                  <div className="text-xs text-[#858075] mt-0.5">Live Online Immersion</div>
-                </div>
-                <div>
-                  <div className="font-luxury text-2xl sm:text-3xl font-semibold text-[#F5F1E8]">
-                    In Tamil
-                  </div>
-                  <div className="text-xs text-[#858075] mt-0.5">Interactive Mentorship</div>
-                </div>
-                <div>
-                  <div className="font-luxury text-2xl sm:text-3xl font-semibold text-[#F5F1E8]">
-                    3+ Systems
-                  </div>
-                  <div className="text-xs text-[#858075] mt-0.5">Shipped to Cloud</div>
-                </div>
-              </div>
+              {/* Visible Live Seats + Countdown to 12th December right on the page */}
+              <LiveSeatAndCountdownCard
+                targetIso={CLASS_SCHEDULE.targetIso}
+                enrolledSeats={cohort.enrolledSeats}
+                totalSeats={cohort.totalSeats}
+              />
 
-              {/* Single Poised Hero CTA */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <button
-                  type="button"
-                  onClick={() => openRegisterModal("hero_primary")}
-                  className="btn-champagne inline-flex min-h-12 cursor-pointer items-center justify-center rounded-full px-8 py-3 text-sm font-semibold tracking-wide"
-                >
-                  Register Now
-                </button>
-
-                <a
-                  href="#curriculum"
-                  className="btn-outline-luxury inline-flex min-h-12 items-center justify-center rounded-full px-7 py-3 text-sm font-medium"
-                >
-                  Explore Curriculum
-                </a>
+              {/* Quick Highlights */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {[
+                  { top: "12th Dec", sub: "Batch Starts" },
+                  { top: "In Tamil", sub: "Live Classes" },
+                  { top: "Real Projects", sub: "Cloud Deployed" },
+                  { top: "Certificate", sub: "Job Guidance" }
+                ].map((h) => (
+                  <div key={h.top} className="light-card rounded-xl p-3 text-center">
+                    <div className="text-sm sm:text-base font-extrabold text-slate-900">
+                      {h.top}
+                    </div>
+                    <div className="text-xs text-slate-500">{h.sub}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Right: Automated 3D Showcase Carousel */}
-            <div className="lg:col-span-6">
-              <ProductionSystemsCarousel />
+            {/* Right 5 Cols: Direct On-Page Student Registration Form */}
+            <div id="register-form" className="lg:col-span-5">
+              <div className="light-card-featured rounded-2xl p-5 sm:p-6">
+                <div className="mb-4 border-b border-slate-100 pb-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono-tech text-[11px] font-bold uppercase text-blue-700">
+                      STARTS 12TH DECEMBER 2026
+                    </span>
+                    <span className="rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 tabular-nums">
+                      {cohort.remainingSeats} Seats Left
+                    </span>
+                  </div>
+                  <h2 className="mt-1 text-xl font-extrabold text-slate-950">
+                    Register for the Live Batch
+                  </h2>
+                  <p className="text-xs text-slate-500">
+                    Fill in your details below to lock your seat immediately.
+                  </p>
+                </div>
+
+                <EnrollmentFormWidget
+                  pricing={cohort.pricing}
+                  enrolledSeats={cohort.enrolledSeats}
+                  totalSeats={cohort.totalSeats}
+                  targetIso={CLASS_SCHEDULE.targetIso}
+                  onSeatConfirmed={(newEnrolled, newRemaining) => {
+                    setCohort((prev) => ({
+                      ...prev,
+                      enrolledSeats: newEnrolled,
+                      remainingSeats: newRemaining,
+                      isSoldOut: newRemaining <= 0
+                    }));
+                  }}
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        {/* 2. THE FDE ENGINEERING PHILOSOPHY (Flows seamlessly on same canvas) */}
-        <section id="perspective" className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl space-y-3">
-            <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#D4AF7A]">
-              The Discipline
-            </span>
-            <h2 className="font-luxury text-3xl sm:text-4xl font-semibold text-[#F5F1E8] leading-snug">
-              Watching AI tutorials is worlds apart from engineering production systems.
-            </h2>
-            <p className="text-sm sm:text-[15px] text-[#B8B2A6] leading-relaxed">
-              Every organization wants AI in production, yet very few engineers know how to connect
-              language models safely to live enterprise APIs, eliminate hallucinations, and maintain
-              strict latency SLAs.
-            </p>
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <Tilt3DCard maxTiltDeg={3.5} className="rounded-2xl">
-              <div className="luxury-card h-full rounded-2xl p-7 space-y-4">
-                <div className="font-mono-tech text-[11px] tracking-widest text-[#858075]">
-                  01 · CONVENTIONAL STUDY
-                </div>
-                <h3 className="font-luxury text-2xl font-semibold text-[#F5F1E8]">
-                  Confined to Local Notebooks
-                </h3>
-                <ul className="space-y-2.5 text-sm text-[#B8B2A6]">
-                  <li>• Prompt experimentation without deterministic JSON contracts</li>
-                  <li>• Fragile prototypes that fail on real multi-page documents</li>
-                  <li>• Zero exposure to FastAPI, Docker containers, or cloud deployment</li>
-                  <li>• No verifiable production architecture to demonstrate in interviews</li>
-                </ul>
-              </div>
-            </Tilt3DCard>
-
-            <Tilt3DCard maxTiltDeg={4} className="rounded-2xl">
-              <div className="luxury-card-elevated h-full rounded-2xl p-7 space-y-4">
-                <div className="font-mono-tech text-[11px] tracking-widest text-[#D4AF7A]">
-                  02 · THE VIMS FDE BRIDGE
-                </div>
-                <h3 className="font-luxury text-2xl font-semibold text-[#F5F1E8]">
-                  Eight Weeks of Applied Architecture
-                </h3>
-                <ul className="space-y-2.5 text-sm text-[#F5F1E8]/90">
-                  <li>• End-to-end LLMs, Hybrid Vector RAG, and Tool-Calling Agents</li>
-                  <li>• Containerized REST services deployed to real cloud environments</li>
-                  <li>• Live sessions taught in Tamil for effortless conceptual mastery</li>
-                  <li>• Grounded in Automotive, Enterprise Ops, and AI SaaS workflows</li>
-                </ul>
-              </div>
-            </Tilt3DCard>
-
-            <Tilt3DCard maxTiltDeg={3.5} className="rounded-2xl">
-              <div className="luxury-card h-full rounded-2xl p-7 space-y-4">
-                <div className="font-mono-tech text-[11px] tracking-widest text-[#52B788]">
-                  03 · CAREER DISTINCTION
-                </div>
-                <h3 className="font-luxury text-2xl font-semibold text-[#F5F1E8]">
-                  Production-Ready FDE Engineer
-                </h3>
-                <ul className="space-y-2.5 text-sm text-[#B8B2A6]">
-                  <li>• Translate complex business problems into deployed AI pipelines</li>
-                  <li>• Executive GitHub portfolio backed by live cloud endpoints</li>
-                  <li>• Mastery of evaluation suites, citations, and latency guardrails</li>
-                  <li>• Prepared for high-impact AI product and enterprise interviews</li>
-                </ul>
-              </div>
-            </Tilt3DCard>
-          </div>
-        </section>
-
-        {/* 3. AUTOMATED 8-WEEK CURRICULUM CAROUSEL */}
-        <section id="curriculum" className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-            <div className="max-w-2xl space-y-2.5">
-              <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#D4AF7A]">
-                Eight-Week Syllabus
-              </span>
-              <h2 className="font-luxury text-3xl sm:text-4xl font-semibold text-[#F5F1E8] leading-snug">
-                Structured as four progressive engineering phases.
-              </h2>
-              <p className="text-sm text-[#B8B2A6]">
-                Every two weeks culminates in a deployed milestone. Live instruction and code
-                walkthroughs are delivered in <strong className="text-[#F5F1E8]">Tamil</strong>.
-              </p>
-            </div>
-            <span className="font-mono-tech text-[11px] tracking-widest text-[#D4AF7A]">
-              AUTO-CYCLING · CLICK ANY PHASE
-            </span>
-          </div>
-
-          <AutomatedCurriculumCarousel />
-        </section>
-
-        {/* 4. AWARD-WINNING INSTITUTION SHOWCASE (REAL PHOTO) */}
-        <section id="institution" className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="luxury-card rounded-3xl p-6 sm:p-10 lg:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              <div className="lg:col-span-6">
-                <Tilt3DCard maxTiltDeg={3} className="rounded-2xl">
-                  <figure className="overflow-hidden rounded-2xl border border-[#D4AF7A]/25">
-                    <img
-                      src="/images/vims-award-tn-digital-summit.jpg"
-                      alt="VIMS Enterprise team honored with the Social Eagle Award at TN Digital Summit 2026"
-                      width={1024}
-                      height={768}
-                      loading="lazy"
-                      className="w-full h-auto object-cover"
-                    />
-                    <figcaption className="bg-[#0B1310]/90 px-4 py-3 text-xs flex flex-wrap items-center justify-between gap-2">
-                      <span className="text-[#F5F1E8] font-medium">
-                        TN Digital Summit 2026 · Social Eagle Award
-                      </span>
-                      <span className="font-mono-tech text-[11px] text-[#D4AF7A]">
-                        VIMS ENTERPRISE
-                      </span>
-                    </figcaption>
-                  </figure>
-                </Tilt3DCard>
-              </div>
-
-              <div className="lg:col-span-6 space-y-5">
-                <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#D4AF7A]">
-                  Institutional Pedigree
+        {/* 2. DEDICATED CLASS DATE, TIMING & SCHEDULE SECTION (12th December 2026) */}
+        <section id="schedule" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="light-card-featured rounded-3xl p-6 sm:p-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <div>
+                <span className="font-mono-tech text-xs font-bold uppercase text-blue-700">
+                  UPCOMING LIVE SCHEDULE
                 </span>
-                <h2 className="font-luxury text-3xl sm:text-4xl font-semibold text-[#F5F1E8] leading-snug">
-                  Presented by an award-winning engineering house.
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-0.5">
+                  Class Date &amp; Timing Details
                 </h2>
-                <p className="text-sm sm:text-[15px] text-[#B8B2A6] leading-relaxed">
-                  <strong className="text-[#F5F1E8] font-medium">VIMS Academy</strong> operates as
-                  the dedicated talent and engineering education arm of{" "}
-                  <strong className="text-[#F5F1E8] font-medium">VIMS Enterprise</strong>, recipient
-                  of the <strong className="text-[#F5F1E8] font-medium">Social Eagle Award at TN Digital Summit 2026</strong>.
-                </p>
-                <p className="text-sm sm:text-[15px] text-[#B8B2A6] leading-relaxed">
-                  Alongside our established automotive and embedded systems ecosystem (
-                  <a
-                    href="https://embskills.vimsenterprise.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#D4AF7A] underline underline-offset-4 hover:text-[#E5C594]"
-                  >
-                    embskills.vimsenterprise.com
-                  </a>
-                  ), this cohort brings authentic industrial architecture, rigorous mentorship, and
-                  verifiable certification to serious learners.
-                </p>
+              </div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1.5 text-xs font-bold text-emerald-800">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                Registration Open · {cohort.enrolledSeats}/{cohort.totalSeats} Booked
+              </span>
+            </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="rounded-xl border border-[#F5F1E8]/10 bg-[#0B1310]/50 p-4">
-                    <div className="font-luxury text-lg font-semibold text-[#D4AF7A]">
-                      Practitioner-Led Craft
-                    </div>
-                    <p className="mt-1 text-xs text-[#B8B2A6] leading-relaxed">
-                      Designed around active enterprise and automotive AI deployments.
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-[#F5F1E8]/10 bg-[#0B1310]/50 p-4">
-                    <div className="font-luxury text-lg font-semibold text-[#D4AF7A]">
-                      Recognized Credential
-                    </div>
-                    <p className="mt-1 text-xs text-[#B8B2A6] leading-relaxed">
-                      VIMS Enterprise-backed Completion Certificate upon capstone sign-off.
-                    </p>
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4">
+                <div className="text-xs font-semibold uppercase text-slate-500">Start Date</div>
+                <div className="mt-1 text-base sm:text-lg font-extrabold text-blue-700">
+                  12th December 2026
                 </div>
+                <div className="text-xs text-slate-600 mt-0.5">Saturday · Live Online</div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4">
+                <div className="text-xs font-semibold uppercase text-slate-500">Class Timing</div>
+                <div className="mt-1 text-base sm:text-lg font-extrabold text-slate-900">
+                  10:00 AM IST Onwards
+                </div>
+                <div className="text-xs text-slate-600 mt-0.5">
+                  Convenient for Students &amp; Working Pros
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4">
+                <div className="text-xs font-semibold uppercase text-slate-500">
+                  Duration &amp; Medium
+                </div>
+                <div className="mt-1 text-base sm:text-lg font-extrabold text-slate-900">
+                  8 Weeks · Live in Tamil
+                </div>
+                <div className="text-xs text-slate-600 mt-0.5">Recordings + Code Included</div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4">
+                <div className="text-xs font-semibold uppercase text-slate-500">Who Should Join</div>
+                <div className="mt-1 text-base sm:text-lg font-extrabold text-emerald-700">
+                  Students &amp; Professionals
+                </div>
+                <div className="text-xs text-slate-600 mt-0.5">Limited to 50 Seats Only</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 5. FACULTY: PROGRAM HOSTS & SUPPORTING MENTOR */}
-        <section id="mentors" className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="max-w-2xl space-y-2.5">
-            <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#D4AF7A]">
-              Faculty &amp; Mentorship
+        {/* 3. RICH IMAGE GALLERY: WHAT YOU WILL LEARN & BUILD */}
+        <section id="projects" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <span className="font-mono-tech text-xs font-bold uppercase text-blue-700">
+              HANDS-ON SKILLS
             </span>
-            <h2 className="font-luxury text-3xl sm:text-4xl font-semibold text-[#F5F1E8] leading-snug">
-              Guided by engineers who ship real systems.
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">
+              What You Will Build in This Program
             </h2>
-            <p className="text-sm text-[#B8B2A6]">
-              Direct instruction from two program hosts paired with dedicated hands-on weekly lab
-              unblocking.
-            </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {MENTORS.map((mentor) => (
-              <Tilt3DCard key={mentor.id} maxTiltDeg={3.5} className="rounded-2xl">
-                <article className="luxury-card flex h-full flex-col justify-between rounded-2xl p-7">
-                  <div>
-                    <div className="flex items-center gap-4">
-                      <div
-                        aria-hidden="true"
-                        className="font-luxury flex h-13 w-13 shrink-0 items-center justify-center rounded-full border border-[#D4AF7A]/40 bg-[#0B1310] text-lg font-semibold text-[#D4AF7A]"
-                      >
-                        {getInitials(mentor.name)}
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#D4AF7A]">
-                          {mentor.badge}
-                        </span>
-                        <h3 className="font-luxury text-2xl font-semibold text-[#F5F1E8] leading-tight">
-                          {mentor.name}
-                        </h3>
-                        <p className="text-xs text-[#858075] mt-0.5">{mentor.role}</p>
-                      </div>
-                    </div>
-
-                    <p className="mt-5 text-sm text-[#B8B2A6] leading-relaxed">{mentor.bio}</p>
-
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {mentor.domains.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-[#F5F1E8]/10 bg-[#0B1310]/60 px-3 py-1 text-[11px] text-[#F5F1E8]/85"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {VISUAL_PROJECTS.map((card) => (
+              <Tilt3DCard key={card.id} className="rounded-2xl">
+                <article className="light-card h-full rounded-2xl overflow-hidden flex flex-col">
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-slate-100">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span className="inline-block rounded-md bg-blue-50 px-2 py-0.5 text-[11px] font-bold text-blue-700">
+                        {card.tag}
+                      </span>
+                      <h3 className="mt-2 text-base font-extrabold text-slate-900">{card.title}</h3>
+                      <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                        {card.shortLine}
+                      </p>
                     </div>
                   </div>
-
-                  {mentor.linkedin && (
-                    <div className="mt-6 pt-4 border-t border-[#F5F1E8]/8">
-                      <a
-                        href={mentor.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-xs font-medium tracking-wide text-[#D4AF7A] hover:text-[#E5C594]"
-                      >
-                        View LinkedIn Profile ↗
-                      </a>
-                    </div>
-                  )}
                 </article>
               </Tilt3DCard>
             ))}
           </div>
         </section>
 
-        {/* 6. AUTOMATED EDITORIAL QUOTES & LEARNER REFLECTIONS CAROUSEL */}
-        <section id="reflections" className="mx-auto max-w-5xl px-5 sm:px-8">
-          <div className="text-center max-w-xl mx-auto mb-8 space-y-2">
-            <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#D4AF7A]">
-              Learner Reflections
+        {/* 4. SHORT, SIMPLE 3-STEP WHY FDE CARDS (Trimmed to 1 simple line each!) */}
+        <section id="why-fde" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <span className="font-mono-tech text-xs font-bold uppercase text-blue-700">
+              WHY THIS ROLE MATTERS
             </span>
-            <h2 className="font-luxury text-3xl sm:text-4xl font-semibold text-[#F5F1E8]">
-              Voices from VIMS Academy learners.
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">
+              Why Students &amp; Working Professionals Choose FDE
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {WHY_FDE_CARDS.map((c, idx) => (
+              <div
+                key={c.step}
+                className={`rounded-2xl p-6 ${
+                  idx === 1 ? "light-card-featured" : "light-card"
+                }`}
+              >
+                <div className="font-mono-tech text-xs font-bold text-blue-700">
+                  {c.step} · {c.label}
+                </div>
+                <h3 className="mt-1.5 text-lg font-extrabold text-slate-900">{c.title}</h3>
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{c.line}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 5. AUTOMATED 8-WEEK SYLLABUS CAROUSEL */}
+        <section id="curriculum" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-7">
+            <div>
+              <span className="font-mono-tech text-xs font-bold uppercase text-blue-700">
+                8-WEEK ROADMAP
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">
+                Simple Week-by-Week Learning Plan
+              </h2>
+            </div>
+            <span className="rounded-full bg-blue-50 border border-blue-200 px-3.5 py-1 text-xs font-bold text-blue-800">
+              Taught Step-by-Step in Tamil
+            </span>
+          </div>
+
+          <AutomatedCurriculumCarousel />
+        </section>
+
+        {/* 6. AWARD-WINNING VIMS ENTERPRISE TRUST SECTION + REAL CLIENT LOGOS */}
+        <section id="credibility" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="light-card rounded-3xl p-6 sm:p-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-6">
+                <figure className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+                  <img
+                    src="/images/vims-award-tn-digital-summit.jpg"
+                    alt="VIMS Enterprise winning Social Eagle Award at TN Digital Summit 2026"
+                    loading="lazy"
+                    className="w-full h-auto object-cover"
+                  />
+                  <figcaption className="bg-white px-4 py-2.5 text-xs font-bold text-slate-800 flex justify-between">
+                    <span>TN Digital Summit 2026 · Social Eagle Award</span>
+                    <span className="text-blue-700">VIMS Enterprise</span>
+                  </figcaption>
+                </figure>
+              </div>
+
+              <div className="lg:col-span-6 space-y-4">
+                <span className="font-mono-tech text-xs font-bold uppercase text-blue-700">
+                  TRUSTED &amp; AWARD-WINNING COMPANY
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 leading-snug">
+                  Learn Directly from Award-Winning VIMS Enterprise.
+                </h2>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                  Honored with the <strong>Social Eagle Award at TN Digital Summit 2026</strong>,
+                  VIMS Enterprise builds real industry products and trains thousands of learners
+                  through{" "}
+                  <a
+                    href="https://embskills.vimsenterprise.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-700 underline"
+                  >
+                    embskills.vimsenterprise.com
+                  </a>{" "}
+                  and VIMS Academy.
+                </p>
+
+                <div className="pt-2">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                    Trusted by Industry Teams
+                  </div>
+                  <div className="grid grid-cols-4 gap-3 items-center">
+                    {CLIENT_LOGOS.map((logo) => (
+                      <div
+                        key={logo.name}
+                        className="flex h-12 items-center justify-center rounded-xl border border-slate-200/80 bg-white p-2"
+                      >
+                        <img
+                          src={logo.src}
+                          alt={logo.name}
+                          loading="lazy"
+                          className="max-h-7 w-auto object-contain"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. MENTOR PHOTOS + SIMPLE 1-LINE CAPTION (No long bios, No LinkedIn link!) */}
+        <section id="mentors" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <span className="font-mono-tech text-xs font-bold uppercase text-blue-700">
+              YOUR MENTORS
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">
+              Guided by Real Industry Practitioners
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {MENTORS.map((m) => (
+              <Tilt3DCard key={m.id} className="rounded-2xl">
+                <article className="light-card rounded-2xl overflow-hidden text-center p-5">
+                  <div className="mx-auto aspect-[4/4] w-44 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
+                    {m.photo ? (
+                      <img
+                        src={m.photo}
+                        alt={m.name}
+                        loading="lazy"
+                        className="h-full w-full object-cover object-top"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-blue-700 to-slate-900 text-white">
+                        <span className="text-3xl font-extrabold">{getInitials(m.name)}</span>
+                        <span className="mt-1 text-[10px] uppercase tracking-widest text-blue-200">
+                          VIMS Enterprise
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <span className="mt-4 inline-block rounded-full bg-blue-50 px-3 py-0.5 text-[11px] font-bold text-blue-700">
+                    {m.badge}
+                  </span>
+                  <h3 className="mt-1.5 text-lg font-extrabold text-slate-950">{m.name}</h3>
+                  <p className="mt-1 text-xs font-medium text-slate-600">{m.simpleLine}</p>
+                </article>
+              </Tilt3DCard>
+            ))}
+          </div>
+        </section>
+
+        {/* 8. AUTOMATED STUDENT & WORKING PRO REVIEWS */}
+        <section id="reviews" className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-7">
+            <span className="font-mono-tech text-xs font-bold uppercase text-blue-700">
+              STUDENT TRUST
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">
+              What Students &amp; Working Professionals Say
             </h2>
           </div>
 
           <AutomatedQuotesCarousel />
         </section>
 
-        {/* 7. REFINED COHORT TUITION & ENROLLMENT CARD (No noisy seat bars here; opens cleanly in Modal) */}
-        <section id="enrollment" className="mx-auto max-w-5xl px-5 sm:px-8">
-          <div className="luxury-card-elevated rounded-3xl p-7 sm:p-11">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-7 space-y-5">
-                <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#D4AF7A]">
-                  Cohort Tuition &amp; Admission
-                </span>
-                <h2 className="font-luxury text-3xl sm:text-4xl font-semibold text-[#F5F1E8] leading-snug">
-                  One transparent investment for the complete 8-week program.
-                </h2>
-
-                <ul className="space-y-3 text-sm text-[#B8B2A6] pt-1">
-                  {[
-                    "8 weeks of live online engineering sessions (conducted in Tamil)",
-                    "Hands-on LLMs, Hybrid Vector RAG, AI Agents & Docker Cloud Deployment",
-                    "Real-world capstones across Automotive, Enterprise & AI SaaS domains",
-                    "Direct guidance from Guruprasath, Gowthamraj Mahadevan & Vimal Raj",
-                    "Lifetime access to HD session recordings & starter GitHub repositories",
-                    "FDE resume positioning, portfolio review & mock interview preparation",
-                    "Verified Completion Certificate backed by VIMS Enterprise"
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span className="text-[#D4AF7A] mt-0.5">✦</span>
-                      <span className="text-[#F5F1E8]/90">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="lg:col-span-5 rounded-2xl border border-[#D4AF7A]/28 bg-[#0B1310]/75 p-7 text-center space-y-5">
-                <div className="text-[11px] uppercase tracking-[0.18em] text-[#858075]">
-                  Complete Cohort Fee
-                </div>
-
-                <div>
-                  <div className="flex items-baseline justify-center gap-2">
-                    <span className="font-luxury text-5xl font-semibold text-[#F5F1E8] tabular-nums">
-                      ₹{cohort.pricing.baseInr.toLocaleString("en-IN")}
-                    </span>
-                    <span className="text-xs font-medium text-[#D4AF7A]">+ 18% GST</span>
-                  </div>
-                  <p className="mt-1.5 text-xs text-[#858075] tabular-nums">
-                    ₹{cohort.pricing.totalInr.toLocaleString("en-IN")} total with official GST
-                    invoice
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  disabled={cohort.isSoldOut}
-                  onClick={() => openRegisterModal("enrollment_card")}
-                  className="btn-champagne flex min-h-12 w-full cursor-pointer items-center justify-center rounded-full px-8 py-3.5 text-sm font-bold tracking-wide disabled:opacity-50"
-                >
-                  {cohort.isSoldOut ? "Cohort Full" : "Register Now"}
-                </button>
-
-                <p className="text-[11px] text-[#858075] leading-relaxed">
-                  Click Register Now to check live seat availability and complete instant UPI / Card
-                  checkout via Razorpay.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 8. REFINED ACCORDION FAQ */}
-        <section id="faq" className="mx-auto max-w-4xl px-5 sm:px-8">
-          <div className="text-center mb-10 space-y-2">
-            <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#D4AF7A]">
-              Clarifications
-            </span>
-            <h2 className="font-luxury text-3xl sm:text-4xl font-semibold text-[#F5F1E8]">
-              Frequently Asked Questions
+        {/* 9. CONCISE FAQ + FINAL CTA */}
+        <section id="faq" className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="font-mono-tech text-xs font-bold uppercase text-blue-700">FAQ</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 mt-1">
+              Quick Answers
             </h2>
           </div>
 
@@ -653,20 +626,20 @@ export default function App() {
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = idx === openFaqIdx;
               return (
-                <div key={item.question} className="luxury-card rounded-2xl overflow-hidden">
+                <div key={item.question} className="light-card rounded-2xl overflow-hidden">
                   <button
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpenFaqIdx(isOpen ? -1 : idx)}
-                    className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 px-6 py-4 text-left text-sm sm:text-[15.5px] font-medium text-[#F5F1E8] hover:text-[#D4AF7A]"
+                    className="flex min-h-13 w-full cursor-pointer items-center justify-between gap-4 px-5 py-3.5 text-left text-sm sm:text-base font-bold text-slate-900"
                   >
                     <span>{item.question}</span>
-                    <span className="font-luxury text-xl text-[#D4AF7A] shrink-0">
+                    <span className="text-lg font-bold text-blue-700 shrink-0">
                       {isOpen ? "−" : "+"}
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="px-6 pb-5 text-sm text-[#B8B2A6] leading-relaxed">
+                    <div className="border-t border-slate-100 px-5 py-3.5 text-sm text-slate-600 leading-relaxed">
                       {item.answer}
                     </div>
                   )}
@@ -674,36 +647,48 @@ export default function App() {
               );
             })}
           </div>
+
+          <div className="mt-10 light-card-featured rounded-3xl p-6 sm:p-8 text-center space-y-4">
+            <div className="text-xs font-bold uppercase tracking-wider text-blue-700">
+              Batch Starts 12th December 2026 · Only {cohort.remainingSeats} of {cohort.totalSeats}{" "}
+              Seats Left
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-950">
+              Ready to Launch Your FDE Career?
+            </h3>
+            <button
+              type="button"
+              onClick={() => openRegisterModal("bottom_cta")}
+              className="btn-primary-trust inline-flex min-h-12 cursor-pointer items-center justify-center rounded-xl px-8 py-3 text-sm sm:text-base font-bold"
+            >
+              Register Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
+            </button>
+          </div>
         </section>
       </main>
 
-      {/* MINIMAL SEAMLESS FOOTER */}
-      <footer className="relative z-10 pb-12 pt-4">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-xs text-[#858075]">
-          <div>
-            <div className="font-luxury text-lg font-semibold text-[#F5F1E8]">
-              VIMS <span className="text-[#D4AF7A]">Academy</span> · Powered by VIMS Enterprise
-            </div>
-            <p className="mt-1">
-              Forward Deployment Engineer Program · Ecosystem:{" "}
-              <a
-                href="https://embskills.vimsenterprise.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#D4AF7A] hover:underline"
-              >
-                embskills.vimsenterprise.com
-              </a>
-            </p>
+      {/* CLEAN LIGHT FOOTER */}
+      <footer className="relative z-10 border-t border-slate-200/70 bg-white/80 py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <div className="flex items-center gap-2.5">
+            <img
+              src="/images/vims-logo.png"
+              alt="VIMS Logo"
+              width={28}
+              height={28}
+              className="h-7 w-7 rounded object-contain"
+            />
+            <span className="font-bold text-slate-800">
+              VIMS Academy · Powered by VIMS Enterprise
+            </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-5">
+          <div className="flex flex-wrap items-center gap-4">
             <span>© 2026 VIMS Enterprise</span>
-            <span className="font-mono-tech text-[11px]">fde.vimsenterprise.com</span>
             <button
               type="button"
               onClick={() => setInspectorOpen(true)}
-              className="cursor-pointer rounded-full border border-[#F5F1E8]/12 bg-[#121F1A]/80 px-3 py-1 font-mono-tech text-[10px] text-[#B8B2A6] hover:border-[#D4AF7A] hover:text-[#F5F1E8]"
+              className="cursor-pointer rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 font-mono-tech text-[10px] text-slate-600 hover:text-blue-700"
             >
               Pixel &amp; Funnel
             </button>
@@ -711,7 +696,6 @@ export default function App() {
         </div>
       </footer>
 
-      {/* EXCLUSIVE REGISTRATION MODAL (Reveals 50 Seats, 10->11 Live Count, Countdown & Razorpay) */}
       <RegistrationModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -719,7 +703,7 @@ export default function App() {
         enrolledSeats={cohort.enrolledSeats}
         totalSeats={cohort.totalSeats}
         startIso={cohort.window.startIso}
-        endIso={cohort.window.endIso}
+        endIso={CLASS_SCHEDULE.targetIso}
         onSeatConfirmed={(newEnrolled, newRemaining) => {
           setCohort((prev) => ({
             ...prev,
@@ -730,7 +714,6 @@ export default function App() {
         }}
       />
 
-      {/* OWNER META PIXEL & FUNNEL INSPECTOR */}
       <FunnelInspectorModal
         isOpen={inspectorOpen}
         onClose={() => setInspectorOpen(false)}

@@ -15,7 +15,7 @@ const TOTAL_INR = BASE_FEE_INR + GST_INR;
 const TOTAL_PAISE = TOTAL_INR * 100;
 
 const REG_START_ISO = process.env.VITE_REG_START_ISO || "2026-11-24T16:00:00+05:30";
-const REG_END_ISO = process.env.VITE_REG_END_ISO || "2026-12-01T16:00:00+05:30";
+const REG_END_ISO = process.env.VITE_REG_END_ISO || "2026-12-12T10:00:00+05:30";
 
 // Storage file (uses /tmp on serverless read-only environments, server/data locally)
 const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
