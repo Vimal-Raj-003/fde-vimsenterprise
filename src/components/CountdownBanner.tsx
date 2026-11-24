@@ -54,21 +54,21 @@ export function LiveSeatAndCountdownCard({
 
   return (
     <div
-      className={`rounded-2xl border border-[#B58338]/30 bg-white shadow-[0_14px_34px_rgba(34,25,29,0.05)] ${
+      className={`rounded-2xl border border-[#047857]/20 bg-white shadow-[0_14px_34px_rgba(4,120,87,0.06)] ${
         compact ? "p-3.5 space-y-3" : "p-4 sm:p-5 space-y-4"
       }`}
     >
       {/* Live Seat Progress */}
       <div>
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
-          <span className="flex items-center gap-2 font-bold text-[#22191D]">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#1A6B54] animate-pulse" />
+          <span className="flex items-center gap-2 font-bold text-[#141A17]">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#059669] animate-pulse" />
             <span>
               <span className="tabular-nums">{enrolledSeats}</span> Booked · Only{" "}
-              <span className="text-[#6A244C] tabular-nums">{remaining} Seats Left</span>
+              <span className="text-[#047857] tabular-nums">{remaining} Seats Left</span>
             </span>
           </span>
-          <span className="font-mono-tech text-xs font-semibold text-[#5E5056] tabular-nums">
+          <span className="font-mono-tech text-xs font-semibold text-[#4B5550] tabular-nums">
             {enrolledSeats}/{totalSeats} Seats
           </span>
         </div>
@@ -79,22 +79,22 @@ export function LiveSeatAndCountdownCard({
           aria-valuemin={0}
           aria-valuemax={totalSeats}
           aria-label="Booked seats"
-          className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-[#FAF6F0]"
+          className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-[#ECFDF5]"
         >
           <div
             style={{ width: `${fillPercent}%` }}
-            className="h-full rounded-full bg-gradient-to-r from-[#6A244C] to-[#B58338] transition-all duration-500"
+            className="h-full rounded-full bg-gradient-to-r from-[#059669] to-[#D97706] transition-all duration-500"
           />
         </div>
       </div>
 
       {/* Live Countdown to 12th December 2026 */}
-      <div className="border-t border-[#6A244C]/10 pt-3">
+      <div className="border-t border-[#047857]/12 pt-3">
         <div className="flex flex-wrap items-center justify-between gap-1 text-xs mb-2">
-          <span className="font-semibold text-[#5E5056]">
-            Batch Starts: <strong className="text-[#6A244C]">12th December 2026</strong>
+          <span className="font-semibold text-[#4B5550]">
+            Batch Starts: <strong className="text-[#047857]">12th December 2026</strong>
           </span>
-          <span className="font-mono-tech text-[10px] font-semibold text-[#1A6B54]">
+          <span className="font-mono-tech text-[10px] font-semibold text-[#B45309] bg-[#FEF3C7] px-2 py-0.5 rounded-full">
             TIME REMAINING
           </span>
         </div>
@@ -103,12 +103,12 @@ export function LiveSeatAndCountdownCard({
           {boxes.map((b) => (
             <div
               key={b.label}
-              className="flex flex-col items-center justify-center rounded-xl border border-[#B58338]/25 bg-[#FAF6F0] py-2 px-1"
+              className="flex flex-col items-center justify-center rounded-xl border border-[#047857]/15 bg-[#F0F7F4] py-2 px-1"
             >
-              <span className="font-luxury text-xl sm:text-2xl font-bold text-[#22191D] tabular-nums leading-none">
+              <span className="font-heading text-xl sm:text-2xl font-bold text-[#141A17] tabular-nums leading-none">
                 {b.value}
               </span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#5E5056] mt-1">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#4B5550] mt-1">
                 {b.label}
               </span>
             </div>

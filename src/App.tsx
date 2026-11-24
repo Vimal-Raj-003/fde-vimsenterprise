@@ -9,6 +9,7 @@ import OwnerAdminPage from "./components/OwnerAdminPage";
 import RegistrationModal, { EnrollmentFormWidget } from "./components/RegistrationModal";
 import { FullPageLuxuryCanvas, Tilt3DCard } from "./components/Spatial3DCanvas";
 import {
+  AUDIENCE_FIT,
   CLASS_SCHEDULE,
   CLIENT_LOGOS,
   FAQ_ITEMS,
@@ -67,9 +68,9 @@ const DEFAULT_COHORT: CohortStatus = {
 
 const NAV_LINKS = [
   { href: "#overview", label: "Overview" },
+  { href: "#audience", label: "Who Is This For" },
   { href: "#credibility", label: "Trust" },
   { href: "#schedule", label: "Dec 12 Timing" },
-  { href: "#projects", label: "Projects" },
   { href: "#curriculum", label: "Syllabus" },
   { href: "#mentors", label: "Mentors" },
   { href: "#reviews", label: "Reviews" }
@@ -121,6 +122,7 @@ export default function App() {
     if (isAdminRoute) return;
     const sectionIds = [
       "overview",
+      "audience",
       "credibility",
       "schedule",
       "why-fde",
@@ -176,12 +178,21 @@ export default function App() {
   }
 
   return (
-    <div id="top" className="relative min-h-screen text-[#22191D]">
-      {/* SEAMLESS WARM-IVORY 3D CONSTELLATION CANVAS */}
+    <div id="top" className="relative min-h-screen text-[#141A17]">
+      {/* CONTINUOUS PEARL-MINT WHITE & EMERALD/GOLD 3D CONSTELLATION CANVAS */}
       <FullPageLuxuryCanvas />
 
-      {/* REFINED LIGHT LUXURY HEADER */}
-      <header className="sticky top-0 z-40 w-full bg-[#FAF6F0]/88 backdrop-blur-xl border-b border-[#6A244C]/10">
+      {/* TOP TRUST ANNOUNCEMENT STRIP */}
+      <div className="relative z-40 bg-[#065F46] px-4 py-2 text-center text-[11px] sm:text-xs font-semibold text-white">
+        <span className="text-[#FDE68A]">Award-Winning VIMS Enterprise</span> · Next Live Batch
+        Starts <strong>12th December 2026</strong> · Taught <strong>Live in Tamil</strong> · Only{" "}
+        <span className="underline decoration-[#FDE68A]/70 tabular-nums">
+          {cohort.remainingSeats} Seats Left
+        </span>
+      </div>
+
+      {/* CLEAN EMERALD-WHITE STICKY HEADER */}
+      <header className="sticky top-0 z-40 w-full bg-[#F8FAF9]/92 backdrop-blur-xl border-b border-[#047857]/12">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <a href="#top" className="inline-flex items-center gap-2.5 shrink-0">
             <img
@@ -192,22 +203,22 @@ export default function App() {
               className="h-9 w-9 rounded-lg object-contain"
             />
             <div className="leading-tight">
-              <div className="font-luxury text-xl font-bold tracking-tight text-[#22191D]">
-                VIMS <span className="text-[#6A244C]">Academy</span>
+              <div className="font-heading text-xl font-bold tracking-tight text-[#141A17]">
+                VIMS <span className="text-[#047857]">Academy</span>
               </div>
-              <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#5E5056]">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#4B5550]">
                 Powered by VIMS Enterprise
               </div>
             </div>
           </a>
 
           <nav aria-label="Primary Navigation" className="hidden lg:block">
-            <ul className="flex items-center gap-6">
+            <ul className="flex items-center gap-5">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm font-semibold text-[#5E5056] transition-colors hover:text-[#6A244C]"
+                    className="text-sm font-semibold text-[#4B5550] transition-colors hover:text-[#047857]"
                   >
                     {link.label}
                   </a>
@@ -220,7 +231,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => openRegisterModal("header_cta")}
-              className="btn-imperial hidden sm:inline-flex min-h-10 cursor-pointer items-center rounded-full px-5 text-xs sm:text-sm font-bold"
+              className="btn-emerald hidden sm:inline-flex min-h-10 cursor-pointer items-center rounded-full px-5 text-xs sm:text-sm font-bold"
             >
               Register Now
             </button>
@@ -230,7 +241,7 @@ export default function App() {
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle menu"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="lg:hidden inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#B58338]/35 bg-white text-[#22191D]"
+              className="lg:hidden inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#047857]/25 bg-white text-[#141A17]"
             >
               {mobileMenuOpen ? "✕" : "☰"}
             </button>
@@ -238,14 +249,14 @@ export default function App() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[#6A244C]/10 bg-white px-4 py-4 shadow-lg">
+          <div className="lg:hidden border-t border-[#047857]/12 bg-white px-4 py-4 shadow-lg">
             <ul className="space-y-1">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex min-h-10 items-center rounded-lg px-3 text-sm font-semibold text-[#22191D] hover:bg-[#FAF6F0]"
+                    className="flex min-h-10 items-center rounded-lg px-3 text-sm font-semibold text-[#141A17] hover:bg-[#ECFDF5]"
                   >
                     {link.label}
                   </a>
@@ -256,29 +267,30 @@ export default function App() {
         )}
       </header>
 
-      {/* SEAMLESS HIGH-CONVERTING LANDING ARCHITECTURE */}
+      {/* HIGH-CONVERTING PERFORMANCE MARKETING FLOW */}
       <main className="relative z-10 space-y-18 sm:space-y-24 pt-8 sm:pt-12 pb-20">
         {/* 1. HERO: CLEAR STUDENT & PRO VALUE + LIVE SEATS/COUNTDOWN + DIRECT REGISTRATION FORM */}
         <section id="overview" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[#B58338]/40 bg-white px-4 py-1.5 text-xs font-bold text-[#6A244C] shadow-2xs">
+              <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[#D97706]/35 bg-white px-4 py-1.5 text-xs font-bold text-[#141A17] shadow-2xs">
+                <span className="h-2 w-2 rounded-full bg-[#059669]" />
                 <span>Specially for College Students &amp; Working Professionals</span>
-                <span className="text-[#B58338]">·</span>
-                <span className="text-[#1A6B54]">Live in Tamil</span>
+                <span className="text-[#D97706]">·</span>
+                <span className="text-[#047857]">Live in Tamil</span>
               </div>
 
-              <h1 className="font-luxury text-4xl sm:text-5xl lg:text-[54px] font-bold tracking-tight text-[#22191D] leading-[1.08]">
+              <h1 className="font-heading text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#141A17] leading-[1.08]">
                 Become a{" "}
-                <span className="italic text-[#6A244C]">Forward Deployment Engineer (FDE)</span>{" "}
-                &amp; Deploy Real-World AI.
+                <span className="text-[#047857]">Forward Deployment Engineer (FDE)</span> &amp;
+                Deploy Real-World AI.
               </h1>
 
-              <p className="text-sm sm:text-base text-[#5E5056] leading-relaxed max-w-2xl">
-                Master <strong className="text-[#22191D]">LLMs, RAG &amp; AI Agents</strong> and
+              <p className="text-sm sm:text-base text-[#4B5550] leading-relaxed max-w-2xl">
+                Master <strong className="text-[#141A17]">LLMs, RAG &amp; AI Agents</strong> and
                 deploy them into live Cloud &amp; Company systems. Taught step-by-step in{" "}
-                <strong className="text-[#22191D]">Tamil</strong> by award-winning{" "}
-                <strong className="text-[#22191D]">VIMS Enterprise</strong> engineers.
+                <strong className="text-[#141A17]">Tamil</strong> by award-winning{" "}
+                <strong className="text-[#141A17]">VIMS Enterprise</strong> engineers.
               </p>
 
               {/* Visible Live Seats + Countdown to 12th December */}
@@ -296,11 +308,11 @@ export default function App() {
                   { top: "3+ Projects", sub: "Cloud Deployed" },
                   { top: "Certificate", sub: "VIMS Enterprise" }
                 ].map((h) => (
-                  <div key={h.top} className="luxury-light-card rounded-2xl p-3.5 text-center">
-                    <div className="font-luxury text-lg sm:text-xl font-bold text-[#6A244C]">
+                  <div key={h.top} className="pm-card rounded-2xl p-3.5 text-center">
+                    <div className="font-heading text-lg sm:text-xl font-bold text-[#047857]">
                       {h.top}
                     </div>
-                    <div className="text-xs font-medium text-[#5E5056]">{h.sub}</div>
+                    <div className="text-xs font-medium text-[#4B5550]">{h.sub}</div>
                   </div>
                 ))}
               </div>
@@ -308,20 +320,20 @@ export default function App() {
 
             {/* Right 5 Cols: Direct On-Page Student Registration Form */}
             <div id="register-form" className="lg:col-span-5">
-              <div className="luxury-light-featured rounded-3xl p-5 sm:p-6">
-                <div className="mb-4 border-b border-[#6A244C]/10 pb-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono-tech text-[11px] font-bold uppercase text-[#6A244C]">
+              <div className="pm-card-featured rounded-3xl p-5 sm:p-6">
+                <div className="mb-4 border-b border-[#047857]/12 pb-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono-tech text-[11px] font-bold uppercase text-[#047857]">
                       STARTS 12TH DECEMBER 2026
                     </span>
-                    <span className="rounded-full bg-[#1A6B54]/10 border border-[#1A6B54]/25 px-2.5 py-0.5 text-[11px] font-bold text-[#1A6B54] tabular-nums">
+                    <span className="rounded-full bg-[#FEF3C7] border border-[#D97706]/30 px-2.5 py-0.5 text-[11px] font-bold text-[#B45309] tabular-nums">
                       {cohort.remainingSeats} Seats Left
                     </span>
                   </div>
-                  <h2 className="font-luxury mt-1 text-2xl font-bold text-[#22191D]">
+                  <h2 className="font-heading mt-1 text-2xl font-bold text-[#141A17]">
                     Register for the Live Batch
                   </h2>
-                  <p className="text-xs text-[#5E5056]">
+                  <p className="text-xs text-[#4B5550]">
                     Lock your seat now with instant Razorpay UPI / Card checkout.
                   </p>
                 </div>
@@ -345,40 +357,90 @@ export default function App() {
           </div>
         </section>
 
-        {/* 2. IMMEDIATE INSTITUTIONAL PROOF & AWARD-WINNING CREDIBILITY */}
+        {/* 2. DEDICATED AUDIENCE FIT: COLLEGE STUDENTS & WORKING PROFESSIONALS */}
+        <section id="audience" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <span className="font-mono-tech text-xs font-bold uppercase text-[#B45309] bg-[#FEF3C7] px-3 py-1 rounded-full">
+              WHO IS THIS PROGRAM BUILT FOR?
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#141A17] mt-3">
+              Tailored for Both Students &amp; Working Engineers
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {AUDIENCE_FIT.map((card, idx) => (
+              <article
+                key={card.id}
+                className={`rounded-3xl p-6 sm:p-8 flex flex-col justify-between ${
+                  idx === 1 ? "pm-card-featured" : "pm-card"
+                }`}
+              >
+                <div>
+                  <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#047857]/20 px-3 py-1 font-mono-tech text-[11px] font-bold text-[#047857]">
+                    {card.tag}
+                  </span>
+                  <h3 className="font-heading mt-3 text-2xl font-bold text-[#141A17]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-[#4B5550] leading-relaxed">{card.subtitle}</p>
+                </div>
+
+                <ul className="mt-5 space-y-2.5 border-t border-[#047857]/12 pt-4">
+                  {card.outcomes.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-sm font-medium text-[#141A17]"
+                    >
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#047857] text-[11px] font-bold text-white">
+                        ✓
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* 3. INSTITUTIONAL PROOF & AWARD-WINNING CREDIBILITY */}
         <section id="credibility" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="luxury-light-card rounded-3xl p-6 sm:p-10">
+          <div className="pm-card rounded-3xl p-6 sm:p-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-6">
-                <figure className="overflow-hidden rounded-2xl border border-[#B58338]/30 shadow-sm">
+                <figure className="overflow-hidden rounded-2xl border border-[#047857]/20 shadow-sm">
                   <img
                     src="/images/vims-award-tn-digital-summit.jpg"
                     alt="VIMS Enterprise winning Social Eagle Award at TN Digital Summit 2026"
                     loading="lazy"
                     className="w-full h-auto object-cover"
                   />
-                  <figcaption className="bg-[#FAF6F0] px-4 py-2.5 text-xs font-bold text-[#22191D] flex justify-between">
+                  <figcaption className="bg-[#F0F7F4] px-4 py-2.5 text-xs font-bold text-[#141A17] flex justify-between">
                     <span>TN Digital Summit 2026 · Social Eagle Award</span>
-                    <span className="text-[#6A244C]">VIMS Enterprise</span>
+                    <span className="text-[#047857]">VIMS Enterprise</span>
                   </figcaption>
                 </figure>
               </div>
 
               <div className="lg:col-span-6 space-y-4">
-                <span className="font-mono-tech text-xs font-bold uppercase tracking-wider text-[#B58338]">
+                <span className="font-mono-tech text-xs font-bold uppercase tracking-wider text-[#B45309]">
                   TRUSTED &amp; AWARD-WINNING INSTITUTION
                 </span>
-                <h2 className="font-luxury text-3xl sm:text-4xl font-bold text-[#22191D] leading-tight">
+                <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#141A17] leading-tight">
                   Backed by Award-Winning VIMS Enterprise.
                 </h2>
-                <p className="text-sm sm:text-base text-[#5E5056] leading-relaxed">
-                  Honored with the <strong className="text-[#22191D]">Social Eagle Award at TN Digital Summit 2026</strong>,
-                  VIMS Enterprise builds real-world software and trains engineers across{" "}
+                <p className="text-sm sm:text-base text-[#4B5550] leading-relaxed">
+                  Honored with the{" "}
+                  <strong className="text-[#141A17]">
+                    Social Eagle Award at TN Digital Summit 2026
+                  </strong>
+                  , VIMS Enterprise builds real-world software and trains engineers across{" "}
                   <a
                     href="https://embskills.vimsenterprise.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-[#6A244C] underline"
+                    className="font-semibold text-[#047857] underline"
                   >
                     embskills.vimsenterprise.com
                   </a>{" "}
@@ -386,14 +448,14 @@ export default function App() {
                 </p>
 
                 <div className="pt-2">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#5E5056] mb-3">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#4B5550] mb-3">
                     Trusted by Industry Partners
                   </div>
                   <div className="grid grid-cols-4 gap-3 items-center">
                     {CLIENT_LOGOS.map((logo) => (
                       <div
                         key={logo.name}
-                        className="flex h-12 items-center justify-center rounded-xl border border-[#B58338]/20 bg-[#FAF6F0]/60 p-2"
+                        className="flex h-12 items-center justify-center rounded-xl border border-[#047857]/15 bg-[#F8FAF9] p-2"
                       >
                         <img
                           src={logo.src}
@@ -410,71 +472,71 @@ export default function App() {
           </div>
         </section>
 
-        {/* 3. CLASS DATE & TIMING ARCHITECTURE (12th December 2026) */}
+        {/* 4. CLASS DATE & TIMING ARCHITECTURE (12th December 2026) */}
         <section id="schedule" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="luxury-light-featured rounded-3xl p-6 sm:p-8">
+          <div className="pm-card-featured rounded-3xl p-6 sm:p-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
               <div>
-                <span className="font-mono-tech text-xs font-bold uppercase text-[#B58338]">
+                <span className="font-mono-tech text-xs font-bold uppercase text-[#B45309]">
                   UPCOMING COHORT SCHEDULE
                 </span>
-                <h2 className="font-luxury text-3xl font-bold text-[#22191D] mt-0.5">
+                <h2 className="font-heading text-3xl font-bold text-[#141A17] mt-0.5">
                   Class Date &amp; Timing Details
                 </h2>
               </div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#1A6B54]/10 border border-[#1A6B54]/25 px-4 py-1.5 text-xs font-bold text-[#1A6B54]">
-                <span className="h-2 w-2 rounded-full bg-[#1A6B54] animate-pulse" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#ECFDF5] border border-[#047857]/25 px-4 py-1.5 text-xs font-bold text-[#047857]">
+                <span className="h-2 w-2 rounded-full bg-[#059669] animate-pulse" />
                 Open Now · {cohort.enrolledSeats}/{cohort.totalSeats} Booked
               </span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="rounded-2xl border border-[#B58338]/25 bg-[#FAF6F0] p-4">
-                <div className="text-xs font-semibold uppercase text-[#5E5056]">Start Date</div>
-                <div className="font-luxury mt-1 text-xl font-bold text-[#6A244C]">
+              <div className="rounded-2xl border border-[#047857]/15 bg-[#F0F7F4] p-4">
+                <div className="text-xs font-semibold uppercase text-[#4B5550]">Start Date</div>
+                <div className="font-heading mt-1 text-xl font-bold text-[#047857]">
                   12th December 2026
                 </div>
-                <div className="text-xs text-[#5E5056] mt-0.5">Saturday · Live Online</div>
+                <div className="text-xs text-[#4B5550] mt-0.5">Saturday · Live Online</div>
               </div>
 
-              <div className="rounded-2xl border border-[#B58338]/25 bg-[#FAF6F0] p-4">
-                <div className="text-xs font-semibold uppercase text-[#5E5056]">Class Timing</div>
-                <div className="font-luxury mt-1 text-xl font-bold text-[#22191D]">
+              <div className="rounded-2xl border border-[#047857]/15 bg-[#F0F7F4] p-4">
+                <div className="text-xs font-semibold uppercase text-[#4B5550]">Class Timing</div>
+                <div className="font-heading mt-1 text-xl font-bold text-[#141A17]">
                   10:00 AM IST Onwards
                 </div>
-                <div className="text-xs text-[#5E5056] mt-0.5">
+                <div className="text-xs text-[#4B5550] mt-0.5">
                   Ideal for Students &amp; Working Pros
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-[#B58338]/25 bg-[#FAF6F0] p-4">
-                <div className="text-xs font-semibold uppercase text-[#5E5056]">
+              <div className="rounded-2xl border border-[#047857]/15 bg-[#F0F7F4] p-4">
+                <div className="text-xs font-semibold uppercase text-[#4B5550]">
                   Duration &amp; Medium
                 </div>
-                <div className="font-luxury mt-1 text-xl font-bold text-[#22191D]">
+                <div className="font-heading mt-1 text-xl font-bold text-[#141A17]">
                   8 Weeks · Live in Tamil
                 </div>
-                <div className="text-xs text-[#5E5056] mt-0.5">Recordings + Code Included</div>
+                <div className="text-xs text-[#4B5550] mt-0.5">Recordings + Code Included</div>
               </div>
 
-              <div className="rounded-2xl border border-[#B58338]/25 bg-[#FAF6F0] p-4">
-                <div className="text-xs font-semibold uppercase text-[#5E5056]">Eligibility</div>
-                <div className="font-luxury mt-1 text-xl font-bold text-[#1A6B54]">
+              <div className="rounded-2xl border border-[#047857]/15 bg-[#F0F7F4] p-4">
+                <div className="text-xs font-semibold uppercase text-[#4B5550]">Eligibility</div>
+                <div className="font-heading mt-1 text-xl font-bold text-[#047857]">
                   Students &amp; Professionals
                 </div>
-                <div className="text-xs text-[#5E5056] mt-0.5">Capped at 50 Seats</div>
+                <div className="text-xs text-[#4B5550] mt-0.5">Capped at 50 Seats</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 4. SHORT, SIMPLE 3-STEP WHY FDE CARDS */}
+        {/* 5. SHORT, SIMPLE 3-STEP WHY FDE CARDS */}
         <section id="why-fde" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="font-mono-tech text-xs font-bold uppercase text-[#B58338]">
+            <span className="font-mono-tech text-xs font-bold uppercase text-[#B45309]">
               THE DIFFERENCE
             </span>
-            <h2 className="font-luxury text-3xl sm:text-4xl font-bold text-[#22191D] mt-1">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#141A17] mt-1">
               Why Students &amp; Working Professionals Choose FDE
             </h2>
           </div>
@@ -483,27 +545,25 @@ export default function App() {
             {WHY_FDE_CARDS.map((c, idx) => (
               <div
                 key={c.step}
-                className={`rounded-2xl p-6 ${
-                  idx === 1 ? "luxury-light-featured" : "luxury-light-card"
-                }`}
+                className={`rounded-2xl p-6 ${idx === 1 ? "pm-card-featured" : "pm-card"}`}
               >
-                <div className="font-mono-tech text-xs font-bold text-[#6A244C]">
+                <div className="font-mono-tech text-xs font-bold text-[#047857]">
                   {c.step} · {c.label}
                 </div>
-                <h3 className="font-luxury mt-1.5 text-2xl font-bold text-[#22191D]">{c.title}</h3>
-                <p className="mt-2 text-sm text-[#5E5056] leading-relaxed">{c.line}</p>
+                <h3 className="font-heading mt-1.5 text-2xl font-bold text-[#141A17]">{c.title}</h3>
+                <p className="mt-2 text-sm text-[#4B5550] leading-relaxed">{c.line}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 5. REAL PROJECT VISUALS GALLERY */}
+        {/* 6. REAL PROJECT VISUALS GALLERY */}
         <section id="projects" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="font-mono-tech text-xs font-bold uppercase text-[#B58338]">
+            <span className="font-mono-tech text-xs font-bold uppercase text-[#B45309]">
               HANDS-ON ENGINEERING
             </span>
-            <h2 className="font-luxury text-3xl sm:text-4xl font-bold text-[#22191D] mt-1">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#141A17] mt-1">
               What You Will Build &amp; Deploy
             </h2>
           </div>
@@ -511,8 +571,8 @@ export default function App() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {VISUAL_PROJECTS.map((card) => (
               <Tilt3DCard key={card.id} className="rounded-2xl">
-                <article className="luxury-light-card h-full rounded-2xl overflow-hidden flex flex-col">
-                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#FAF6F0]">
+                <article className="pm-card h-full rounded-2xl overflow-hidden flex flex-col">
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-[#F0F7F4]">
                     <img
                       src={card.image}
                       alt={card.title}
@@ -521,13 +581,13 @@ export default function App() {
                     />
                   </div>
                   <div className="p-4 flex-1">
-                    <span className="inline-block rounded-full bg-[#6A244C]/8 px-2.5 py-0.5 text-[11px] font-bold text-[#6A244C]">
+                    <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#047857]/15 px-2.5 py-0.5 text-[11px] font-bold text-[#047857]">
                       {card.tag}
                     </span>
-                    <h3 className="font-luxury mt-2 text-xl font-bold text-[#22191D]">
+                    <h3 className="font-heading mt-2 text-xl font-bold text-[#141A17]">
                       {card.title}
                     </h3>
-                    <p className="mt-1 text-xs text-[#5E5056] leading-relaxed">{card.shortLine}</p>
+                    <p className="mt-1 text-xs text-[#4B5550] leading-relaxed">{card.shortLine}</p>
                   </div>
                 </article>
               </Tilt3DCard>
@@ -535,18 +595,18 @@ export default function App() {
           </div>
         </section>
 
-        {/* 6. AUTOMATED 8-WEEK SYLLABUS CAROUSEL */}
+        {/* 7. AUTOMATED 8-WEEK SYLLABUS CAROUSEL */}
         <section id="curriculum" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-4 mb-7">
             <div>
-              <span className="font-mono-tech text-xs font-bold uppercase text-[#B58338]">
+              <span className="font-mono-tech text-xs font-bold uppercase text-[#B45309]">
                 8-WEEK ROADMAP
               </span>
-              <h2 className="font-luxury text-3xl sm:text-4xl font-bold text-[#22191D] mt-1">
+              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#141A17] mt-1">
                 Structured Week-by-Week Syllabus
               </h2>
             </div>
-            <span className="rounded-full bg-[#6A244C]/8 border border-[#6A244C]/20 px-4 py-1 text-xs font-bold text-[#6A244C]">
+            <span className="rounded-full bg-[#ECFDF5] border border-[#047857]/20 px-4 py-1 text-xs font-bold text-[#047857]">
               Taught Live in Tamil
             </span>
           </div>
@@ -554,13 +614,13 @@ export default function App() {
           <AutomatedCurriculumCarousel />
         </section>
 
-        {/* 7. YOUR MENTORS — ALL 3 EXACT REAL STUDIO PORTRAITS + SIMPLE 1-LINE ROLE */}
+        {/* 8. YOUR MENTORS: EXACT 3 STUDIO PORTRAITS + CONCISE 1-LINE ROLE */}
         <section id="mentors" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-xl mx-auto mb-9">
-            <span className="font-mono-tech text-xs font-bold uppercase text-[#B58338]">
+            <span className="font-mono-tech text-xs font-bold uppercase text-[#B45309]">
               PROGRAM FACULTY
             </span>
-            <h2 className="font-luxury text-3xl sm:text-4xl font-bold text-[#22191D] mt-1">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#141A17] mt-1">
               Guided by Real Industry Practitioners
             </h2>
           </div>
@@ -568,8 +628,8 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {MENTORS.map((m) => (
               <Tilt3DCard key={m.id} className="rounded-3xl">
-                <article className="luxury-light-card rounded-3xl overflow-hidden text-center p-5">
-                  <div className="mx-auto aspect-[4/5] w-full max-w-[240px] overflow-hidden rounded-2xl border border-[#B58338]/30 bg-[#FAF6F0]">
+                <article className="pm-card rounded-3xl overflow-hidden text-center p-5">
+                  <div className="mx-auto aspect-[4/5] w-full max-w-[240px] overflow-hidden rounded-2xl border border-[#047857]/20 bg-[#F0F7F4]">
                     <img
                       src={m.photo}
                       alt={m.name}
@@ -578,28 +638,28 @@ export default function App() {
                     />
                   </div>
 
-                  <span className="mt-4 inline-block rounded-full bg-[#6A244C]/8 border border-[#6A244C]/15 px-3 py-0.5 text-[11px] font-bold text-[#6A244C]">
+                  <span className="mt-4 inline-block rounded-full bg-[#ECFDF5] border border-[#047857]/20 px-3 py-0.5 text-[11px] font-bold text-[#047857]">
                     {m.badge}
                   </span>
-                  <h3 className="font-luxury mt-1.5 text-2xl font-bold text-[#22191D]">{m.name}</h3>
-                  <p className="mt-1 text-xs font-medium text-[#5E5056]">{m.simpleLine}</p>
+                  <h3 className="font-heading mt-1.5 text-2xl font-bold text-[#141A17]">{m.name}</h3>
+                  <p className="mt-1 text-xs font-medium text-[#4B5550]">{m.simpleLine}</p>
                 </article>
               </Tilt3DCard>
             ))}
           </div>
         </section>
 
-        {/* 8. HIGHLIGHTED 3D GLASSY AUTOMATED QUOTES SHOWCASE ("What Students & Working Professionals Say") */}
+        {/* 9. HIGHLIGHTED 3D GLASSY AUTOMATED QUOTES SHOWCASE ("What Students & Working Professionals Say") */}
         <section id="reviews" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          <div className="rounded-[32px] border border-[#B58338]/30 bg-gradient-to-b from-white/85 via-[#FAF2E8]/80 to-white/80 px-4 sm:px-8 py-10 sm:py-14 shadow-[0_24px_64px_rgba(106,36,76,0.07)]">
+          <div className="rounded-[32px] border border-[#047857]/20 bg-gradient-to-b from-white/95 via-[#ECFDF5]/65 to-white/90 px-4 sm:px-8 py-10 sm:py-14 shadow-[0_24px_64px_rgba(4,120,87,0.08)]">
             <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
-              <span className="inline-block rounded-full border border-[#B58338]/40 bg-white px-4 py-1 font-mono-tech text-[11px] font-bold uppercase tracking-wider text-[#6A244C]">
+              <span className="inline-block rounded-full border border-[#D97706]/35 bg-[#FEF3C7] px-4 py-1 font-mono-tech text-[11px] font-bold uppercase tracking-wider text-[#B45309]">
                 HIGHLIGHTED LEARNER OUTCOMES
               </span>
-              <h2 className="font-luxury text-3xl sm:text-5xl font-bold text-[#22191D] leading-tight">
+              <h2 className="font-heading text-3xl sm:text-5xl font-bold text-[#141A17] leading-tight">
                 What Students &amp; Working Professionals Say
               </h2>
-              <p className="text-xs sm:text-sm text-[#5E5056]">
+              <p className="text-xs sm:text-sm text-[#4B5550]">
                 Real experiences from college students and working engineers building with VIMS Academy.
               </p>
             </div>
@@ -608,11 +668,11 @@ export default function App() {
           </div>
         </section>
 
-        {/* 9. CONCISE FAQ + FINAL CONVERSION CARD */}
+        {/* 10. CONCISE FAQ + FINAL CONVERSION CARD */}
         <section id="faq" className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <span className="font-mono-tech text-xs font-bold uppercase text-[#B58338]">FAQ</span>
-            <h2 className="font-luxury text-3xl sm:text-4xl font-bold text-[#22191D] mt-1">
+            <span className="font-mono-tech text-xs font-bold uppercase text-[#B45309]">FAQ</span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#141A17] mt-1">
               Quick Answers
             </h2>
           </div>
@@ -621,20 +681,20 @@ export default function App() {
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = idx === openFaqIdx;
               return (
-                <div key={item.question} className="luxury-light-card rounded-2xl overflow-hidden">
+                <div key={item.question} className="pm-card rounded-2xl overflow-hidden">
                   <button
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpenFaqIdx(isOpen ? -1 : idx)}
-                    className="flex min-h-13 w-full cursor-pointer items-center justify-between gap-4 px-5 py-3.5 text-left text-sm sm:text-base font-bold text-[#22191D]"
+                    className="flex min-h-13 w-full cursor-pointer items-center justify-between gap-4 px-5 py-3.5 text-left text-sm sm:text-base font-bold text-[#141A17]"
                   >
                     <span>{item.question}</span>
-                    <span className="font-luxury text-2xl font-bold text-[#6A244C] shrink-0">
+                    <span className="font-heading text-2xl font-bold text-[#047857] shrink-0">
                       {isOpen ? "−" : "+"}
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="border-t border-[#6A244C]/10 px-5 py-3.5 text-sm text-[#5E5056] leading-relaxed">
+                    <div className="border-t border-[#047857]/12 px-5 py-3.5 text-sm text-[#4B5550] leading-relaxed">
                       {item.answer}
                     </div>
                   )}
@@ -643,17 +703,17 @@ export default function App() {
             })}
           </div>
 
-          <div className="mt-10 luxury-light-featured rounded-3xl p-6 sm:p-9 text-center space-y-4">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#6A244C]">
+          <div className="mt-10 pm-card-featured rounded-3xl p-6 sm:p-9 text-center space-y-4">
+            <div className="text-xs font-bold uppercase tracking-wider text-[#047857]">
               Starts 12th December 2026 · Only {cohort.remainingSeats} of {cohort.totalSeats} Seats Left
             </div>
-            <h3 className="font-luxury text-3xl sm:text-4xl font-bold text-[#22191D]">
+            <h3 className="font-heading text-3xl sm:text-4xl font-bold text-[#141A17]">
               Reserve Your Seat in the Next FDE Batch
             </h3>
             <button
               type="button"
               onClick={() => openRegisterModal("bottom_cta")}
-              className="btn-imperial inline-flex min-h-12 cursor-pointer items-center justify-center rounded-full px-9 py-3.5 text-sm sm:text-base font-bold"
+              className="btn-emerald inline-flex min-h-12 cursor-pointer items-center justify-center rounded-full px-9 py-3.5 text-sm sm:text-base font-bold"
             >
               Register Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
             </button>
@@ -661,9 +721,9 @@ export default function App() {
         </section>
       </main>
 
-      {/* REFINED LIGHT LUXURY FOOTER */}
-      <footer className="relative z-10 border-t border-[#6A244C]/10 bg-white/80 py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#5E5056]">
+      {/* CLEAN FOOTER */}
+      <footer className="relative z-10 border-t border-[#047857]/12 bg-white/85 py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#4B5550]">
           <div className="flex items-center gap-2.5">
             <img
               src="/images/vims-logo.png"
@@ -672,7 +732,7 @@ export default function App() {
               height={28}
               className="h-7 w-7 rounded object-contain"
             />
-            <span className="font-bold text-[#22191D]">
+            <span className="font-bold text-[#141A17]">
               VIMS Academy · Powered by VIMS Enterprise
             </span>
           </div>
@@ -681,14 +741,14 @@ export default function App() {
             <span>© 2026 VIMS Enterprise</span>
             <a
               href="/admin"
-              className="rounded-lg border border-[#B58338]/35 bg-[#FAF6F0] px-2.5 py-1 font-mono-tech text-[10px] font-semibold text-[#6A244C] hover:bg-white"
+              className="rounded-lg border border-[#047857]/25 bg-[#F0F7F4] px-2.5 py-1 font-mono-tech text-[10px] font-semibold text-[#047857] hover:bg-white"
             >
               Owner Leads (/admin)
             </a>
             <button
               type="button"
               onClick={() => setInspectorOpen(true)}
-              className="cursor-pointer rounded-lg border border-[#B58338]/25 bg-white px-2.5 py-1 font-mono-tech text-[10px] text-[#5E5056] hover:text-[#6A244C]"
+              className="cursor-pointer rounded-lg border border-[#047857]/20 bg-white px-2.5 py-1 font-mono-tech text-[10px] text-[#4B5550] hover:text-[#047857]"
             >
               Pixel Tracker
             </button>

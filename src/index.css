@@ -2,23 +2,25 @@
 
 @layer base {
   :root {
-    --surface-ivory: #faf6f0;
-    --ink-espresso: #22191d;
-    --ink-taupe: #5e5056;
-    --accent-plum: #6a244c;
-    --accent-plum-deep: #4a1635;
-    --accent-gold: #b58338;
-    --accent-jade: #1a6b54;
+    --surface-canvas: #f8faf9;
+    --surface-card: #ffffff;
+    --ink-charcoal: #141a17;
+    --ink-slate: #4b5550;
+    --accent-emerald: #047857;
+    --accent-emerald-bright: #059669;
+    --accent-emerald-deep: #065f46;
+    --accent-gold: #d97706;
+    --accent-gold-soft: #fef3c7;
 
-    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-heading: "Outfit", system-ui, -apple-system, sans-serif;
     --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
   }
 
   html,
   body {
-    background-color: var(--surface-ivory);
-    color: var(--ink-espresso);
+    background-color: var(--surface-canvas);
+    color: var(--ink-charcoal);
     font-family: var(--font-sans);
     font-size: 15px;
     line-height: 1.65;
@@ -26,62 +28,66 @@
   }
 }
 
-.font-luxury {
-  font-family: var(--font-serif);
-  letter-spacing: -0.015em;
+.font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
 }
 
 .font-mono-tech {
   font-family: var(--font-mono);
 }
 
-/* Crisp solid ivory-white elevated cards (no unnecessary backdrop blur on regular cards) */
-.luxury-light-card {
+/* Crisp elevated conversion cards on pearl-mint canvas */
+.pm-card {
   background: #ffffff;
-  border: 1px solid rgba(106, 36, 76, 0.1);
-  box-shadow: 0 12px 32px rgba(34, 25, 29, 0.05);
+  border: 1px solid rgba(4, 120, 87, 0.11);
+  box-shadow: 0 12px 32px rgba(20, 26, 23, 0.045);
 }
 
-.luxury-light-featured {
+.pm-card-featured {
   background: #ffffff;
-  border: 1.5px solid rgba(181, 131, 56, 0.45);
-  box-shadow: 0 22px 52px rgba(106, 36, 76, 0.1);
+  border: 1.5px solid rgba(4, 120, 87, 0.28);
+  box-shadow: 0 22px 54px rgba(4, 120, 87, 0.1);
 }
 
-/* Specular warm glassmorphism exclusively for the 3D Revolving Quotes Carousel */
+/* Specular emerald-pearl glassmorphism exclusively for the 3D Quotes Carousel */
 .glass-quote-card {
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.92) 0%,
-    rgba(250, 245, 238, 0.78) 100%
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(236, 253, 245, 0.78) 100%
   );
-  border: 1.5px solid rgba(181, 131, 56, 0.42);
+  border: 1.5px solid rgba(217, 119, 6, 0.35);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    0 28px 64px rgba(74, 22, 53, 0.14);
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 26px 60px rgba(4, 120, 87, 0.13);
   backdrop-filter: blur(18px);
 }
 
-/* Imperial Plum & Brushed Gold Primary CTA */
-.btn-imperial {
-  background: linear-gradient(135deg, #6a244c 0%, #4a1635 100%);
-  color: #fffdf9;
-  border: 1px solid rgba(212, 175, 106, 0.45);
+/* Emerald Conversion Primary CTA */
+.btn-emerald {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  border: 1px solid rgba(6, 95, 70, 0.4);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 12px 28px rgba(106, 36, 76, 0.24);
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 12px 28px rgba(4, 120, 87, 0.24);
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 220ms ease;
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 200ms ease;
 }
 
-.btn-imperial:hover {
-  filter: brightness(1.07);
+.btn-emerald:hover {
+  filter: brightness(1.06);
   transform: translateY(-1px);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.24),
-    0 16px 34px rgba(106, 36, 76, 0.32);
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 16px 34px rgba(4, 120, 87, 0.32);
+}
+
+.btn-emerald:active {
+  transform: translateY(0px);
 }
 
 @keyframes progressSweep {

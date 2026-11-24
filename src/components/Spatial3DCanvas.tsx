@@ -64,8 +64,8 @@ const EDGES: Array<[number, number]> = [
 ];
 
 /**
- * Seamless Light Warm-Ivory 3D Constellation & Champagne/Plum-Rose Wash Canvas.
- * Runs continuously behind every section so transitions feel smooth and unbroken.
+ * Continuous Pearl-Mint White (#F8FAF9) 3D Constellation with Soft Emerald & Warm Amber Gold washes.
+ * Keeps section transitions completely seamless with zero harsh bands.
  */
 export function FullPageLuxuryCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -107,37 +107,37 @@ export function FullPageLuxuryCanvas() {
       ctx.clearRect(0, 0, width, height);
       if (width < 40 || height < 40) return;
 
-      baseYaw += dt * 0.065;
+      baseYaw += dt * 0.06;
       smoothX = damp(smoothX, ptrX, 2.8, dt || 0.016);
       smoothY = damp(smoothY, ptrY, 2.8, dt || 0.016);
 
-      // Soft warm champagne top-right ambient wash
+      // Soft emerald-mint top-right ambient wash
       const g1 = ctx.createRadialGradient(
-        width * 0.78,
-        height * 0.2,
+        width * 0.8,
+        height * 0.18,
         20,
-        width * 0.78,
-        height * 0.2,
-        Math.max(width, height) * 0.58
+        width * 0.8,
+        height * 0.18,
+        Math.max(width, height) * 0.56
       );
-      g1.addColorStop(0, "rgba(181, 131, 56, 0.07)");
-      g1.addColorStop(0.55, "rgba(106, 36, 76, 0.035)");
-      g1.addColorStop(1, "rgba(250, 246, 240, 0)");
+      g1.addColorStop(0, "rgba(5, 150, 105, 0.065)");
+      g1.addColorStop(0.55, "rgba(217, 119, 6, 0.035)");
+      g1.addColorStop(1, "rgba(248, 250, 249, 0)");
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, width, height);
 
-      // Satin plum-rose lower-left ambient wash
+      // Warm amber-gold lower-left ambient wash
       const g2 = ctx.createRadialGradient(
-        width * 0.18,
-        height * 0.76,
+        width * 0.16,
+        height * 0.78,
         20,
-        width * 0.18,
-        height * 0.76,
-        Math.max(width, height) * 0.54
+        width * 0.16,
+        height * 0.78,
+        Math.max(width, height) * 0.52
       );
-      g2.addColorStop(0, "rgba(106, 36, 76, 0.055)");
-      g2.addColorStop(0.6, "rgba(181, 131, 56, 0.03)");
-      g2.addColorStop(1, "rgba(250, 246, 240, 0)");
+      g2.addColorStop(0, "rgba(217, 119, 6, 0.045)");
+      g2.addColorStop(0.6, "rgba(4, 120, 87, 0.03)");
+      g2.addColorStop(1, "rgba(248, 250, 249, 0)");
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, width, height);
 
@@ -167,7 +167,7 @@ export function FullPageLuxuryCanvas() {
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.quadraticCurveTo(midX, midY, b.x, b.y);
-        ctx.strokeStyle = "rgba(106, 36, 76, 0.075)";
+        ctx.strokeStyle = "rgba(4, 120, 87, 0.075)";
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -187,8 +187,8 @@ export function FullPageLuxuryCanvas() {
         ctx.beginPath();
         ctx.arc(px, py, 2.5, 0, Math.PI * 2);
         ctx.fillStyle = pkt.gold
-          ? "rgba(181, 131, 56, 0.45)"
-          : "rgba(106, 36, 76, 0.38)";
+          ? "rgba(217, 119, 6, 0.42)"
+          : "rgba(5, 150, 105, 0.4)";
         ctx.fill();
       }
 
@@ -198,8 +198,8 @@ export function FullPageLuxuryCanvas() {
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2.8 * p.scale, 0, Math.PI * 2);
         ctx.fillStyle = node.gold
-          ? "rgba(181, 131, 56, 0.34)"
-          : "rgba(34, 25, 29, 0.16)";
+          ? "rgba(217, 119, 6, 0.34)"
+          : "rgba(4, 120, 87, 0.22)";
         ctx.fill();
       }
     };

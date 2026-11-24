@@ -31,21 +31,21 @@ export function AutomatedCurriculumCarousel() {
               onClick={() => setActive(idx)}
               className={`relative overflow-hidden rounded-2xl p-4 text-left cursor-pointer transition-all ${
                 isCurrent
-                  ? "luxury-light-featured"
-                  : "luxury-light-card opacity-80 hover:opacity-100"
+                  ? "pm-card-featured"
+                  : "pm-card opacity-80 hover:opacity-100"
               }`}
             >
-              <div className="flex items-center justify-between text-[11px] font-mono-tech font-semibold text-[#6A244C]">
+              <div className="flex items-center justify-between text-[11px] font-mono-tech font-semibold text-[#047857]">
                 <span>{sp.sprintCode}</span>
-                <span className="text-[#85757C]">{sp.weeksLabel}</span>
+                <span className="text-[#6B7570]">{sp.weeksLabel}</span>
               </div>
-              <div className="font-luxury mt-1 text-lg sm:text-xl font-bold text-[#22191D] line-clamp-1">
+              <div className="font-heading mt-1 text-lg sm:text-xl font-bold text-[#141A17] line-clamp-1">
                 {sp.title}
               </div>
               {isCurrent && !paused && (
                 <span
                   key={`bar-${active}`}
-                  className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#6A244C] to-[#B58338] animate-carousel-progress"
+                  className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#059669] to-[#D97706] animate-carousel-progress"
                 />
               )}
             </button>
@@ -53,16 +53,16 @@ export function AutomatedCurriculumCarousel() {
         })}
       </div>
 
-      <div className="luxury-light-card rounded-3xl p-6 sm:p-9">
+      <div className="pm-card rounded-3xl p-6 sm:p-9">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-center">
           <div className="lg:col-span-5 space-y-3">
-            <span className="inline-block rounded-full bg-[#6A244C]/8 border border-[#6A244C]/20 px-3.5 py-1 font-mono-tech text-xs font-semibold text-[#6A244C]">
+            <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#047857]/20 px-3.5 py-1 font-mono-tech text-xs font-semibold text-[#047857]">
               {sprint.sprintCode} · {sprint.weeksLabel}
             </span>
-            <h3 className="font-luxury text-2xl sm:text-3xl font-bold text-[#22191D] leading-snug">
+            <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[#141A17] leading-snug">
               {sprint.title}
             </h3>
-            <div className="rounded-xl border border-[#1A6B54]/25 bg-[#1A6B54]/6 px-4 py-3 text-xs font-semibold text-[#1A6B54]">
+            <div className="rounded-xl border border-[#047857]/25 bg-[#ECFDF5] px-4 py-3 text-xs font-semibold text-[#065F46]">
               ✓ {sprint.output}
             </div>
           </div>
@@ -71,9 +71,9 @@ export function AutomatedCurriculumCarousel() {
             {sprint.points.map((pt, i) => (
               <div
                 key={pt}
-                className="flex items-center gap-3.5 rounded-xl border border-[#6A244C]/10 bg-[#FAF6F0]/65 px-4 py-3 text-sm font-medium text-[#22191D]"
+                className="flex items-center gap-3.5 rounded-xl border border-[#047857]/12 bg-[#F8FAF9] px-4 py-3 text-sm font-medium text-[#141A17]"
               >
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#6A244C] text-xs font-bold text-[#FFFDF9]">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#047857] text-xs font-bold text-white">
                   {i + 1}
                 </span>
                 <span>{pt}</span>
@@ -153,10 +153,10 @@ export function AutomatedQuotesCarousel() {
                 }`}
               >
                 <div className="flex items-center justify-between gap-3 mb-4">
-                  <span className="rounded-full border border-[#B58338]/40 bg-[#FAF6F0] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#6A244C]">
+                  <span className="rounded-full border border-[#D97706]/35 bg-[#FEF3C7] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#B45309]">
                     {review.tag}
                   </span>
-                  <div className="flex items-center gap-0.5 text-[#B58338] text-sm" aria-label="5 out of 5 stars">
+                  <div className="flex items-center gap-0.5 text-[#D97706] text-sm" aria-label="5 out of 5 stars">
                     <span>★</span>
                     <span>★</span>
                     <span>★</span>
@@ -165,16 +165,16 @@ export function AutomatedQuotesCarousel() {
                   </div>
                 </div>
 
-                <blockquote className="font-luxury italic text-[22px] lg:text-[24px] font-semibold text-[#22191D] leading-[1.45]">
+                <blockquote className="font-heading text-[21px] lg:text-[23px] font-semibold text-[#141A17] leading-[1.45]">
                   &ldquo;{review.quote}&rdquo;
                 </blockquote>
 
-                <div className="mt-6 flex items-center justify-between border-t border-[#6A244C]/10 pt-4">
+                <div className="mt-6 flex items-center justify-between border-t border-[#047857]/12 pt-4">
                   <div>
-                    <div className="text-sm font-bold text-[#22191D]">{review.name}</div>
-                    <div className="text-xs text-[#5E5056] mt-0.5">{review.role}</div>
+                    <div className="text-sm font-bold text-[#141A17]">{review.name}</div>
+                    <div className="text-xs text-[#4B5550] mt-0.5">{review.role}</div>
                   </div>
-                  <span className="font-mono-tech text-[10px] font-semibold uppercase tracking-wider text-[#1A6B54] bg-[#1A6B54]/8 px-2.5 py-1 rounded-full">
+                  <span className="font-mono-tech text-[10px] font-semibold uppercase tracking-wider text-[#047857] bg-[#ECFDF5] border border-[#047857]/20 px-2.5 py-1 rounded-full">
                     Verified Learner
                   </span>
                 </div>
@@ -182,7 +182,7 @@ export function AutomatedQuotesCarousel() {
                 {isCenter && !paused && (
                   <span
                     key={`quote-sweep-${active}`}
-                    className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#B58338] via-[#D4AF6A] to-[#6A244C] animate-carousel-progress"
+                    className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#D97706] via-[#059669] to-[#047857] animate-carousel-progress"
                   />
                 )}
               </article>
@@ -191,32 +191,37 @@ export function AutomatedQuotesCarousel() {
         </div>
       </div>
 
-      {/* Mobile Full-Width Clean Animated Card (Zero Horizontal Overflow) */}
+      {/* Mobile Full-Width Clean Animated Card */}
       <div className="md:hidden">
         {(() => {
           const current = STUDENT_REVIEWS[active]!;
           return (
             <article className="glass-quote-card relative overflow-hidden rounded-3xl p-6">
               <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="rounded-full border border-[#B58338]/40 bg-[#FAF6F0] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#6A244C]">
+                <span className="rounded-full border border-[#D97706]/35 bg-[#FEF3C7] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#B45309]">
                   {current.tag}
                 </span>
-                <div className="text-[#B58338] text-xs">★★★★★</div>
+                <div className="text-[#D97706] text-xs" aria-label="5 out of 5 stars">★★★★★</div>
               </div>
 
-              <blockquote className="font-luxury italic text-xl font-semibold text-[#22191D] leading-[1.45]">
+              <blockquote className="font-heading text-lg font-semibold text-[#141A17] leading-[1.48]">
                 &ldquo;{current.quote}&rdquo;
               </blockquote>
 
-              <div className="mt-5 border-t border-[#6A244C]/10 pt-3">
-                <div className="text-sm font-bold text-[#22191D]">{current.name}</div>
-                <div className="text-xs text-[#5E5056]">{current.role}</div>
+              <div className="mt-5 border-t border-[#047857]/12 pt-3 flex items-center justify-between gap-2">
+                <div>
+                  <div className="text-sm font-bold text-[#141A17]">{current.name}</div>
+                  <div className="text-xs text-[#4B5550]">{current.role}</div>
+                </div>
+                <span className="font-mono-tech text-[10px] font-semibold uppercase tracking-wider text-[#047857] bg-[#ECFDF5] px-2 py-1 rounded-full">
+                  Verified
+                </span>
               </div>
 
               {!paused && (
                 <span
                   key={`mobile-quote-sweep-${active}`}
-                  className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#B58338] to-[#6A244C] animate-carousel-progress"
+                  className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#D97706] to-[#047857] animate-carousel-progress"
                 />
               )}
             </article>
@@ -230,7 +235,7 @@ export function AutomatedQuotesCarousel() {
           type="button"
           aria-label="Previous student quote"
           onClick={() => setActive((prev) => (prev - 1 + total) % total)}
-          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#B58338]/35 bg-white text-sm font-bold text-[#6A244C] shadow-xs hover:border-[#6A244C]"
+          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#047857]/25 bg-white text-sm font-bold text-[#047857] shadow-xs hover:border-[#047857] hover:bg-[#ECFDF5]"
         >
           ‹
         </button>
@@ -243,7 +248,7 @@ export function AutomatedQuotesCarousel() {
               aria-label={`View quote from ${r.name}`}
               onClick={() => setActive(idx)}
               className={`h-2 cursor-pointer rounded-full transition-all duration-300 ${
-                idx === active ? "w-8 bg-[#6A244C]" : "w-2 bg-[#B58338]/35 hover:bg-[#B58338]/65"
+                idx === active ? "w-8 bg-[#047857]" : "w-2 bg-[#D97706]/40 hover:bg-[#D97706]/70"
               }`}
             />
           ))}
@@ -253,7 +258,7 @@ export function AutomatedQuotesCarousel() {
           type="button"
           aria-label="Next student quote"
           onClick={() => setActive((prev) => (prev + 1) % total)}
-          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#B58338]/35 bg-white text-sm font-bold text-[#6A244C] shadow-xs hover:border-[#6A244C]"
+          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#047857]/25 bg-white text-sm font-bold text-[#047857] shadow-xs hover:border-[#047857] hover:bg-[#ECFDF5]"
         >
           ›
         </button>

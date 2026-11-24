@@ -30,10 +30,45 @@ export interface StudentReview {
   quote: string;
 }
 
+export interface AudienceFitItem {
+  id: string;
+  tag: string;
+  title: string;
+  subtitle: string;
+  outcomes: string[];
+}
+
 export interface FaqItem {
   question: string;
   answer: string;
 }
+
+export const AUDIENCE_FIT: AudienceFitItem[] = [
+  {
+    id: "students",
+    tag: "FOR COLLEGE STUDENTS & FRESHERS",
+    title: "Stand Out in Campus & Off-Campus Placements",
+    subtitle:
+      "Stop relying on generic tutorial notebooks. Build live deployed AI endpoints that interviewers test right on call.",
+    outcomes: [
+      "Ship 3+ live GitHub + Cloud-hosted AI projects before graduation",
+      "Master Python APIs, RAG & Agents clearly in Tamil without overwhelm",
+      "Walk into placement rounds with VIMS Enterprise project certification"
+    ]
+  },
+  {
+    id: "professionals",
+    tag: "FOR WORKING PROFESSIONALS (IT & CORE)",
+    title: "Transition Smoothly Into High-Paying AI Engineering",
+    subtitle:
+      "Built around weekend live sessions on Saturday mornings so you can upskill without quitting or stalling work.",
+    outcomes: [
+      "Bridge legacy backend, QA, or core engineering into production AI systems",
+      "Deploy Dockerized FastAPI + Vector DB workflows used in real client teams",
+      "Upgrade your resume with system architecture & interview-ready case studies"
+    ]
+  }
+];
 
 export const CLASS_SCHEDULE = {
   dateLabel: "Saturday, 12th December 2026",
@@ -149,21 +184,21 @@ export const MENTORS: MentorProfile[] = [
     name: "Guruprasath",
     badge: "Program Host",
     simpleLine: "AI Solutions & Forward Deployment Lead · VIMS Enterprise",
-    photo: "/images/mentor-guruprasath.jpg"
+    photo: "/images/faculty-guruprasath-studio.jpg"
   },
   {
     id: "gowthamraj",
     name: "Gowthamraj Mahadevan",
     badge: "Program Host",
     simpleLine: "ADAS & Systems Engineering Lead · VIMS Enterprise",
-    photo: "/images/mentor-gowthamraj.jpg"
+    photo: "/images/faculty-gowthamraj-studio.jpg"
   },
   {
     id: "vimalraj",
     name: "Vimal Raj",
     badge: "Supporting Mentor",
     simpleLine: "Hands-On Lab & Student Project Support · VIMS Academy",
-    photo: "/images/mentor-vimalraj.jpg"
+    photo: "/images/faculty-vimalraj-studio.jpg"
   }
 ];
 

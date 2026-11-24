@@ -127,7 +127,7 @@ export function EnrollmentFormWidget({
             contact: `+91${phone.replace(/\D/g, "").slice(-10)}`
           },
           theme: {
-            color: "#6A244C"
+            color: "#047857"
           },
           handler: async (response: Record<string, string>) => {
             await completeVerification(regId, {
@@ -264,7 +264,7 @@ export function EnrollmentFormWidget({
   }
 
   const inputClass =
-    "h-11 w-full rounded-xl border border-[#B58338]/25 bg-[#FAF6F0]/75 px-3.5 text-sm text-[#22191D] placeholder:text-[#85757C] focus:border-[#6A244C] focus:bg-white focus:outline-none";
+    "h-11 w-full rounded-xl border border-[#047857]/20 bg-[#F8FAF9] px-3.5 text-sm text-[#141A17] placeholder:text-[#6B7570] focus:border-[#047857] focus:bg-white focus:outline-none";
 
   return (
     <div className="space-y-4">
@@ -300,8 +300,8 @@ export function EnrollmentFormWidget({
           />
 
           <div>
-            <label className="block text-xs font-semibold text-[#5E5056] mb-1">
-              Full Name <span className="text-[#6A244C]">*</span>
+            <label className="block text-xs font-semibold text-[#4B5550] mb-1">
+              Full Name <span className="text-[#047857]">*</span>
             </label>
             <input
               type="text"
@@ -316,8 +316,8 @@ export function EnrollmentFormWidget({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-[#5E5056] mb-1">
-                WhatsApp / Mobile <span className="text-[#6A244C]">*</span>
+              <label className="block text-xs font-semibold text-[#4B5550] mb-1">
+                WhatsApp / Mobile <span className="text-[#047857]">*</span>
               </label>
               <input
                 type="tel"
@@ -334,7 +334,7 @@ export function EnrollmentFormWidget({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#5E5056] mb-1">City</label>
+              <label className="block text-xs font-semibold text-[#4B5550] mb-1">City</label>
               <input
                 type="text"
                 value={city}
@@ -346,8 +346,8 @@ export function EnrollmentFormWidget({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#5E5056] mb-1">
-              Email ID <span className="text-[#6A244C]">*</span>
+            <label className="block text-xs font-semibold text-[#4B5550] mb-1">
+              Email ID <span className="text-[#047857]">*</span>
             </label>
             <input
               type="email"
@@ -361,7 +361,7 @@ export function EnrollmentFormWidget({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#5E5056] mb-1">I am a</label>
+            <label className="block text-xs font-semibold text-[#4B5550] mb-1">I am a</label>
             <select
               value={profile}
               onChange={(e) => setProfile(e.target.value)}
@@ -373,11 +373,11 @@ export function EnrollmentFormWidget({
             </select>
           </div>
 
-          <div className="rounded-xl border border-[#B58338]/25 bg-[#FAF6F0] px-3.5 py-2.5 text-xs flex items-center justify-between">
-            <span className="text-[#5E5056]">
-              Fee: <strong className="text-[#22191D]">₹{pricing.baseInr.toLocaleString("en-IN")}</strong> + 18% GST
+          <div className="rounded-xl border border-[#047857]/20 bg-[#F0F7F4] px-3.5 py-2.5 text-xs flex items-center justify-between">
+            <span className="text-[#4B5550]">
+              Fee: <strong className="text-[#141A17]">₹{pricing.baseInr.toLocaleString("en-IN")}</strong> + 18% GST
             </span>
-            <span className="font-mono-tech font-bold text-[#6A244C] tabular-nums">
+            <span className="font-mono-tech font-bold text-[#047857] tabular-nums">
               Total: ₹{pricing.totalInr.toLocaleString("en-IN")}
             </span>
           </div>
@@ -385,16 +385,16 @@ export function EnrollmentFormWidget({
           <button
             type="submit"
             disabled={isSubmitting || remainingSeats <= 0}
-            className="btn-imperial flex min-h-12 w-full cursor-pointer items-center justify-center rounded-xl px-6 py-3 text-sm sm:text-base font-bold disabled:opacity-50"
+            className="btn-emerald flex min-h-12 w-full cursor-pointer items-center justify-center rounded-xl px-6 py-3 text-sm sm:text-base font-bold disabled:opacity-50"
           >
             {isSubmitting
               ? "Opening Razorpay Payment..."
               : remainingSeats <= 0
                 ? "All 50 Seats Booked"
-                : `Register Now · ₹${pricing.baseInr.toLocaleString("en-IN")} + GST`}
+                : `Reserve Seat Now · ₹${pricing.baseInr.toLocaleString("en-IN")} + GST`}
           </button>
 
-          <p className="text-center text-[11px] text-[#5E5056]">
+          <p className="text-center text-[11px] text-[#4B5550]">
             100% Secure Razorpay Live Checkout · UPI (GPay, PhonePe, Paytm), Cards &amp; NetBanking
           </p>
         </form>
@@ -402,7 +402,7 @@ export function EnrollmentFormWidget({
 
       {step === "sandbox_checkout" && (
         <div className="space-y-3.5">
-          <div className="rounded-xl border border-[#B58338]/35 bg-[#FAF6F0] p-3 text-xs text-[#22191D]">
+          <div className="rounded-xl border border-[#047857]/20 bg-[#F0F7F4] p-3 text-xs text-[#141A17]">
             <strong>Checkout Preview:</strong> Order <code className="font-mono-tech">{orderId}</code>{" "}
             created for ₹{pricing.totalInr.toLocaleString("en-IN")}. Select payment method below:
           </div>
@@ -417,8 +417,8 @@ export function EnrollmentFormWidget({
                 key={m.id}
                 className={`flex min-h-11 cursor-pointer items-center justify-between rounded-xl border px-4 py-2 text-sm font-medium ${
                   sandboxMethod === m.id
-                    ? "border-[#6A244C] bg-[#6A244C]/6 text-[#22191D]"
-                    : "border-[#B58338]/20 bg-white text-[#5E5056]"
+                    ? "border-[#047857] bg-[#ECFDF5] text-[#141A17]"
+                    : "border-[#047857]/15 bg-white text-[#4B5550]"
                 }`}
               >
                 <span>{m.label}</span>
@@ -426,7 +426,7 @@ export function EnrollmentFormWidget({
                   type="radio"
                   checked={sandboxMethod === m.id}
                   onChange={() => setSandboxMethod(m.id)}
-                  className="accent-[#6A244C]"
+                  className="accent-[#047857]"
                 />
               </label>
             ))}
@@ -442,7 +442,7 @@ export function EnrollmentFormWidget({
                   sandbox_method: sandboxMethod
                 })
               }
-              className="btn-imperial min-h-11 cursor-pointer rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold"
+              className="btn-emerald min-h-11 cursor-pointer rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold"
             >
               {isSubmitting ? "Confirming..." : `Pay ₹${pricing.totalInr.toLocaleString("en-IN")}`}
             </button>
@@ -458,7 +458,7 @@ export function EnrollmentFormWidget({
                   body: JSON.stringify({ registrationId, reason: "sandbox_cancelled" })
                 });
               }}
-              className="min-h-11 cursor-pointer rounded-xl border border-[#B58338]/35 bg-white px-4 py-2.5 text-xs sm:text-sm font-semibold text-[#5E5056]"
+              className="min-h-11 cursor-pointer rounded-xl border border-[#047857]/25 bg-white px-4 py-2.5 text-xs sm:text-sm font-semibold text-[#4B5550]"
             >
               Cancel
             </button>
@@ -468,7 +468,7 @@ export function EnrollmentFormWidget({
 
       {step === "abandoned" && (
         <div className="space-y-3.5">
-          <div className="rounded-xl border border-[#B58338]/35 bg-[#FAF6F0] p-3.5 text-xs text-[#22191D]">
+          <div className="rounded-xl border border-[#D97706]/30 bg-[#FEF3C7]/60 p-3.5 text-xs text-[#141A17]">
             Your details are saved! Only <strong>{remainingSeats} seats</strong> remain for the 12th
             December batch. Complete payment below to lock your seat.
           </div>
@@ -476,7 +476,7 @@ export function EnrollmentFormWidget({
             type="button"
             disabled={isSubmitting}
             onClick={() => startPaymentForRegistration(registrationId)}
-            className="btn-imperial min-h-11 w-full cursor-pointer rounded-xl px-5 py-2.5 text-sm font-bold"
+            className="btn-emerald min-h-11 w-full cursor-pointer rounded-xl px-5 py-2.5 text-sm font-bold"
           >
             Resume Payment · ₹{pricing.totalInr.toLocaleString("en-IN")}
           </button>
@@ -485,46 +485,46 @@ export function EnrollmentFormWidget({
 
       {step === "confirmed" && receipt && (
         <div className="space-y-3.5 text-center">
-          <div className="rounded-xl border border-[#1A6B54]/30 bg-[#1A6B54]/8 p-4">
-            <div className="mx-auto mb-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#1A6B54] text-white font-bold">
+          <div className="rounded-xl border border-[#047857]/30 bg-[#ECFDF5] p-4">
+            <div className="mx-auto mb-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#047857] text-white font-bold">
               ✓
             </div>
-            <div className="font-mono-tech text-xs font-bold text-[#1A6B54]">
+            <div className="font-mono-tech text-xs font-bold text-[#047857]">
               SEAT #{receipt.seatNumber} / {totalSeats} CONFIRMED
             </div>
-            <div className="font-luxury mt-1 text-xl font-bold text-[#22191D]">
+            <div className="font-heading mt-1 text-xl font-bold text-[#141A17]">
               Welcome, {name}! See you live on 12th December.
             </div>
           </div>
 
-          <div className="rounded-xl border border-[#B58338]/25 bg-[#FAF6F0] p-3.5 text-xs space-y-1.5 text-left">
+          <div className="rounded-xl border border-[#047857]/15 bg-[#F0F7F4] p-3.5 text-xs space-y-1.5 text-left">
             <div className="flex justify-between">
-              <span className="text-[#5E5056]">Seat Number</span>
-              <span className="font-mono-tech font-bold text-[#6A244C]">
+              <span className="text-[#4B5550]">Seat Number</span>
+              <span className="font-mono-tech font-bold text-[#047857]">
                 #{receipt.seatNumber} of {totalSeats}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#5E5056]">Registration ID</span>
-              <span className="font-mono-tech font-semibold text-[#22191D]">
+              <span className="text-[#4B5550]">Registration ID</span>
+              <span className="font-mono-tech font-semibold text-[#141A17]">
                 {receipt.registrationId}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#5E5056]">Payment Reference</span>
-              <span className="font-mono-tech font-semibold text-[#22191D]">
+              <span className="text-[#4B5550]">Payment Reference</span>
+              <span className="font-mono-tech font-semibold text-[#141A17]">
                 {receipt.paymentId}
               </span>
             </div>
-            <div className="flex justify-between border-t border-[#6A244C]/10 pt-1.5">
-              <span className="text-[#5E5056]">Amount Paid</span>
-              <span className="font-mono-tech font-bold text-[#1A6B54]">
+            <div className="flex justify-between border-t border-[#047857]/12 pt-1.5">
+              <span className="text-[#4B5550]">Amount Paid</span>
+              <span className="font-mono-tech font-bold text-[#047857]">
                 ₹{receipt.amountInr.toLocaleString("en-IN")}
               </span>
             </div>
           </div>
 
-          <p className="text-[11px] text-[#5E5056]">
+          <p className="text-[11px] text-[#4B5550]">
             A confirmation receipt email has been sent to <strong>{email}</strong>.
           </p>
 
@@ -532,7 +532,7 @@ export function EnrollmentFormWidget({
             <button
               type="button"
               onClick={onDoneClose}
-              className="btn-imperial min-h-11 w-full cursor-pointer rounded-xl px-5 py-2.5 text-xs font-bold"
+              className="btn-emerald min-h-11 w-full cursor-pointer rounded-xl px-5 py-2.5 text-xs font-bold"
             >
               Done
             </button>
@@ -578,18 +578,18 @@ export default function RegistrationModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="fde-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#22191D]/60 p-4 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#141A17]/60 p-4 backdrop-blur-xs overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative my-auto w-full max-w-lg rounded-3xl border border-[#B58338]/35 bg-white text-[#22191D] shadow-2xl overflow-hidden">
-        <div className="flex items-center justify-between gap-4 border-b border-[#6A244C]/10 bg-[#FAF6F0] px-6 py-4">
+      <div className="relative my-auto w-full max-w-lg rounded-3xl border border-[#047857]/25 bg-white text-[#141A17] shadow-2xl overflow-hidden">
+        <div className="flex items-center justify-between gap-4 border-b border-[#047857]/12 bg-[#F0F7F4] px-6 py-4">
           <div>
-            <span className="font-mono-tech text-[11px] font-bold uppercase text-[#6A244C]">
+            <span className="font-mono-tech text-[11px] font-bold uppercase text-[#047857]">
               STARTS 12TH DECEMBER · LIVE IN TAMIL
             </span>
-            <h2 id="fde-modal-title" className="font-luxury text-2xl font-bold text-[#22191D]">
+            <h2 id="fde-modal-title" className="font-heading text-2xl font-bold text-[#141A17]">
               Register Your Seat
             </h2>
           </div>
@@ -597,7 +597,7 @@ export default function RegistrationModal({
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#B58338]/30 bg-white text-xs text-[#5E5056] hover:text-[#6A244C]"
+            className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#047857]/25 bg-white text-xs text-[#4B5550] hover:text-[#047857]"
           >
             ✕
           </button>
