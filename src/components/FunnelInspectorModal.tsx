@@ -67,83 +67,89 @@ export default function FunnelInspectorModal({ isOpen, onClose }: FunnelInspecto
       role="dialog"
       aria-modal="true"
       aria-label="Meta Pixel and Funnel Live Analytics"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/75 p-4 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#22191D]/65 p-4 backdrop-blur-xs"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="w-full max-w-4xl rounded-2xl border border-zinc-200 bg-white shadow-2xl overflow-hidden max-h-[88vh] flex flex-col">
-        <div className="flex items-center justify-between border-b border-zinc-200 bg-zinc-950 px-6 py-4 text-white">
+      <div className="w-full max-w-4xl rounded-3xl border border-[#B58338]/35 bg-white shadow-2xl overflow-hidden max-h-[88vh] flex flex-col">
+        <div className="flex items-center justify-between border-b border-[#6A244C]/12 bg-[#4A1635] px-6 py-4 text-white">
           <div>
-            <span className="font-mono-tech text-[11px] text-emerald-400 uppercase">
-              META PIXEL METHOD + FUNNEL TELEMETRY
+            <span className="font-mono-tech text-[11px] text-[#E5C594] uppercase">
+              META PIXEL (1606721668164457) + FUNNEL TELEMETRY
             </span>
-            <h2 className="font-display text-base sm:text-lg font-bold">
-              Live Ad Funnel & Visitor Journey Inspector
+            <h2 className="font-luxury text-xl font-bold">
+              Live Ad Funnel &amp; Visitor Journey Inspector
             </h2>
           </div>
           <div className="flex items-center gap-2">
+            <a
+              href="/admin"
+              className="inline-flex min-h-9 items-center rounded-lg bg-[#B58338] px-3 text-xs font-bold text-[#22191D]"
+            >
+              Open Full /admin
+            </a>
             <button
               type="button"
               onClick={refreshSummary}
-              className="min-h-9 cursor-pointer rounded-lg border border-zinc-700 bg-zinc-900 px-3 text-xs font-semibold text-zinc-200 hover:bg-zinc-800"
+              className="min-h-9 cursor-pointer rounded-lg border border-white/25 bg-white/10 px-3 text-xs font-semibold text-white"
             >
               {loading ? "Refreshing..." : "Refresh"}
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="min-h-9 w-9 cursor-pointer rounded-lg border border-zinc-700 bg-zinc-900 text-sm text-zinc-300 hover:bg-zinc-800"
+              className="min-h-9 w-9 cursor-pointer rounded-lg border border-white/25 bg-white/10 text-sm text-white"
             >
               ✕
             </button>
           </div>
         </div>
 
-        <div className="p-6 overflow-y-auto space-y-6 text-xs">
+        <div className="p-6 overflow-y-auto space-y-6 text-xs text-[#22191D]">
           {summary && (
             <>
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-3">
-                  <div className="text-zinc-500">Unique Visitors</div>
-                  <div className="font-display text-xl font-bold text-zinc-950 mt-1 tabular-nums">
+                <div className="rounded-xl border border-[#B58338]/25 bg-[#FAF6F0] p-3">
+                  <div className="text-[#5E5056]">Unique Visitors</div>
+                  <div className="font-luxury text-2xl font-bold mt-1 tabular-nums">
                     {summary.funnel.uniqueVisitors}
                   </div>
                 </div>
-                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-3">
-                  <div className="text-zinc-500">Leads Captured</div>
-                  <div className="font-display text-xl font-bold text-zinc-950 mt-1 tabular-nums">
+                <div className="rounded-xl border border-[#B58338]/25 bg-[#FAF6F0] p-3">
+                  <div className="text-[#5E5056]">Leads Captured</div>
+                  <div className="font-luxury text-2xl font-bold mt-1 tabular-nums">
                     {summary.funnel.leadsCaptured}
                   </div>
                 </div>
-                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-3">
-                  <div className="text-zinc-500">Checkouts Opened</div>
-                  <div className="font-display text-xl font-bold text-zinc-950 mt-1 tabular-nums">
+                <div className="rounded-xl border border-[#B58338]/25 bg-[#FAF6F0] p-3">
+                  <div className="text-[#5E5056]">Checkouts Opened</div>
+                  <div className="font-luxury text-2xl font-bold mt-1 tabular-nums">
                     {summary.funnel.checkoutInitiated}
                   </div>
                 </div>
                 <div className="rounded-xl border border-amber-200 bg-amber-50 p-3">
                   <div className="text-amber-800">Drop-offs</div>
-                  <div className="font-display text-xl font-bold text-amber-900 mt-1 tabular-nums">
+                  <div className="font-luxury text-2xl font-bold text-amber-900 mt-1 tabular-nums">
                     {summary.funnel.paymentAbandoned}
                   </div>
                 </div>
-                <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3">
-                  <div className="text-emerald-800">Cohort Seats</div>
-                  <div className="font-display text-xl font-bold text-emerald-700 mt-1 tabular-nums">
+                <div className="rounded-xl border border-[#1A6B54]/25 bg-[#1A6B54]/8 p-3">
+                  <div className="text-[#1A6B54]">Cohort Seats</div>
+                  <div className="font-luxury text-2xl font-bold text-[#1A6B54] mt-1 tabular-nums">
                     {summary.cohort.enrolledSeats} / {summary.cohort.totalSeats}
                   </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="rounded-xl border border-zinc-200 p-4">
-                  <h3 className="font-bold text-zinc-900 mb-2">Section Visibility Reach:</h3>
+                <div className="rounded-xl border border-[#B58338]/20 p-4">
+                  <h3 className="font-bold text-[#22191D] mb-2">Section Visibility Reach:</h3>
                   <div className="space-y-1.5">
                     {Object.entries(summary.funnel.sectionReach).map(([sec, count]) => (
-                      <div key={sec} className="flex justify-between border-b border-zinc-100 pb-1">
-                        <span className="font-mono-tech text-zinc-700">#{sec}</span>
-                        <span className="font-mono-tech font-bold text-zinc-950 tabular-nums">
+                      <div key={sec} className="flex justify-between border-b border-slate-100 pb-1">
+                        <span className="font-mono-tech text-[#5E5056]">#{sec}</span>
+                        <span className="font-mono-tech font-bold text-[#6A244C] tabular-nums">
                           {count} visitors
                         </span>
                       </div>
@@ -151,21 +157,21 @@ export default function FunnelInspectorModal({ isOpen, onClose }: FunnelInspecto
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-zinc-200 p-4">
-                  <h3 className="font-bold text-zinc-900 mb-2">Scroll Depth & CTA Clicks:</h3>
+                <div className="rounded-xl border border-[#B58338]/20 p-4">
+                  <h3 className="font-bold text-[#22191D] mb-2">Scroll Depth &amp; CTA Clicks:</h3>
                   <div className="space-y-1.5">
                     {Object.entries(summary.funnel.scrollReach).map(([depth, count]) => (
-                      <div key={depth} className="flex justify-between border-b border-zinc-100 pb-1">
-                        <span className="font-mono-tech text-zinc-700">Scroll {depth}</span>
-                        <span className="font-mono-tech font-bold text-emerald-700 tabular-nums">
+                      <div key={depth} className="flex justify-between border-b border-slate-100 pb-1">
+                        <span className="font-mono-tech text-[#5E5056]">Scroll {depth}</span>
+                        <span className="font-mono-tech font-bold text-[#1A6B54] tabular-nums">
                           {count} visitors
                         </span>
                       </div>
                     ))}
                     {Object.entries(summary.funnel.ctaClicksByPlacement).map(([btn, count]) => (
-                      <div key={btn} className="flex justify-between border-b border-zinc-100 pb-1">
-                        <span className="font-mono-tech text-[#E8451A]">CTA: {btn}</span>
-                        <span className="font-mono-tech font-bold text-zinc-950 tabular-nums">
+                      <div key={btn} className="flex justify-between border-b border-slate-100 pb-1">
+                        <span className="font-mono-tech text-[#6A244C]">CTA: {btn}</span>
+                        <span className="font-mono-tech font-bold text-[#22191D] tabular-nums">
                           {count} clicks
                         </span>
                       </div>
@@ -173,68 +179,20 @@ export default function FunnelInspectorModal({ isOpen, onClose }: FunnelInspecto
                   </div>
                 </div>
               </div>
-
-              <div className="rounded-xl border border-zinc-200 p-4">
-                <h3 className="font-bold text-zinc-900 mb-2">Captured Leads & Paid Enrollments:</h3>
-                {summary.registrations.length === 0 ? (
-                  <p className="text-zinc-500">
-                    No new test registrations yet (baseline 10/50 cohort seats active).
-                  </p>
-                ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="border-b border-zinc-200 text-zinc-500">
-                          <th className="py-2 pr-3">Name</th>
-                          <th className="py-2 pr-3">Mobile</th>
-                          <th className="py-2 pr-3">Status</th>
-                          <th className="py-2 pr-3">Seat</th>
-                          <th className="py-2">Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {summary.registrations.map((r) => (
-                          <tr key={r.id} className="border-b border-zinc-100">
-                            <td className="py-2 pr-3 font-semibold text-zinc-900">{r.name}</td>
-                            <td className="py-2 pr-3 font-mono-tech">{r.phone}</td>
-                            <td className="py-2 pr-3">
-                              <span
-                                className={`rounded px-2 py-0.5 font-mono-tech text-[10px] font-bold uppercase ${
-                                  r.status === "paid"
-                                    ? "bg-emerald-100 text-emerald-800"
-                                    : r.status === "payment_abandoned"
-                                      ? "bg-amber-100 text-amber-800"
-                                      : "bg-blue-100 text-blue-800"
-                                }`}
-                              >
-                                {r.status}
-                              </span>
-                            </td>
-                            <td className="py-2 pr-3 font-mono-tech">
-                              {r.seatNumber ? `#${r.seatNumber}` : "-"}
-                            </td>
-                            <td className="py-2 font-mono-tech">₹{r.totalInr}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
             </>
           )}
 
-          <div className="rounded-xl border border-zinc-200 bg-zinc-950 p-4 text-zinc-200">
+          <div className="rounded-xl border border-[#6A244C]/15 bg-[#22191D] p-4 text-[#FAF6F0]">
             <h3 className="font-bold text-white mb-2">
               Browser Session Meta Pixel Firing Log ({pixelEvents.length}):
             </h3>
             <div className="max-h-48 overflow-y-auto space-y-1.5 font-mono-tech text-[11px]">
               {pixelEvents.map((ev, idx) => (
-                <div key={`${ev.timestamp}-${idx}`} className="border-b border-zinc-800 pb-1">
-                  <span className="text-emerald-400">[{ev.type.toUpperCase()}]</span>{" "}
+                <div key={`${ev.timestamp}-${idx}`} className="border-b border-white/10 pb-1">
+                  <span className="text-[#D4AF6A]">[{ev.type.toUpperCase()}]</span>{" "}
                   <strong className="text-white">{ev.event}</strong>{" "}
-                  {ev.eventId && <span className="text-orange-300">({ev.eventId})</span>}{" "}
-                  {ev.params && <span className="text-zinc-400">{JSON.stringify(ev.params)}</span>}
+                  {ev.eventId && <span className="text-[#E5C594]">({ev.eventId})</span>}{" "}
+                  {ev.params && <span className="text-white/70">{JSON.stringify(ev.params)}</span>}
                 </div>
               ))}
             </div>

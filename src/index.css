@@ -2,58 +2,86 @@
 
 @layer base {
   :root {
-    --surface-light: #f6f8fb;
-    --ink-primary: #0f172a;
-    --ink-secondary: #475569;
-    --accent-primary: #1d4ed8;
-    --accent-emerald: #059669;
+    --surface-ivory: #faf6f0;
+    --ink-espresso: #22191d;
+    --ink-taupe: #5e5056;
+    --accent-plum: #6a244c;
+    --accent-plum-deep: #4a1635;
+    --accent-gold: #b58338;
+    --accent-jade: #1a6b54;
 
+    --font-serif: "Cormorant Garamond", Georgia, serif;
     --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
   }
 
   html,
   body {
-    background-color: var(--surface-light);
-    color: var(--ink-primary);
+    background-color: var(--surface-ivory);
+    color: var(--ink-espresso);
     font-family: var(--font-sans);
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.65;
     overflow-x: hidden;
   }
+}
+
+.font-luxury {
+  font-family: var(--font-serif);
+  letter-spacing: -0.015em;
 }
 
 .font-mono-tech {
   font-family: var(--font-mono);
 }
 
-/* Soft, seamless crisp white cards */
-.light-card {
+/* Crisp solid ivory-white elevated cards (no unnecessary backdrop blur on regular cards) */
+.luxury-light-card {
   background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.045);
+  border: 1px solid rgba(106, 36, 76, 0.1);
+  box-shadow: 0 12px 32px rgba(34, 25, 29, 0.05);
 }
 
-.light-card-featured {
+.luxury-light-featured {
   background: #ffffff;
-  border: 1.5px solid rgba(29, 78, 216, 0.22);
-  box-shadow: 0 20px 48px rgba(29, 78, 216, 0.09);
+  border: 1.5px solid rgba(181, 131, 56, 0.45);
+  box-shadow: 0 22px 52px rgba(106, 36, 76, 0.1);
 }
 
-.btn-primary-trust {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
-  color: #ffffff;
-  box-shadow: 0 10px 24px rgba(29, 78, 216, 0.24);
+/* Specular warm glassmorphism exclusively for the 3D Revolving Quotes Carousel */
+.glass-quote-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(250, 245, 238, 0.78) 100%
+  );
+  border: 1.5px solid rgba(181, 131, 56, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 28px 64px rgba(74, 22, 53, 0.14);
+  backdrop-filter: blur(18px);
+}
+
+/* Imperial Plum & Brushed Gold Primary CTA */
+.btn-imperial {
+  background: linear-gradient(135deg, #6a244c 0%, #4a1635 100%);
+  color: #fffdf9;
+  border: 1px solid rgba(212, 175, 106, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 12px 28px rgba(106, 36, 76, 0.24);
   transition:
-    transform 200ms ease,
-    box-shadow 200ms ease,
-    filter 200ms ease;
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 220ms ease;
 }
 
-.btn-primary-trust:hover {
-  filter: brightness(1.06);
+.btn-imperial:hover {
+  filter: brightness(1.07);
   transform: translateY(-1px);
-  box-shadow: 0 14px 30px rgba(29, 78, 216, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 16px 34px rgba(106, 36, 76, 0.32);
 }
 
 @keyframes progressSweep {

@@ -36,16 +36,16 @@ export function project3D(
 }
 
 const NODES = [
-  { x: -320, y: -140, z: -100, primary: true },
-  { x: -165, y: -200, z: 90, primary: false },
-  { x: -225, y: 95, z: 75, primary: false },
-  { x: -40, y: -40, z: -135, primary: true },
-  { x: 35, y: 140, z: 115, primary: false },
-  { x: 155, y: -135, z: 55, primary: true },
-  { x: 215, y: 50, z: -110, primary: false },
-  { x: 325, y: -65, z: 85, primary: true },
-  { x: 300, y: 150, z: -40, primary: false },
-  { x: -95, y: 185, z: -90, primary: true }
+  { x: -320, y: -140, z: -100, gold: true },
+  { x: -165, y: -200, z: 90, gold: false },
+  { x: -225, y: 95, z: 75, gold: false },
+  { x: -40, y: -40, z: -135, gold: true },
+  { x: 35, y: 140, z: 115, gold: false },
+  { x: 155, y: -135, z: 55, gold: true },
+  { x: 215, y: 50, z: -110, gold: false },
+  { x: 325, y: -65, z: 85, gold: true },
+  { x: 300, y: 150, z: -40, gold: false },
+  { x: -95, y: 185, z: -90, gold: true }
 ];
 
 const EDGES: Array<[number, number]> = [
@@ -64,7 +64,8 @@ const EDGES: Array<[number, number]> = [
 ];
 
 /**
- * Bright, Seamless Light-Mode 3D Atmospheric Canvas (Zero dark gloom, zero section cuts).
+ * Seamless Light Warm-Ivory 3D Constellation & Champagne/Plum-Rose Wash Canvas.
+ * Runs continuously behind every section so transitions feel smooth and unbroken.
  */
 export function FullPageLuxuryCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -90,8 +91,8 @@ export function FullPageLuxuryCanvas() {
     const pulses = EDGES.map((_, idx) => ({
       edgeIdx: idx,
       progress: (idx * 0.19) % 1,
-      speed: 0.14 + (idx % 4) * 0.04,
-      emerald: idx % 2 === 0
+      speed: 0.13 + (idx % 4) * 0.035,
+      gold: idx % 2 === 0
     }));
 
     const onPointerMove = (e: PointerEvent) => {
@@ -106,35 +107,37 @@ export function FullPageLuxuryCanvas() {
       ctx.clearRect(0, 0, width, height);
       if (width < 40 || height < 40) return;
 
-      baseYaw += dt * 0.07;
-      smoothX = damp(smoothX, ptrX, 3.0, dt || 0.016);
-      smoothY = damp(smoothY, ptrY, 3.0, dt || 0.016);
+      baseYaw += dt * 0.065;
+      smoothX = damp(smoothX, ptrX, 2.8, dt || 0.016);
+      smoothY = damp(smoothY, ptrY, 2.8, dt || 0.016);
 
-      // Soft airy sky-blue & mint-emerald ambient washes
+      // Soft warm champagne top-right ambient wash
       const g1 = ctx.createRadialGradient(
         width * 0.78,
-        height * 0.22,
+        height * 0.2,
         20,
         width * 0.78,
-        height * 0.22,
-        Math.max(width, height) * 0.55
+        height * 0.2,
+        Math.max(width, height) * 0.58
       );
-      g1.addColorStop(0, "rgba(37, 99, 235, 0.075)");
-      g1.addColorStop(0.6, "rgba(16, 185, 129, 0.04)");
-      g1.addColorStop(1, "rgba(246, 248, 251, 0)");
+      g1.addColorStop(0, "rgba(181, 131, 56, 0.07)");
+      g1.addColorStop(0.55, "rgba(106, 36, 76, 0.035)");
+      g1.addColorStop(1, "rgba(250, 246, 240, 0)");
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, width, height);
 
+      // Satin plum-rose lower-left ambient wash
       const g2 = ctx.createRadialGradient(
         width * 0.18,
-        height * 0.75,
+        height * 0.76,
         20,
         width * 0.18,
-        height * 0.75,
-        Math.max(width, height) * 0.5
+        height * 0.76,
+        Math.max(width, height) * 0.54
       );
-      g2.addColorStop(0, "rgba(5, 150, 105, 0.055)");
-      g2.addColorStop(1, "rgba(246, 248, 251, 0)");
+      g2.addColorStop(0, "rgba(106, 36, 76, 0.055)");
+      g2.addColorStop(0.6, "rgba(181, 131, 56, 0.03)");
+      g2.addColorStop(1, "rgba(250, 246, 240, 0)");
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, width, height);
 
@@ -164,7 +167,7 @@ export function FullPageLuxuryCanvas() {
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.quadraticCurveTo(midX, midY, b.x, b.y);
-        ctx.strokeStyle = "rgba(30, 58, 138, 0.075)";
+        ctx.strokeStyle = "rgba(106, 36, 76, 0.075)";
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -182,10 +185,10 @@ export function FullPageLuxuryCanvas() {
         const py = q * q * a.y + 2 * q * u * midY + u * u * b.y;
 
         ctx.beginPath();
-        ctx.arc(px, py, 2.4, 0, Math.PI * 2);
-        ctx.fillStyle = pkt.emerald
-          ? "rgba(5, 150, 105, 0.45)"
-          : "rgba(29, 78, 216, 0.45)";
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = pkt.gold
+          ? "rgba(181, 131, 56, 0.45)"
+          : "rgba(106, 36, 76, 0.38)";
         ctx.fill();
       }
 
@@ -194,9 +197,9 @@ export function FullPageLuxuryCanvas() {
         const node = NODES[i]!;
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2.8 * p.scale, 0, Math.PI * 2);
-        ctx.fillStyle = node.primary
-          ? "rgba(29, 78, 216, 0.28)"
-          : "rgba(15, 23, 42, 0.18)";
+        ctx.fillStyle = node.gold
+          ? "rgba(181, 131, 56, 0.34)"
+          : "rgba(34, 25, 29, 0.16)";
         ctx.fill();
       }
     };

@@ -3,6 +3,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import express from "express";
+import {
+  notifyLeadCaptured,
+  notifyPaymentConfirmed,
+  notifyPaymentDropoff
+} from "./notify.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -240,6 +245,9 @@ export function createApp() {
     store.registrations.push(record);
     writeStore(store);
 
+    // Fire asynchronous owner email + mobile push alert immediately on every new lead
+    void notifyLeadCaptured(record);
+
     return res.json({
       registrationId,
       leadEventId,
@@ -402,6 +410,9 @@ export function createApp() {
     writeStore(store);
     const updatedCohort = computeCohortStatus(store);
 
+    // Fire instant receipt email to student + payment alert email & mobile push to owner
+    void notifyPaymentConfirmed(reg, updatedCohort);
+
     return res.json({
       success: true,
       alreadyVerified: false,
@@ -427,6 +438,7 @@ export function createApp() {
       reg.dropoffReason = String(reason || "modal_dismissed").slice(0, 80);
       reg.updatedAt = new Date().toISOString();
       writeStore(store);
+      void notifyPaymentDropoff(reg, reg.dropoffReason);
     }
     return res.json({ ok: true });
   });
@@ -443,6 +455,8 @@ export function createApp() {
     const cohort = computeCohortStatus(store);
     const visitorsList = Object.values(store.telemetry.visitors || {});
     const regs = [...store.registrations].reverse();
+    const paidRegs = regs.filter((r) => r.status === "paid");
+    const totalRevenueInr = paidRegs.reduce((sum, r) => sum + Number(r.totalInr || TOTAL_INR), 0);
 
     const funnel = {
       uniqueVisitors: visitorsList.length,
@@ -454,12 +468,24 @@ export function createApp() {
         (r) => r.status === "checkout_initiated" || r.status === "payment_abandoned" || r.status === "paid"
       ).length,
       paymentAbandoned: regs.filter((r) => r.status === "payment_abandoned").length,
-      paidEnrollments: regs.filter((r) => r.status === "paid").length
+      paidEnrollments: paidRegs.length,
+      totalRevenueInr
+    };
+
+    const channels = {
+      razorpayLive: Boolean(process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET),
+      smtpReady: Boolean(
+        process.env.SMTP_HOST &&
+          process.env.SMTP_USER &&
+          (process.env.SMTP_PASSWORD || process.env.SMTP_PASS)
+      ),
+      pushTopic: (process.env.NTFY_TOPIC || "").trim() || null
     };
 
     return res.json({
       cohort,
       funnel,
+      channels,
       registrations: regs
     });
   });

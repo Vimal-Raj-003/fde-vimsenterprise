@@ -19,13 +19,14 @@ export interface MentorProfile {
   name: string;
   badge: string;
   simpleLine: string;
-  photo: string | null;
+  photo: string;
 }
 
 export interface StudentReview {
   id: string;
   name: string;
   role: string;
+  tag: string;
   quote: string;
 }
 
@@ -148,7 +149,7 @@ export const MENTORS: MentorProfile[] = [
     name: "Guruprasath",
     badge: "Program Host",
     simpleLine: "AI Solutions & Forward Deployment Lead · VIMS Enterprise",
-    photo: null
+    photo: "/images/mentor-guruprasath.jpg"
   },
   {
     id: "gowthamraj",
@@ -178,22 +179,25 @@ export const STUDENT_REVIEWS: StudentReview[] = [
     id: "r1",
     name: "Karthik Raja",
     role: "Final-Year Engineering Student · Chennai",
+    tag: "College Student",
     quote:
-      "Learning real API and AI deployment in Tamil made complex topics super easy to understand and build on my own."
+      "I watched dozens of playlists without knowing how companies ship real AI. Learning live APIs and Cloud deployment in Tamil made everything crystal clear."
   },
   {
     id: "r2",
     name: "Priya Dharshini",
-    role: "Working Software Developer · Coimbatore",
+    role: "Software Developer · Coimbatore",
+    tag: "Working IT Pro",
     quote:
-      "Showing live deployed AI projects in interviews gave me huge confidence compared to normal certificate courses."
+      "Walking into technical interviews with live deployed RAG and Agent URLs changed how hiring managers evaluated me compared to standard certificate holders."
   },
   {
     id: "r3",
     name: "Arun Prakash",
     role: "Working Core Engineer · Bengaluru",
+    tag: "Core-to-AI Switch",
     quote:
-      "Perfect bridge for working professionals switching into practical AI roles with step-by-step mentor support."
+      "Switching from core engineering into practical AI felt tough until VIMS mentors guided me step by step from Python fundamentals to live deployment."
   }
 ];
 
@@ -206,7 +210,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: "When does the class start and what is the teaching language?",
     answer:
-      "The batch starts on Saturday, 12th December 2026 (Live Online). All concepts are taught clearly in Tamil while using standard English technical terms."
+      "The batch starts on Saturday, 12th December 2026 at 10:00 AM IST (Live Online). All concepts are taught clearly in Tamil while using standard English technical terms."
   },
   {
     question: "Do I get recordings and a certificate?",
