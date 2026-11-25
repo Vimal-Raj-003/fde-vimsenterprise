@@ -282,7 +282,8 @@ export default function OwnerAdminPage({
                             {reg.name}
                           </div>
                           <div className="text-xs text-[var(--ink-secondary)]">
-                            {reg.profile} · {reg.city}
+                            {reg.profile}
+                            {reg.city ? ` · ${reg.city}` : ""}
                           </div>
                         </div>
                         <span className="rounded-full px-3 py-0.5 font-mono-tech text-[11px] font-bold uppercase border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] text-[var(--accent-gold)]">

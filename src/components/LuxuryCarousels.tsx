@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CURRICULUM_SPRINTS, STUDENT_REVIEWS } from "../data/fdeData";
+import { Icon3D } from "./Icons3D";
 
 export function AutomatedCurriculumCarousel() {
   const [active, setActive] = useState(0);
@@ -72,18 +73,13 @@ export function AutomatedCurriculumCarousel() {
           </div>
 
           <div className="lg:col-span-7 space-y-3">
-            {sprint.points.map((pt, i) => (
+            {sprint.points.map((pt) => (
               <div
-                key={pt}
-                className="surface-well flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-[15px] sm:text-base font-medium text-[var(--ink-primary)] hover:translate-x-1"
+                key={pt.text}
+                className="group surface-well flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-[15px] sm:text-base font-medium text-[var(--ink-primary)] hover:translate-x-1"
               >
-                <span
-                  style={{ background: "var(--cta-bg)", color: "var(--cta-text)" }}
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold"
-                >
-                  {i + 1}
-                </span>
-                <span>{pt}</span>
+                <Icon3D name={pt.icon} size="sm" />
+                <span>{pt.text}</span>
               </div>
             ))}
           </div>

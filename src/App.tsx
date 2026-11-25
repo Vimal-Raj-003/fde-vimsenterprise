@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { LiveSeatAndCountdownCard } from "./components/CountdownBanner";
 import FunnelInspectorModal from "./components/FunnelInspectorModal";
+import { Icon3D } from "./components/Icons3D";
 import {
   AutomatedCurriculumCarousel,
   AutomatedQuotesCarousel
 } from "./components/LuxuryCarousels";
 import OwnerAdminPage from "./components/OwnerAdminPage";
-import RegistrationModal, { EnrollmentFormWidget } from "./components/RegistrationModal";
+import RegistrationModal from "./components/RegistrationModal";
 import { FullPageLuxuryCanvas, Reveal3D, Tilt3DCard } from "./components/Spatial3DCanvas";
 import {
-  AUDIENCE_FIT,
   CLASS_SCHEDULE,
   CLIENT_LOGOS,
   FAQ_ITEMS,
@@ -134,11 +134,9 @@ export default function App() {
     const sectionIds = [
       "overview",
       "fast-mastery",
-      "audience",
-      "credibility",
-      "schedule",
       "projects",
       "curriculum",
+      "credibility",
       "mentors",
       "reviews",
       "faq"
@@ -197,9 +195,8 @@ export default function App() {
         style={{ backgroundColor: "var(--bg-strip)", color: "var(--ink-strip)" }}
         className="relative z-40 px-4 py-2 text-center text-xs sm:text-[13px] font-semibold border-b border-[var(--border-gold)]"
       >
-        <span style={{ color: "#E3B452" }}>Award-Winning VIMS Enterprise</span> ·{" "}
-        <strong>1-Week Live Intensive</strong> Starts <strong>12th December 2026</strong> · Master
-        Core Skills in First 2 Days · Only{" "}
+        <span style={{ color: "#E3B452" }}>Award-Winning VIMS Academy</span> · Live Batch Starts{" "}
+        <strong>12th December 2026</strong> · Only{" "}
         <span style={{ color: "#E3B452" }} className="underline tabular-nums">
           {cohort.remainingSeats} Seats Left
         </span>
@@ -214,7 +211,7 @@ export default function App() {
           <a href="#top" className="inline-flex items-center gap-3 shrink-0 group">
             <img
               src="/images/vims-logo.png"
-              alt="VIMS Enterprise Logo"
+              alt="VIMS Academy Logo"
               width={40}
               height={40}
               className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl object-contain transition-transform duration-300 group-hover:scale-105"
@@ -224,7 +221,7 @@ export default function App() {
                 VIMS <span className="text-[var(--accent-gold)]">Academy</span>
               </div>
               <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ink-muted)]">
-                Powered by VIMS Enterprise
+                Forward Deployment Program
               </div>
             </div>
           </a>
@@ -235,7 +232,7 @@ export default function App() {
               data-testid="theme-toggle"
               onClick={toggleTheme}
               aria-label={`Switch to ${theme === "light" ? "Dark" : "Light"} theme`}
-              className="btn-outline-3d inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-full px-3.5 sm:px-4 text-xs sm:text-sm font-bold"
+              className="btn-outline-3d inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-full px-3.5 sm:px-4 text-xs sm:text-sm font-bold whitespace-nowrap"
             >
               {theme === "light" ? (
                 <>
@@ -253,7 +250,7 @@ export default function App() {
                   >
                     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
                   </svg>
-                  <span>Dark Mode</span>
+                  <span>Dark</span>
                 </>
               ) : (
                 <>
@@ -279,7 +276,7 @@ export default function App() {
                     <path d="m6.34 17.66-1.41 1.41" />
                     <path d="m19.07 4.93-1.41 1.41" />
                   </svg>
-                  <span>Light Mode</span>
+                  <span>Light</span>
                 </>
               )}
             </button>
@@ -287,26 +284,25 @@ export default function App() {
             <button
               type="button"
               onClick={() => openRegisterModal("header_cta")}
-              className="btn-gold-3d hidden sm:inline-flex min-h-10 cursor-pointer items-center rounded-full px-5 sm:px-6 text-sm font-bold"
+              className="btn-gold-3d inline-flex min-h-10 cursor-pointer items-center rounded-full px-4 sm:px-6 text-xs sm:text-sm font-bold whitespace-nowrap"
             >
-              Reserve Seat
+              Register Now
             </button>
           </div>
         </div>
       </header>
 
-      {/* STANDALONE PERFORMANCE MARKETING FUNNEL */}
-      <main className="relative z-10 space-y-12 sm:space-y-16 pt-6 sm:pt-9 pb-14">
-        {/* 1. HERO: 1-WEEK INTENSIVE VALUE + FIRST-2-DAYS MASTERY PROOF + DIRECT FORM */}
+      {/* CONCISE ZERO-REPETITION PERFORMANCE MARKETING FLOW */}
+      <main className="relative z-10 space-y-12 sm:space-y-16 pt-7 sm:pt-11 pb-16">
+        {/* 1. HERO: CLEAN VALUE PROP + REGISTER NOW CTA + LIVE COHORT SNAPSHOT CARD */}
         <section id="overview" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-            <div className="lg:col-span-7 space-y-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border-gold)] bg-[var(--bg-surface)] px-4 py-1.5 text-xs sm:text-sm font-bold text-[var(--ink-primary)] shadow-sm">
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent-gold-bright)]" />
                 <span>
-                  1-Week Live Program for Students &amp; Working Pros{" "}
-                  <span className="text-[var(--accent-gold)]">·</span>{" "}
-                  <span className="text-[var(--accent-gold)]">In Tamil</span>
+                  1-Week Intensive · Students &amp; Working Professionals ·{" "}
+                  <span className="text-[var(--accent-gold)]">Live in Tamil</span>
                 </span>
               </div>
 
@@ -319,91 +315,70 @@ export default function App() {
               </h1>
 
               <p className="text-[17px] sm:text-[19px] text-[var(--ink-secondary)] leading-relaxed max-w-2xl">
-                In just <strong className="text-[var(--ink-primary)]">1 focused week</strong>,
-                absorb the entire practical workflow in the{" "}
-                <strong className="text-[var(--ink-primary)]">first 2 days alone</strong> and ship{" "}
-                <strong className="text-[var(--ink-primary)]">
-                  LLMs, RAG &amp; AI Agents
-                </strong>{" "}
-                live onto Cloud systems, taught clearly in Tamil by award-winning{" "}
-                <strong className="text-[var(--ink-primary)]">VIMS Enterprise</strong> engineers.
+                Learn <strong className="text-[var(--ink-primary)]">LLMs, RAG, AI Agents</strong>{" "}
+                and live Cloud deployment step-by-step in{" "}
+                <strong className="text-[var(--ink-primary)]">Tamil</strong>. Structured so even
+                beginners grasp the entire core system right in the{" "}
+                <strong className="text-[var(--ink-primary)]">first 2 days</strong>.
               </p>
 
-              {/* First-2-Days Confidence Callout */}
-              <div className="rounded-2xl border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] px-4 py-3 text-sm sm:text-[15px] font-bold text-[var(--accent-gold)] flex items-center gap-2.5">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--accent-gold)] text-white text-xs">
-                  ✓
+              <div className="pt-1 flex flex-col sm:flex-row sm:items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => openRegisterModal("hero_cta")}
+                  className="btn-gold-3d inline-flex min-h-14 cursor-pointer items-center justify-center rounded-full px-9 py-3.5 text-base sm:text-lg font-bold"
+                >
+                  Register Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
+                </button>
+                <span className="text-xs sm:text-sm font-medium text-[var(--ink-muted)]">
+                  Instant Razorpay UPI / Card seat confirmation
                 </span>
-                <span>
-                  Beginner-Friendly Blueprint: Understand &amp; build real AI systems right within
-                  the first 2 days.
-                </span>
-              </div>
-
-              {/* Visible Live Seats + Countdown to 12th December */}
-              <LiveSeatAndCountdownCard
-                targetIso={CLASS_SCHEDULE.targetIso}
-                enrolledSeats={cohort.enrolledSeats}
-                totalSeats={cohort.totalSeats}
-              />
-
-              {/* 4 Interactive 3D Trust Tiles */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 items-stretch">
-                {[
-                  { top: "1 Week", sub: "Intensive Live" },
-                  { top: "First 2 Days", sub: "Core Mastery" },
-                  { top: "In Tamil", sub: "Live Online Class" },
-                  { top: "Certificate", sub: "VIMS Enterprise" }
-                ].map((h) => (
-                  <Tilt3DCard key={h.top} maxTiltDeg={7} className="rounded-2xl h-full">
-                    <div className="surface-card h-full rounded-2xl p-4 text-center flex flex-col justify-center">
-                      <div className="font-heading text-xl sm:text-[22px] font-bold text-[var(--accent-gold)]">
-                        {h.top}
-                      </div>
-                      <div className="text-xs sm:text-sm font-medium text-[var(--ink-secondary)] mt-0.5">
-                        {h.sub}
-                      </div>
-                    </div>
-                  </Tilt3DCard>
-                ))}
               </div>
             </div>
 
-            {/* Right 5 Cols: Elevated Direct On-Page Student Registration Card */}
-            <div id="register-form" className="lg:col-span-5">
-              <Tilt3DCard maxTiltDeg={2.2} className="rounded-3xl">
-                <div className="surface-card-featured rounded-3xl p-5 sm:p-6">
-                  <div className="mb-4 border-b border-[var(--border-subtle)] pb-3.5">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                        1-WEEK INTENSIVE · STARTS 12TH DEC
-                      </span>
-                      <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3 py-0.5 text-xs font-bold text-[var(--accent-gold)] tabular-nums">
-                        {cohort.remainingSeats} Seats Left
-                      </span>
-                    </div>
-                    <h2 className="font-heading mt-1.5 text-2xl sm:text-[28px] font-bold text-[var(--ink-primary)]">
-                      Register for the Live Batch
-                    </h2>
-                    <p className="text-sm text-[var(--ink-secondary)]">
-                      Lock your seat now with instant Razorpay UPI / Card checkout.
-                    </p>
-                  </div>
-
-                  <EnrollmentFormWidget
-                    pricing={cohort.pricing}
+            {/* Right 5 Cols: Elevated 3D Cohort Snapshot Card */}
+            <div className="lg:col-span-5 space-y-4">
+              <Tilt3DCard maxTiltDeg={3} className="rounded-3xl">
+                <div className="surface-card-featured rounded-3xl p-5 sm:p-6 space-y-4">
+                  <LiveSeatAndCountdownCard
+                    targetIso={CLASS_SCHEDULE.targetIso}
                     enrolledSeats={cohort.enrolledSeats}
                     totalSeats={cohort.totalSeats}
-                    targetIso={CLASS_SCHEDULE.targetIso}
-                    onSeatConfirmed={(newEnrolled, newRemaining) => {
-                      setCohort((prev) => ({
-                        ...prev,
-                        enrolledSeats: newEnrolled,
-                        remainingSeats: newRemaining,
-                        isSoldOut: newRemaining <= 0
-                      }));
-                    }}
+                    compact
                   />
+
+                  <div className="space-y-2.5 pt-1">
+                    {[
+                      {
+                        icon: "calendar" as const,
+                        title: "Starts Saturday, 12th December 2026",
+                        sub: "10:00 AM IST Onwards · Live Online"
+                      },
+                      {
+                        icon: "language" as const,
+                        title: "Taught Live in Simple Tamil",
+                        sub: "Grasp core AI workflows inside the first 2 days"
+                      },
+                      {
+                        icon: "award" as const,
+                        title: "VIMS Academy Certificate & Projects",
+                        sub: "HD recordings, source code & GitHub showcase included"
+                      }
+                    ].map((row) => (
+                      <div
+                        key={row.title}
+                        className="group surface-well flex items-center gap-3.5 rounded-2xl px-4 py-3"
+                      >
+                        <Icon3D name={row.icon} size="sm" />
+                        <div>
+                          <div className="text-sm sm:text-[15px] font-bold text-[var(--ink-primary)] leading-snug">
+                            {row.title}
+                          </div>
+                          <div className="text-xs text-[var(--ink-secondary)]">{row.sub}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </Tilt3DCard>
             </div>
@@ -426,20 +401,23 @@ export default function App() {
               {RAPID_MASTERY_STEPS.map((step, idx) => (
                 <Tilt3DCard key={step.dayLabel} maxTiltDeg={6} className="rounded-3xl h-full">
                   <article
-                    className={`h-full rounded-3xl p-6 sm:p-7 flex flex-col justify-between ${
+                    className={`group h-full rounded-3xl p-6 sm:p-7 flex flex-col justify-between ${
                       idx === 1 ? "surface-card-featured" : "surface-card"
                     }`}
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                          {step.dayLabel}
-                        </span>
-                        <span className="text-xs font-semibold text-[var(--ink-muted)]">
-                          {step.phase}
-                        </span>
+                      <div className="flex items-center justify-between gap-3">
+                        <Icon3D name={step.icon} size="md" />
+                        <div className="text-right">
+                          <div className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
+                            {step.dayLabel}
+                          </div>
+                          <div className="text-xs font-semibold text-[var(--ink-muted)]">
+                            {step.phase}
+                          </div>
+                        </div>
                       </div>
-                      <h3 className="font-heading mt-3 text-2xl font-bold text-[var(--ink-primary)]">
+                      <h3 className="font-heading mt-4 text-2xl font-bold text-[var(--ink-primary)]">
                         {step.title}
                       </h3>
                       <p className="mt-2.5 text-[15px] sm:text-base text-[var(--ink-secondary)] leading-relaxed">
@@ -457,54 +435,41 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 3. DEDICATED AUDIENCE FIT: COLLEGE STUDENTS & WORKING PROFESSIONALS */}
-        <section id="audience" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* 3. REAL FDE AI PROJECT VISUALS GALLERY */}
+        <section id="projects" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="text-center max-w-5xl mx-auto mb-7">
-              <span className="font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--accent-gold)] bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3.5 py-1 rounded-full">
-                WHO IS THIS PROGRAM BUILT FOR?
+              <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
+                WHAT YOU WILL LEARN &amp; SHIP
               </span>
-              <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-3">
-                Built for Students &amp; Working Professionals
+              <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+                What You Will Build &amp; Deploy Live
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-              {AUDIENCE_FIT.map((card, idx) => (
-                <Tilt3DCard key={card.id} maxTiltDeg={4.5} className="rounded-3xl h-full">
-                  <article
-                    className={`h-full rounded-3xl p-6 sm:p-8 flex flex-col justify-between ${
-                      idx === 1 ? "surface-card-featured" : "surface-card"
-                    }`}
-                  >
-                    <div>
-                      <span className="inline-block rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3.5 py-1 font-mono-tech text-xs font-bold text-[var(--accent-gold)]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+              {VISUAL_PROJECTS.map((card) => (
+                <Tilt3DCard key={card.id} maxTiltDeg={6.5} className="rounded-2xl h-full">
+                  <article className="surface-card h-full rounded-2xl overflow-hidden flex flex-col">
+                    <div className="aspect-[16/10] w-full overflow-hidden bg-[#11100E]">
+                      <img
+                        src={card.image}
+                        alt={card.title}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-108"
+                      />
+                    </div>
+                    <div className="p-5 flex-1 flex flex-col">
+                      <span className="self-start inline-block rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3 py-0.5 text-xs font-bold text-[var(--accent-gold)]">
                         {card.tag}
                       </span>
-                      <h3 className="font-heading mt-3.5 text-2xl sm:text-[26px] font-bold text-[var(--ink-primary)]">
+                      <h3 className="font-heading mt-2.5 text-xl font-bold text-[var(--ink-primary)]">
                         {card.title}
                       </h3>
-                      <p className="mt-2.5 text-[15px] sm:text-base text-[var(--ink-secondary)] leading-relaxed">
-                        {card.subtitle}
+                      <p className="mt-1.5 text-sm text-[var(--ink-secondary)] leading-relaxed">
+                        {card.shortLine}
                       </p>
                     </div>
-
-                    <ul className="mt-5 space-y-3 border-t border-[var(--border-subtle)] pt-4">
-                      {card.outcomes.map((item) => (
-                        <li
-                          key={item}
-                          className="flex items-start gap-3 text-[15px] sm:text-base font-medium text-[var(--ink-primary)]"
-                        >
-                          <span
-                            style={{ background: "var(--cta-bg)", color: "var(--cta-text)" }}
-                            className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold"
-                          >
-                            ✓
-                          </span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </article>
                 </Tilt3DCard>
               ))}
@@ -512,7 +477,28 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 4. INSTITUTIONAL PROOF & AWARD-WINNING CREDIBILITY */}
+        {/* 4. AUTOMATED 1-WEEK SYLLABUS CAROUSEL (SCULPTED 3D ICONS) */}
+        <section id="curriculum" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal3D>
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
+              <div>
+                <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
+                  1-WEEK INTENSIVE SYLLABUS
+                </span>
+                <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+                  1-Week Day-by-Day Practical Roadmap
+                </h2>
+              </div>
+              <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-4 py-1.5 text-sm font-bold text-[var(--accent-gold)]">
+                Heavy Core Learning in First 2 Days
+              </span>
+            </div>
+
+            <AutomatedCurriculumCarousel />
+          </Reveal3D>
+        </section>
+
+        {/* 5. INSTITUTIONAL PROOF & AWARD-WINNING CREDIBILITY */}
         <section id="credibility" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="surface-card rounded-3xl p-6 sm:p-9">
@@ -522,13 +508,13 @@ export default function App() {
                     <figure className="overflow-hidden rounded-2xl border border-[var(--border-gold)]">
                       <img
                         src="/images/vims-award-tn-digital-summit.jpg"
-                        alt="VIMS Enterprise winning Social Eagle Award at TN Digital Summit 2026"
+                        alt="VIMS Academy winning Social Eagle Award at TN Digital Summit 2026"
                         loading="lazy"
                         className="w-full h-auto object-cover transition-transform duration-500 hover:scale-105"
                       />
                       <figcaption className="bg-[var(--bg-well)] px-4 py-3 text-xs sm:text-sm font-bold text-[var(--ink-primary)] flex justify-between">
                         <span>TN Digital Summit 2026 · Social Eagle Award</span>
-                        <span className="text-[var(--accent-gold)]">VIMS Enterprise</span>
+                        <span className="text-[var(--accent-gold)]">VIMS Academy</span>
                       </figcaption>
                     </figure>
                   </Tilt3DCard>
@@ -539,14 +525,15 @@ export default function App() {
                     TRUSTED &amp; AWARD-WINNING INSTITUTION
                   </span>
                   <h2 className="font-heading text-[26px] sm:text-[32px] lg:text-[36px] font-bold text-[var(--ink-primary)] leading-tight">
-                    Backed by Award-Winning VIMS Enterprise
+                    Backed by Award-Winning VIMS Academy
                   </h2>
                   <p className="text-[15px] sm:text-[17px] text-[var(--ink-secondary)] leading-relaxed">
                     Honored with the{" "}
                     <strong className="text-[var(--ink-primary)]">
                       Social Eagle Award at TN Digital Summit 2026
                     </strong>
-                    , VIMS Enterprise builds production software and trains engineers across{" "}
+                    , VIMS builds real-world software solutions and trains college students and
+                    working engineers across{" "}
                     <a
                       href="https://embskills.vimsenterprise.com"
                       target="_blank"
@@ -584,137 +571,7 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 5. COHORT DATE & TIMING ARCHITECTURE */}
-        <section id="schedule" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal3D>
-            <div className="surface-card-featured rounded-3xl p-6 sm:p-8">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
-                <div>
-                  <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                    UPCOMING COHORT SCHEDULE
-                  </span>
-                  <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[38px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
-                    1-Week Intensive Batch Date &amp; Timing
-                  </h2>
-                </div>
-                <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-4 py-1.5 text-sm font-bold text-[var(--accent-gold)]">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent-gold-bright)] animate-pulse" />
-                  Open Now · {cohort.enrolledSeats}/{cohort.totalSeats} Booked
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-                {[
-                  {
-                    label: "Start Date",
-                    val: "12th December 2026",
-                    sub: "Saturday · Live Online",
-                    gold: true
-                  },
-                  {
-                    label: "Class Timing",
-                    val: "10:00 AM IST Onwards",
-                    sub: "Ideal for Students & Pros",
-                    gold: false
-                  },
-                  {
-                    label: "Duration & Medium",
-                    val: "1 Week · Live in Tamil",
-                    sub: "Recordings + Code Included",
-                    gold: false
-                  },
-                  {
-                    label: "Eligibility",
-                    val: "Students & Professionals",
-                    sub: "Capped at 50 Seats",
-                    gold: true
-                  }
-                ].map((item) => (
-                  <Tilt3DCard key={item.label} maxTiltDeg={6} className="rounded-2xl h-full">
-                    <div className="surface-well h-full rounded-2xl p-5 flex flex-col justify-between">
-                      <div className="text-xs font-bold uppercase text-[var(--ink-muted)]">
-                        {item.label}
-                      </div>
-                      <div
-                        className={`font-heading mt-1.5 text-2xl font-bold ${
-                          item.gold ? "text-[var(--accent-gold)]" : "text-[var(--ink-primary)]"
-                        }`}
-                      >
-                        {item.val}
-                      </div>
-                      <div className="text-sm text-[var(--ink-secondary)] mt-1">{item.sub}</div>
-                    </div>
-                  </Tilt3DCard>
-                ))}
-              </div>
-            </div>
-          </Reveal3D>
-        </section>
-
-        {/* 6. REAL PROJECT VISUALS GALLERY */}
-        <section id="projects" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal3D>
-            <div className="text-center max-w-5xl mx-auto mb-7">
-              <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                HANDS-ON ENGINEERING
-              </span>
-              <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
-                What You Will Build &amp; Deploy Live
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
-              {VISUAL_PROJECTS.map((card) => (
-                <Tilt3DCard key={card.id} maxTiltDeg={6.5} className="rounded-2xl h-full">
-                  <article className="surface-card h-full rounded-2xl overflow-hidden flex flex-col">
-                    <div className="aspect-[16/10] w-full overflow-hidden bg-[var(--bg-well)]">
-                      <img
-                        src={card.image}
-                        alt={card.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-108"
-                      />
-                    </div>
-                    <div className="p-5 flex-1 flex flex-col">
-                      <span className="self-start inline-block rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3 py-0.5 text-xs font-bold text-[var(--accent-gold)]">
-                        {card.tag}
-                      </span>
-                      <h3 className="font-heading mt-2.5 text-xl font-bold text-[var(--ink-primary)]">
-                        {card.title}
-                      </h3>
-                      <p className="mt-1.5 text-sm text-[var(--ink-secondary)] leading-relaxed">
-                        {card.shortLine}
-                      </p>
-                    </div>
-                  </article>
-                </Tilt3DCard>
-              ))}
-            </div>
-          </Reveal3D>
-        </section>
-
-        {/* 7. AUTOMATED 1-WEEK SYLLABUS CAROUSEL */}
-        <section id="curriculum" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal3D>
-            <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
-              <div>
-                <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                  1-WEEK INTENSIVE SYLLABUS
-                </span>
-                <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
-                  1-Week Day-by-Day Practical Roadmap
-                </h2>
-              </div>
-              <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-4 py-1.5 text-sm font-bold text-[var(--accent-gold)]">
-                Heavy Core Learning in First 2 Days
-              </span>
-            </div>
-
-            <AutomatedCurriculumCarousel />
-          </Reveal3D>
-        </section>
-
-        {/* 8. YOUR MENTORS: SINGLE-LINE HEADING + EXACT 3 FULL-FRAME STUDIO PORTRAITS */}
+        {/* 6. YOUR MENTORS: SINGLE-LINE HEADING + EXACT 3 FULL-FRAME STUDIO PORTRAITS */}
         <section id="mentors" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="text-center max-w-5xl mx-auto mb-8">
@@ -755,7 +612,7 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 9. HIGHLIGHTED 3D GLASSY AUTOMATED QUOTES SHOWCASE */}
+        {/* 7. HIGHLIGHTED 3D GLASSY AUTOMATED QUOTES SHOWCASE */}
         <section id="reviews" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="reviews-showcase-frame rounded-[32px] px-4 sm:px-8 py-9 sm:py-12">
@@ -777,7 +634,7 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 10. CONCISE FAQ + FINAL CONVERSION CARD */}
+        {/* 8. CONCISE FAQ + FINAL CONVERSION CARD */}
         <section id="faq" className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="text-center mb-7">
@@ -824,18 +681,17 @@ export default function App() {
               <Tilt3DCard maxTiltDeg={3} className="rounded-3xl">
                 <div className="surface-card-featured rounded-3xl p-7 sm:p-10 text-center space-y-4">
                   <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--accent-gold)]">
-                    1-Week Live Intensive · Starts 12th December 2026 · Only{" "}
-                    {cohort.remainingSeats} of {cohort.totalSeats} Seats Left
+                    Only {cohort.remainingSeats} of {cohort.totalSeats} Seats Left for 12th December
                   </div>
                   <h3 className="font-heading text-3xl sm:text-4xl font-bold text-[var(--ink-primary)]">
-                    Reserve Your Seat in the 1-Week Batch
+                    Ready to Build &amp; Deploy Real-World AI?
                   </h3>
                   <button
                     type="button"
                     onClick={() => openRegisterModal("bottom_cta")}
                     className="btn-gold-3d inline-flex min-h-13 cursor-pointer items-center justify-center rounded-full px-10 py-3.5 text-base font-bold"
                   >
-                    Reserve Seat Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
+                    Register Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
                   </button>
                 </div>
               </Tilt3DCard>
@@ -856,12 +712,12 @@ export default function App() {
               className="h-7 w-7 rounded-lg object-contain"
             />
             <span className="font-bold text-[var(--ink-primary)]">
-              VIMS Academy · Powered by VIMS Enterprise
+              VIMS Academy · Forward Deployment Program
             </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-4">
-            <span>© 2026 VIMS Enterprise</span>
+            <span>© 2026 VIMS Academy</span>
             <a
               href="/admin"
               className="btn-outline-3d rounded-lg px-3 py-1.5 font-mono-tech text-xs font-semibold text-[var(--accent-gold)]"
@@ -883,10 +739,8 @@ export default function App() {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         pricing={cohort.pricing}
-        enrolledSeats={cohort.enrolledSeats}
         totalSeats={cohort.totalSeats}
-        startIso={cohort.window.startIso}
-        endIso={CLASS_SCHEDULE.targetIso}
+        remainingSeats={cohort.remainingSeats}
         onSeatConfirmed={(newEnrolled, newRemaining) => {
           setCohort((prev) => ({
             ...prev,

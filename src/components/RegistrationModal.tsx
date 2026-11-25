@@ -7,7 +7,6 @@ import {
   trackPaymentDropoff,
   trackVerifiedPurchase
 } from "../lib/pixel";
-import { LiveSeatAndCountdownCard } from "./CountdownBanner";
 
 declare global {
   interface Window {
@@ -28,12 +27,10 @@ export interface PricingInfo {
 
 interface SharedFormProps {
   pricing: PricingInfo;
-  enrolledSeats: number;
   totalSeats: number;
-  targetIso: string;
+  remainingSeats: number;
   onSeatConfirmed: (newEnrolled: number, newRemaining: number) => void;
   onDoneClose?: () => void;
-  showSeatHeader?: boolean;
 }
 
 type FlowStep = "form" | "sandbox_checkout" | "abandoned" | "confirmed";
@@ -55,19 +52,16 @@ function loadRazorpaySdk(): Promise<boolean> {
 
 export function EnrollmentFormWidget({
   pricing,
-  enrolledSeats,
   totalSeats,
-  targetIso,
+  remainingSeats,
   onSeatConfirmed,
-  onDoneClose,
-  showSeatHeader = false
+  onDoneClose
 }: SharedFormProps) {
   const [step, setStep] = useState<FlowStep>("form");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [profile, setProfile] = useState("student");
-  const [city, setCity] = useState("");
   const [honeypot, setHoneypot] = useState("");
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -84,8 +78,6 @@ export function EnrollmentFormWidget({
     registrationId: string;
     amountInr: number;
   } | null>(null);
-
-  const remainingSeats = Math.max(0, totalSeats - enrolledSeats);
 
   async function startPaymentForRegistration(regId: string) {
     setIsSubmitting(true);
@@ -240,7 +232,7 @@ export function EnrollmentFormWidget({
           phone,
           email,
           profile,
-          city,
+          city: "",
           utm: captureUtmAttribution(),
           visitorId: getVisitorId(),
           fde_hp_trap: honeypot
@@ -268,17 +260,8 @@ export function EnrollmentFormWidget({
 
   return (
     <div className="space-y-4">
-      {showSeatHeader && step !== "confirmed" && (
-        <LiveSeatAndCountdownCard
-          targetIso={targetIso}
-          enrolledSeats={enrolledSeats}
-          totalSeats={totalSeats}
-          compact
-        />
-      )}
-
       {step === "form" && (
-        <form onSubmit={handleFormSubmit} noValidate className="space-y-3.5">
+        <form onSubmit={handleFormSubmit} noValidate className="space-y-4">
           {generalError && (
             <div
               role="alert"
@@ -300,7 +283,7 @@ export function EnrollmentFormWidget({
           />
 
           <div>
-            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
+            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1.5">
               Full Name <span className="text-[var(--accent-gold)]">*</span>
             </label>
             <input
@@ -314,41 +297,26 @@ export function EnrollmentFormWidget({
             {fieldErrors.name && <p className="mt-1 text-xs text-red-500">{fieldErrors.name}</p>}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
-                WhatsApp / Mobile <span className="text-[var(--accent-gold)]">*</span>
-              </label>
-              <input
-                type="tel"
-                inputMode="numeric"
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="10-digit mobile number"
-                className={inputClass}
-              />
-              {fieldErrors.phone && (
-                <p className="mt-1 text-xs text-red-500">{fieldErrors.phone}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
-                City
-              </label>
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                placeholder="Chennai / Coimbatore"
-                className={inputClass}
-              />
-            </div>
+          <div>
+            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1.5">
+              WhatsApp / Mobile <span className="text-[var(--accent-gold)]">*</span>
+            </label>
+            <input
+              type="tel"
+              inputMode="numeric"
+              required
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="10-digit mobile number"
+              className={inputClass}
+            />
+            {fieldErrors.phone && (
+              <p className="mt-1 text-xs text-red-500">{fieldErrors.phone}</p>
+            )}
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
+            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1.5">
               Email ID <span className="text-[var(--accent-gold)]">*</span>
             </label>
             <input
@@ -363,7 +331,7 @@ export function EnrollmentFormWidget({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
+            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1.5">
               I am a
             </label>
             <select
@@ -377,23 +345,10 @@ export function EnrollmentFormWidget({
             </select>
           </div>
 
-          <div className="surface-well rounded-xl px-4 py-3 text-sm flex items-center justify-between">
-            <span className="text-[var(--ink-secondary)]">
-              Fee:{" "}
-              <strong className="text-[var(--ink-primary)]">
-                ₹{pricing.baseInr.toLocaleString("en-IN")}
-              </strong>{" "}
-              + 18% GST
-            </span>
-            <span className="font-mono-tech font-bold text-[var(--accent-gold)] tabular-nums">
-              Total: ₹{pricing.totalInr.toLocaleString("en-IN")}
-            </span>
-          </div>
-
           <button
             type="submit"
             disabled={isSubmitting || remainingSeats <= 0}
-            className="btn-gold-3d flex min-h-12 w-full cursor-pointer items-center justify-center rounded-xl px-6 py-3.5 text-base font-bold disabled:opacity-50"
+            className="btn-gold-3d flex min-h-13 w-full cursor-pointer items-center justify-center rounded-xl px-6 py-3.5 text-base font-bold disabled:opacity-50"
           >
             {isSubmitting
               ? "Opening Razorpay Payment..."
@@ -559,19 +514,15 @@ export default function RegistrationModal({
   isOpen,
   onClose,
   pricing,
-  enrolledSeats,
   totalSeats,
-  startIso: _startIso,
-  endIso,
+  remainingSeats,
   onSeatConfirmed
 }: {
   isOpen: boolean;
   onClose: () => void;
   pricing: PricingInfo;
-  enrolledSeats: number;
   totalSeats: number;
-  startIso: string;
-  endIso: string;
+  remainingSeats: number;
   onSeatConfirmed: (newEnrolled: number, newRemaining: number) => void;
 }) {
   useEffect(() => {
@@ -595,24 +546,29 @@ export default function RegistrationModal({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="surface-card-featured relative my-auto w-full max-w-lg rounded-3xl overflow-hidden">
+      <div className="surface-card-featured relative my-auto w-full max-w-md rounded-3xl overflow-hidden">
         <div className="flex items-center justify-between gap-4 border-b border-[var(--border-subtle)] bg-[var(--bg-well)] px-6 py-4">
           <div>
-            <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-              1-WEEK INTENSIVE · STARTS 12TH DEC · LIVE IN TAMIL
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
+                STARTS 12TH DEC · LIVE IN TAMIL
+              </span>
+              <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-2.5 py-0.5 text-[11px] font-bold text-[var(--accent-gold)] tabular-nums">
+                {remainingSeats} Left
+              </span>
+            </div>
             <h2
               id="fde-modal-title"
-              className="font-heading text-2xl font-bold text-[var(--ink-primary)]"
+              className="font-heading mt-0.5 text-2xl font-bold text-[var(--ink-primary)]"
             >
-              Register Your Seat
+              Register for the Live Batch
             </h2>
           </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="btn-outline-3d inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-sm font-bold"
+            className="btn-outline-3d inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full text-sm font-bold"
           >
             ✕
           </button>
@@ -621,12 +577,10 @@ export default function RegistrationModal({
         <div className="p-6 max-h-[82vh] overflow-y-auto bg-[var(--bg-surface)]">
           <EnrollmentFormWidget
             pricing={pricing}
-            enrolledSeats={enrolledSeats}
             totalSeats={totalSeats}
-            targetIso={endIso}
+            remainingSeats={remainingSeats}
             onSeatConfirmed={onSeatConfirmed}
             onDoneClose={onClose}
-            showSeatHeader
           />
         </div>
       </div>
