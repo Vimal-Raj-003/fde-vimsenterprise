@@ -302,7 +302,7 @@ export default function App() {
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent-gold-bright)]" />
                 <span>
                   1-Week Intensive · Students &amp; Working Pros ·{" "}
-                  <span className="text-[var(--accent-gold)]">Live Class in Tamil</span>
+                  <span className="text-[var(--accent-gold)]">Live in Tamil (தமிழ்)</span>
                 </span>
               </div>
 
@@ -321,11 +321,11 @@ export default function App() {
                     Master <strong className="text-[var(--ink-primary)]">LLMs, RAG, AI Agents</strong>{" "}
                     &amp; Cloud{" "}
                     <span className="font-semibold text-[var(--accent-gold)]">
-                      (தமிழ்லயே ரொம்ப ஈஸியா கத்துக்கலாம்!)
+                      (தமிழ்லயே ஈஸியா சொல்லித் தருவோம்)
                     </span>
                   </>,
                   <>
-                    <strong className="text-[var(--ink-primary)]">First 2 Days-லயே Full Clarity:</strong>{" "}
+                    <strong className="text-[var(--ink-primary)]">First 2 Days Clarity:</strong>{" "}
                     Build Live API &amp; AI systems step-by-step from zero
                   </>,
                   <>
@@ -376,8 +376,8 @@ export default function App() {
                       },
                       {
                         icon: "language" as const,
-                        title: "Live Class in Tamil (தமிழ்லயே கத்துக்கலாம்)",
-                        sub: "Beginner-ஆ இருந்தாலும் சுலபமா புரியும்"
+                        title: "Live Interactive Class in Tamil",
+                        sub: "தமிழ்லயே எளிமையா சொல்லித் தருவாங்க · Beginner-friendly"
                       },
                       {
                         icon: "award" as const,
@@ -412,7 +412,7 @@ export default function App() {
               <span className="font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--accent-gold)] bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3.5 py-1 rounded-full">
                 WHY LEARNERS SUCCEED SO FAST
               </span>
-              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-3">
+              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] font-bold text-[var(--ink-primary)] mt-3">
                 Master Core FDE Skills in the First 2 Days
               </h2>
             </div>
@@ -464,7 +464,7 @@ export default function App() {
             <div className="mt-7 surface-card-featured rounded-2xl p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
                 <div className="font-heading text-lg sm:text-xl font-bold text-[var(--ink-primary)]">
-                  First 2 Days-லயே Full Clarity · இன்னைக்கே AI Journey-ஐ ஸ்டார்ட் பண்ணுங்க
+                  Get Full Clarity in Just 2 Days · Start Your AI Journey Today
                 </div>
                 <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
                   12th Dec Live Class · Only {cohort.remainingSeats} Seats Left
@@ -488,7 +488,7 @@ export default function App() {
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
                 HANDS-ON REAL PROJECTS
               </span>
-              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] font-bold text-[var(--ink-primary)] mt-1">
                 What You Will Build &amp; Deploy Live
               </h2>
             </div>
@@ -542,12 +542,12 @@ export default function App() {
                 <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
                   1-WEEK PRACTICAL ROADMAP
                 </span>
-                <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+                <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] font-bold text-[var(--ink-primary)] mt-1">
                   1-Week Day-by-Day Practical Roadmap
                 </h2>
               </div>
               <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-4 py-1.5 text-xs sm:text-sm font-bold text-[var(--accent-gold)]">
-                First 2 Days-லயே Full Clarity
+                Full Clarity in First 2 Days
               </span>
             </div>
 
@@ -557,7 +557,7 @@ export default function App() {
             <div className="mt-7 surface-card-featured rounded-2xl p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
                 <div className="font-heading text-lg sm:text-xl font-bold text-[var(--ink-primary)]">
-                  1 Week-ல உங்கள் முதல் Live AI Project-ஐ Deploy பண்ண Ready-ஆ?
+                  Ready to Deploy Your First Live AI Project in 1 Week?
                 </div>
                 <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
                   Live Tamil Mentorship + Full HD Recordings + Complete Source Code
@@ -613,9 +613,9 @@ export default function App() {
                         </strong>
                       </>,
                       <>
-                        Real Industry Engineers நேரடியா{" "}
-                        <strong className="text-[var(--ink-primary)]">தமிழ்லயே</strong>{" "}
-                        சொல்லித் தருவாங்க
+                        Real Industry Engineers teaching live in{" "}
+                        <strong className="text-[var(--ink-primary)]">simple Tamil</strong> from
+                        the basics
                       </>,
                       <>
                         Production training proven across{" "}
@@ -670,7 +670,7 @@ export default function App() {
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
                 YOUR MENTORS
               </span>
-              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] font-bold text-[var(--ink-primary)] mt-1">
                 Guided by Real Industry Practitioners
               </h2>
             </div>
@@ -712,11 +712,11 @@ export default function App() {
                 <span className="inline-block rounded-full border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] px-4 py-1 font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--accent-gold)]">
                   LEARNER REVIEWS
                 </span>
-                <h2 className="font-heading text-[24px] sm:text-[34px] lg:text-[38px] xl:text-[42px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] leading-tight">
-                  What Students &amp; Working Professionals Say
+                <h2 className="font-heading text-[24px] sm:text-[34px] lg:text-[38px] xl:text-[42px] font-bold text-[var(--ink-primary)] leading-tight">
+                  What Our Learners Say
                 </h2>
                 <p className="text-sm sm:text-base text-[var(--ink-secondary)]">
-                  VIMS Academy-ல படிச்ச Students &amp; Working Professionals-ஓட real feedback.
+                  Real feedback from students and working professionals at VIMS Academy.
                 </p>
               </div>
 
@@ -743,7 +743,7 @@ export default function App() {
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
                 QUICK FAQ
               </span>
-              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] font-bold text-[var(--ink-primary)] mt-1">
                 Quick Answers Before You Enroll
               </h2>
             </div>
@@ -783,7 +783,7 @@ export default function App() {
               <Tilt3DCard maxTiltDeg={3} className="rounded-3xl">
                 <div className="surface-card-featured rounded-3xl p-6 sm:p-10 text-center space-y-4">
                   <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--accent-gold)]">
-                    இன்றே உங்கள் Seat-ஐ Book பண்ணுங்க! · Only {cohort.remainingSeats} of{" "}
+                    Reserve Your Seat Today · Only {cohort.remainingSeats} of{" "}
                     {cohort.totalSeats} Seats Left
                   </div>
                   <h3 className="font-heading text-2xl sm:text-4xl font-bold text-[var(--ink-primary)]">

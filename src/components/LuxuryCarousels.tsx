@@ -120,7 +120,7 @@ export function AutomatedQuotesCarousel() {
     >
       {/* Desktop 3D Revolving Glassy Stage */}
       <div
-        className="hidden md:block relative h-[360px] w-full overflow-visible"
+        className="hidden md:block relative h-[270px] w-full overflow-visible"
         style={{ perspective: "1450px" }}
       >
         <div
@@ -150,7 +150,7 @@ export function AutomatedQuotesCarousel() {
                   transition:
                     "transform 680ms cubic-bezier(0.22, 1, 0.36, 1), opacity 520ms ease"
                 }}
-                className={`glass-quote-card absolute w-full max-w-[560px] rounded-3xl p-8 overflow-hidden ${
+                className={`glass-quote-card absolute w-full max-w-[560px] rounded-3xl p-7 overflow-hidden ${
                   isCenter ? "cursor-default" : "cursor-pointer hover:opacity-90"
                 }`}
               >
@@ -170,7 +170,7 @@ export function AutomatedQuotesCarousel() {
                   </div>
                 </div>
 
-                <blockquote className="font-heading text-[22px] lg:text-[24px] font-semibold text-[var(--ink-primary)] leading-[1.45]">
+                <blockquote className="font-heading text-[20px] lg:text-[22px] font-semibold text-[var(--ink-primary)] leading-[1.45]">
                   &ldquo;{review.quote}&rdquo;
                 </blockquote>
 
