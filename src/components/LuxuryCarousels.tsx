@@ -76,7 +76,7 @@ export function AutomatedCurriculumCarousel() {
             {sprint.points.map((pt) => (
               <div
                 key={pt.text}
-                className="group surface-well flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-[15px] sm:text-base font-medium text-[var(--ink-primary)] hover:translate-x-1"
+                className="group surface-well flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-[15px] sm:text-base font-normal text-[var(--ink-primary)] hover:translate-x-1"
               >
                 <Icon3D name={pt.icon} size="sm" />
                 <span>{pt.text}</span>

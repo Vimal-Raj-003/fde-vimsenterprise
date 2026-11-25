@@ -339,18 +339,15 @@ export default function App() {
                 {[
                   <>
                     Master <strong className="text-[var(--ink-primary)]">LLMs, RAG, AI Agents</strong>{" "}
-                    &amp; Cloud{" "}
-                    <span className="font-normal text-[var(--ink-secondary)]">
-                      (தமிழ்ல easy-ஆ சொல்லித் தருவோம்)
-                    </span>
+                    &amp; Cloud, <span className="font-normal">zero-ல இருந்து easy-ஆ தமிழ்ல கத்துக்கலாம்</span>
                   </>,
                   <>
                     <strong className="text-[var(--ink-primary)]">Master in 3 Days:</strong>{" "}
-                    Build Live API, RAG &amp; AI Agent systems step-by-step from zero
+                    Live API, RAG &amp; AI Agents எல்லாமே நீங்களே step-by-step build பண்ணுவீங்க
                   </>,
                   <>
                     <strong className="text-[var(--ink-primary)]">3-Day Outcome:</strong>{" "}
-                    Deployed GitHub Portfolio &amp; VIMS Academy Certificate
+                    Live deployed GitHub Portfolio + VIMS Academy Certificate உங்க கையில இருக்கும்
                   </>
                 ].map((bullet, i) => (
                   <li key={i} className="flex items-start gap-2.5">
@@ -397,12 +394,12 @@ export default function App() {
                       {
                         icon: "language" as const,
                         title: "Live Interactive Class in Tamil",
-                        sub: "Beginner-friendly · தமிழ்ல step-by-step கத்துக்கலாம்"
+                        sub: "Beginner-ஆ இருந்தாலும் easy-ஆ புரியுற மாதிரி சொல்லித் தருவோம்"
                       },
                       {
                         icon: "award" as const,
                         title: "VIMS Academy Certificate & GitHub Projects",
-                        sub: "Full HD Recordings + Complete Source Code Included"
+                        sub: "Full HD Recordings + Complete Source Code free-ஆ கிடைக்கும்"
                       }
                     ].map((row) => (
                       <div
@@ -489,7 +486,7 @@ export default function App() {
                   Master Real-World AI in 3 Days · Start Your Journey Today
                 </div>
                 <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
-                  12th Dec · 3-Day Live Workshop · Only {cohort.remainingSeats} Seats Left
+                  12th Dec · 3-Day Live Workshop · இன்னும் {cohort.remainingSeats} seats தான் இருக்கு
                 </div>
               </div>
               <button
@@ -582,7 +579,7 @@ export default function App() {
                   Ready to Deploy Your First Live AI Project in 3 Days?
                 </div>
                 <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
-                  Live Tamil Mentorship + Full HD Recordings + Complete Source Code
+                  Live Tamil mentorship + Full HD Recordings + Complete Source Code எல்லாமே கிடைக்கும்
                 </div>
               </div>
               <button
@@ -635,8 +632,8 @@ export default function App() {
                         </strong>
                       </>,
                       <>
-                        Real Industry Engineers teaching live from basics, தமிழ்ல clear-ஆ சொல்லித்
-                        தருவாங்க
+                        Real Industry Engineers நேரடியா basics-ல இருந்து comfortable-ஆ தமிழ்ல
+                        சொல்லித் தருவாங்க
                       </>,
                       <>
                         Production training proven across{" "}

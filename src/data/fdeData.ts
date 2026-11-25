@@ -66,9 +66,9 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
     phase: "Instant Clarity",
     title: "Grasp Full AI Stack & Live APIs",
     points: [
-      "Understand the complete FDE architecture from zero",
-      "Build and run your first FastAPI + LLM Live API",
-      "100% live hands-on coding, தமிழ்ல clear-ஆ explain பண்ணுவோம்"
+      "Zero-ல இருந்து full FDE architecture easy-ஆ புரியும்",
+      "உங்க first FastAPI + LLM Live API நீங்களே build பண்ணி run பண்ணுவீங்க",
+      "Boring theory இல்லாம, 100% live hands-on coding-ஆ சொல்லித் தருவோம்"
     ],
     milestone: "Day 1 Output: Your First Live AI API"
   },
@@ -78,9 +78,9 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
     phase: "Real-World RAG Build",
     title: "Build Real RAG & Vector Systems",
     points: [
-      "Connect PDFs & Company Databases to live AI models",
-      "Eliminate wrong answers with accurate RAG retrieval",
-      "Ship a working Enterprise AI Assistant by Day 2"
+      "PDFs & Company Database-ஐ live AI models கூட connect பண்ணுவோம்",
+      "Wrong answers வராம accurate RAG retrieval set பண்ணுவோம்",
+      "Day 2 முடிக்கும்போது ஒரு working Enterprise AI Assistant ready ஆகிடும்"
     ],
     milestone: "Day 2 Output: Live Data AI Assistant"
   },
@@ -90,9 +90,9 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
     phase: "Cloud Deploy & Mastery",
     title: "Ship AI Agents & Live Portfolio",
     points: [
-      "Build Enterprise AI Agents that automate daily tasks",
-      "Deploy live to Public Cloud using Docker & HTTPS",
-      "Graduate with GitHub Portfolio & VIMS Certificate"
+      "Daily office tasks-ஐ automate பண்ற Enterprise AI Agents build பண்ணலாம்",
+      "Docker & HTTPS use பண்ணி Public Cloud-ல live-ஆ deploy பண்ணலாம்",
+      "Live GitHub Portfolio + VIMS Academy Certificate-ஓட finish பண்ணலாம்"
     ],
     milestone: "Day 3 Output: Live Cloud URLs + Certificate"
   }
@@ -104,8 +104,8 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     tag: "RAG Architecture",
     title: "LLMs, RAG & Vector Search",
     points: [
-      "Search real PDFs & databases with an accurate RAG pipeline",
-      "Zero-hallucination Enterprise Knowledge AI system"
+      "Real PDFs & database search பண்ணி accurate answers தரும் RAG pipeline",
+      "Wrong answers (hallucinations) இல்லாத Enterprise Knowledge AI"
     ],
     image: "/images/realtime-rag-architecture.jpg",
     fit: "contain"
@@ -115,8 +115,8 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     tag: "FastAPI & Cloud",
     title: "Live FastAPI & Cloud APIs",
     points: [
-      "Production Python REST APIs with interactive /docs",
-      "Docker containerization & Live HTTPS Cloud deployment"
+      "Interactive /docs-ஓட production Python REST APIs build பண்ணலாம்",
+      "Docker use பண்ணி Live HTTPS Cloud-ல deploy பண்ணலாம்"
     ],
     image: "/images/realtime-fastapi-cloud-wide.png",
     fit: "cover"
@@ -126,8 +126,8 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     tag: "AI Agent Workflow",
     title: "Autonomous Enterprise AI Agents",
     points: [
-      "Real AI Agents connected to Gmail, Slack & live APIs",
-      "Automate multi-step business workflows end-to-end"
+      "Gmail, Slack & live APIs கூட connect ஆகுற real AI Agents",
+      "Multi-step business workflows-ஐ automatically run பண்ண set பண்ணலாம்"
     ],
     image: "/images/realtime-ai-agent-workflow.png",
     fit: "cover"
@@ -137,7 +137,7 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     tag: "GitHub & Career",
     title: "Live GitHub Portfolio & Career",
     points: [
-      "Recruiter-ready GitHub portfolio with live deployed links",
+      "Recruiters check பண்ற live deployed links-ஓட GitHub portfolio",
       "Resume prep, Mock Interviews & VIMS Academy Certificate"
     ],
     image: "/images/realtime-fde-github-portfolio-v2.png",
@@ -153,15 +153,15 @@ export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
     points: [
       {
         icon: "brain",
-        text: "Learn FDE architecture & AI workflows from basics (தமிழ்ல simple-ஆ புரியும்)"
+        text: "Full FDE architecture & AI workflows-ஐ basics-ல இருந்து clear-ஆ கத்துக்கலாம்"
       },
       {
         icon: "code",
-        text: "Build FastAPI backends with real LLM APIs & Structured JSON"
+        text: "FastAPI backend + real LLM APIs & Structured JSON hands-on-ஆ build பண்ணுவோம்"
       },
       {
         icon: "rocket",
-        text: "Run and test your first production-ready AI endpoint live"
+        text: "உங்க first production-ready AI endpoint live-ஆ test பண்ணி run பண்ணலாம்"
       }
     ],
     output: "Day 1 Output: Your First Live AI API"
@@ -173,15 +173,15 @@ export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
     points: [
       {
         icon: "database",
-        text: "Connect PDFs & company data to Vector Search live"
+        text: "PDFs & company data-வை Vector Search கூட live-ஆ connect பண்ணுவோம்"
       },
       {
         icon: "shield",
-        text: "Prevent hallucinations using Source Citations & grounding"
+        text: "AI wrong answers தராம இருக்க Source Citations & grounding set பண்ணலாம்"
       },
       {
         icon: "check",
-        text: "Optimize speed, retrieval accuracy & real-world prompt evaluation"
+        text: "Fast response speed, accuracy testing & real-world prompt tuning"
       }
     ],
     output: "Day 2 Output: Production Document AI Assistant"
@@ -193,15 +193,15 @@ export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
     points: [
       {
         icon: "agent",
-        text: "Build Tool-Calling AI Agents that automate real workflows"
+        text: "Real tasks-ஐ automatically பண்ற Tool-Calling AI Agents build பண்ணலாம்"
       },
       {
         icon: "cloud",
-        text: "Package with Docker and ship to a Public HTTPS Cloud URL"
+        text: "Docker-ல package பண்ணி Public HTTPS Cloud URL-ல live-ஆ ship பண்ணலாம்"
       },
       {
         icon: "award",
-        text: "Publish your GitHub Portfolio, Resume tips & VIMS Certificate"
+        text: "GitHub Portfolio publish பண்ணி, Resume tips & VIMS Certificate வாங்கலாம்"
       }
     ],
     output: "Day 3 Mastery: Live Cloud URLs + Portfolio + Certificate"
@@ -267,16 +267,16 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: "Can complete beginners master this in 3 days?",
     answer:
-      "Yes, கண்டிப்பா முடியும்! Basic-ல இருந்து தமிழ்ல easy-ஆ சொல்லித் தருவோம். By Day 2 you will build live FastAPI and RAG systems, and by Day 3 you will deploy Cloud AI Agents with a live GitHub portfolio."
+      "Yes, கண்டிப்பா முடியும்! Basics-ல இருந்து comfortable-ஆ தமிழ்ல சொல்லித் தருவோம். Day 2-லயே FastAPI & RAG build பண்ணிடுவீங்க, Day 3-ல Cloud AI Agents & live GitHub portfolio complete பண்ணிடலாம்."
   },
   {
     question: "Who should join this FDE live class?",
     answer:
-      "Ideal for College Students, Working Professionals, Industrialists, and anyone who wants real deployed AI projects instead of passive theory."
+      "College Students, Working Professionals, Industrialists, theory-ஆ இல்லாம real deployed AI projects கத்துக்க நினைக்கிற எல்லாரும் join பண்ணலாம்."
   },
   {
     question: "When does the workshop start, and are recordings included?",
     answer:
-      "The 3-day live online workshop starts Saturday, 12th December 2026 at 10:00 AM IST. Full HD recordings, complete source code, and your VIMS Academy Certificate are included."
+      "Saturday, 12th December 2026, 10:00 AM IST-க்கு 3-day live online workshop start ஆகும். Full HD recordings, complete source code, and VIMS Academy Certificate எல்லாமே உங்களுக்கு கிடைக்கும்."
   }
 ];
