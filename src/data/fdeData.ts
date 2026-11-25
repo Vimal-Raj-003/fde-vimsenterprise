@@ -6,9 +6,17 @@ export interface VisualProjectCard {
   image: string;
 }
 
+export interface RapidMasteryStep {
+  dayLabel: string;
+  phase: string;
+  title: string;
+  summary: string;
+  milestone: string;
+}
+
 export interface CurriculumSprint {
   sprintCode: string;
-  weeksLabel: string;
+  daysLabel: string;
   title: string;
   points: string[];
   output: string;
@@ -43,41 +51,68 @@ export interface FaqItem {
   answer: string;
 }
 
-export const AUDIENCE_FIT: AudienceFitItem[] = [
-  {
-    id: "students",
-    tag: "FOR COLLEGE STUDENTS & FRESHERS",
-    title: "Stand Out in Campus & Off-Campus Placements",
-    subtitle:
-      "Stop relying on generic tutorial notebooks. Build live deployed AI endpoints that interviewers test right on call.",
-    outcomes: [
-      "Ship 3+ live GitHub + Cloud-hosted AI projects before graduation",
-      "Master Python APIs, RAG & Agents clearly in Tamil without overwhelm",
-      "Walk into placement rounds with VIMS Enterprise project certification"
-    ]
-  },
-  {
-    id: "professionals",
-    tag: "FOR WORKING PROFESSIONALS (IT & CORE)",
-    title: "Transition Smoothly Into High-Paying AI Engineering",
-    subtitle:
-      "Built around weekend live sessions on Saturday mornings so you can upskill without quitting or stalling work.",
-    outcomes: [
-      "Bridge legacy backend, QA, or core engineering into production AI systems",
-      "Deploy Dockerized FastAPI + Vector DB workflows used in real client teams",
-      "Upgrade your resume with system architecture & interview-ready case studies"
-    ]
-  }
-];
-
 export const CLASS_SCHEDULE = {
   dateLabel: "Saturday, 12th December 2026",
   timeLabel: "10:00 AM IST Onwards (Live Online)",
   targetIso: "2026-12-12T10:00:00+05:30",
   languageLabel: "Live in Tamil",
   audienceLabel: "College Students & Working Professionals",
-  durationLabel: "8-Week Hands-On Program"
+  durationLabel: "1-Week Intensive Program"
 };
+
+export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
+  {
+    dayLabel: "DAY 1 · RAPID CLARITY",
+    phase: "Zero-Jargon Tamil Breakdown",
+    title: "Grasp Full AI Stack & Live APIs",
+    summary:
+      "Most learners overthink AI engineering. On Day 1 itself, understand the complete Forward Deployment architecture in simple Tamil and ship your first FastAPI + LLM endpoint.",
+    milestone: "First Live AI Endpoint Running by Night 1"
+  },
+  {
+    dayLabel: "DAY 2 · CORE MASTERY",
+    phase: "Heavy Practical Immersion",
+    title: "Build Real RAG & Vector Systems",
+    summary:
+      "By the end of Day 2, you connect real company PDFs, databases, and structured JSON pipelines with zero hallucinations so every piece clicks naturally.",
+    milestone: "Real Data AI Assistant Built in 48 Hours"
+  },
+  {
+    dayLabel: "DAYS 3 - 7 · DEPLOY",
+    phase: "Agents, Cloud & Career Pack",
+    title: "Ship AI Agents & Interview Ready",
+    summary:
+      "Finish the 1-week sprint by containerizing autonomous AI Agents onto live Cloud URLs, plus GitHub portfolio review and VIMS Enterprise certification.",
+    milestone: "Live Public Cloud Portfolio + Certificate"
+  }
+];
+
+export const AUDIENCE_FIT: AudienceFitItem[] = [
+  {
+    id: "students",
+    tag: "FOR COLLEGE STUDENTS & FRESHERS",
+    title: "Stand Out in Campus & Off-Campus Placements",
+    subtitle:
+      "Stop relying on generic tutorial notebooks. In 1 focused week, build live deployed AI URLs that interviewers test right on call.",
+    outcomes: [
+      "Master practical core AI foundations right in the first 2 days",
+      "Ship 3+ live GitHub and Cloud-hosted AI projects within 1 week",
+      "Walk into placement rounds with VIMS Enterprise project certification"
+    ]
+  },
+  {
+    id: "professionals",
+    tag: "FOR WORKING PROFESSIONALS (IT & CORE)",
+    title: "Upskill Into AI Engineering in Just 1 Week",
+    subtitle:
+      "Designed for busy engineers starting Saturday at 10 AM IST. Rapid high-impact sessions help you transition without pausing your job.",
+    outcomes: [
+      "Grasp modern LLM, RAG, and Agent workflows clearly in the first 2 days",
+      "Deploy Dockerized FastAPI and Vector DB systems used in real teams",
+      "Upgrade your resume with live architecture links and interview case studies"
+    ]
+  }
+];
 
 export const VISUAL_PROJECTS: VisualProjectCard[] = [
   {
@@ -105,76 +140,55 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     id: "career-bench",
     tag: "Job Readiness",
     title: "Portfolio, Resume & Mock Interviews",
-    shortLine: "Graduate with deployed GitHub links and a VIMS Enterprise certificate.",
+    shortLine: "Graduate in 1 week with deployed GitHub links and a VIMS Enterprise certificate.",
     image: "/images/hil-test-bench.jpg"
-  }
-];
-
-export const WHY_FDE_CARDS = [
-  {
-    step: "01",
-    label: "Normal Courses",
-    title: "Only Theory & Basic Prompts",
-    line: "Watching videos and notebook scripts that never run inside a real company."
-  },
-  {
-    step: "02",
-    label: "VIMS FDE Class",
-    title: "Build & Deploy Live in Tamil",
-    line: "Step-by-step LLMs, RAG, AI Agents, and Cloud API deployment taught clearly in Tamil."
-  },
-  {
-    step: "03",
-    label: "Your Outcome",
-    title: "Job-Ready FDE Portfolio",
-    line: "Stand out as a Student or Working Professional with live deployed AI projects."
   }
 ];
 
 export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
   {
-    sprintCode: "WEEKS 1 - 2",
-    weeksLabel: "Foundation",
-    title: "Python APIs & LLM Fundamentals",
+    sprintCode: "DAYS 1 - 2",
+    daysLabel: "Deep Core Jumpstart",
+    title: "Full FDE Architecture, APIs & RAG",
     points: [
-      "What a Forward Deployment Engineer (FDE) does in top AI teams",
-      "FastAPI backend setup & connecting real LLM APIs",
-      "Structured JSON outputs without broken responses"
+      "Complete FDE system mental model explained crystal clearly in Tamil",
+      "FastAPI backend setup, real LLM APIs & structured JSON outputs",
+      "Connect PDFs & databases with Vector Search right inside Day 2"
     ],
-    output: "Build 1: Live Structured AI API Service"
+    output: "First 48 Hours: Live Knowledge AI API Service Running"
   },
   {
-    sprintCode: "WEEKS 3 - 4",
-    weeksLabel: "RAG Systems",
-    title: "Company Data AI & Vector Search",
+    sprintCode: "DAYS 3 - 4",
+    daysLabel: "Enterprise RAG",
+    title: "Citation Accuracy & Production Tuning",
     points: [
-      "Connect PDFs, documents & SQL databases using Vector DBs",
-      "Stop AI hallucinations with accurate source citations",
-      "Test accuracy and speed for real business queries"
+      "Stop AI hallucinations using grounded enterprise source citations",
+      "Optimize latency, chunking strategy, and multi-document retrieval",
+      "Evaluate response reliability like top AI forward deployment teams"
     ],
-    output: "Build 2: Document & Knowledge AI Assistant"
+    output: "Mid-Week Build: Production Grounded Document Assistant"
   },
   {
-    sprintCode: "WEEKS 5 - 6",
-    weeksLabel: "Agents & Cloud",
-    title: "AI Agents & Live Cloud Deployment",
+    sprintCode: "DAYS 5 - 6",
+    daysLabel: "Agents & Cloud",
+    title: "Autonomous Agents & Docker Cloud",
     points: [
-      "Build tool-calling AI Agents that automate real tasks",
-      "Package with Docker and deploy to a public Cloud URL",
-      "API security, cost control & live monitoring"
+      "Build tool-calling AI Agents that automate multi-step engineering tasks",
+      "Package cleanly with Docker and ship to a public HTTPS Cloud URL",
+      "API key security, cost guardrails, and live telemetry monitoring"
     ],
-    output: "Build 3: Cloud-Deployed Autonomous AI Agent"
+    output: "Live Cloud Build: Public HTTPS AI Agent System"
   },
   {
-    sprintCode: "WEEKS 7 - 8",
-    weeksLabel: "Career Launch",
-    title: "Industry Capstone & Interview Prep",
+    sprintCode: "DAY 7",
+    daysLabel: "Showcase & Career",
+    title: "Capstone Review & Interview Readiness",
     points: [
-      "End-to-end Enterprise & Automotive AI capstone project",
-      "GitHub portfolio & FDE resume building for Students & Pros",
-      "Mock interviews & VIMS Enterprise Completion Certificate"
+      "Publish your complete 1-week AI engineering showcase on GitHub",
+      "Role-ready resume & system walkthrough prep for Students and Pros",
+      "Graduate with your official VIMS Enterprise Completion Certificate"
     ],
-    output: "Final Output: Industry Capstone + Verified Certificate"
+    output: "Graduation: Deployed Portfolio + Verified Certificate"
   }
 ];
 
@@ -216,7 +230,7 @@ export const STUDENT_REVIEWS: StudentReview[] = [
     role: "Final-Year Engineering Student · Chennai",
     tag: "College Student",
     quote:
-      "I watched dozens of playlists without knowing how companies ship real AI. Learning live APIs and Cloud deployment in Tamil made everything crystal clear."
+      "I watched playlists for months with zero confidence. Here, inside the first two days in Tamil, everything from FastAPI to live Cloud deployment clicked."
   },
   {
     id: "r2",
@@ -224,7 +238,7 @@ export const STUDENT_REVIEWS: StudentReview[] = [
     role: "Software Developer · Coimbatore",
     tag: "Working IT Pro",
     quote:
-      "Walking into technical interviews with live deployed RAG and Agent URLs changed how hiring managers evaluated me compared to standard certificate holders."
+      "In one focused week I shipped live deployed RAG and Agent URLs. Walking into interviews with real production links immediately set me apart."
   },
   {
     id: "r3",
@@ -232,29 +246,29 @@ export const STUDENT_REVIEWS: StudentReview[] = [
     role: "Working Core Engineer · Bengaluru",
     tag: "Core-to-AI Switch",
     quote:
-      "Switching from core engineering into practical AI felt tough until VIMS mentors guided me step by step from Python fundamentals to live deployment."
+      "Switching from core engineering felt tough until the VIMS mentors simplified the whole architecture in Day 1 and guided every hands-on build."
   }
 ];
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "Who can join this FDE program?",
+    question: "How much can I actually learn in a 1-Week program?",
     answer:
-      "Specially designed for College Students (all engineering/CS/IT streams), Freshers, and Working Professionals (IT or Core engineers) looking to move into high-demand AI engineering roles."
+      "Because all concepts are explained directly in simple Tamil without fluff, the first 2 days cover the complete core architecture and your first live AI build, while Days 3 to 7 solidify Agents, Cloud deployment, and interview readiness."
   },
   {
-    question: "When does the class start and what is the teaching language?",
+    question: "Who is this 1-Week FDE Intensive designed for?",
     answer:
-      "The batch starts on Saturday, 12th December 2026 at 10:00 AM IST (Live Online). All concepts are taught clearly in Tamil while using standard English technical terms."
+      "Built specifically for College Students (all engineering, CS, and IT streams), Freshers, and Working Professionals (IT or Core engineers) ready to ship production AI projects fast."
   },
   {
-    question: "Do I get recordings and a certificate?",
+    question: "When does the live batch start and what if I miss a session?",
     answer:
-      "Yes! Every live session recording, full source code, and an official VIMS Enterprise Completion Certificate are included."
+      "The 1-week intensive kicks off on Saturday, 12th December 2026 at 10:00 AM IST (Live Online in Tamil). Full session recordings, clean codebases, and an official VIMS Enterprise Certificate are included."
   },
   {
-    question: "What is the program fee?",
+    question: "What is the complete program fee?",
     answer:
-      "One-time fee of ₹2,999 + 18% GST (₹3,539 total). Only 50 seats are available so mentors can guide every participant personally."
+      "One-time fee of ₹2,999 + 18% GST (₹3,539 total). Seats are strictly capped at 50 learners so mentors personally support every student."
   }
 ];

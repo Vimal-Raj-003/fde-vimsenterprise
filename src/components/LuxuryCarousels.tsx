@@ -19,9 +19,9 @@ export function AutomatedCurriculumCarousel() {
     <div
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      className="space-y-5"
+      className="space-y-4"
     >
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
         {CURRICULUM_SPRINTS.map((sp, idx) => {
           const isCurrent = idx === active;
           return (
@@ -29,23 +29,27 @@ export function AutomatedCurriculumCarousel() {
               key={sp.sprintCode}
               type="button"
               onClick={() => setActive(idx)}
-              className={`relative overflow-hidden rounded-2xl p-4 text-left cursor-pointer transition-all ${
+              className={`relative overflow-hidden rounded-2xl p-4 sm:p-5 text-left cursor-pointer hover:-translate-y-1 ${
                 isCurrent
-                  ? "pm-card-featured"
-                  : "pm-card opacity-80 hover:opacity-100"
+                  ? "surface-card-featured"
+                  : "surface-card opacity-80 hover:opacity-100"
               }`}
             >
-              <div className="flex items-center justify-between text-[11px] font-mono-tech font-semibold text-[#047857]">
+              <div className="flex items-center justify-between gap-2 text-xs font-mono-tech font-bold text-[var(--accent-gold)]">
                 <span>{sp.sprintCode}</span>
-                <span className="text-[#6B7570]">{sp.weeksLabel}</span>
+                <span className="text-[var(--ink-muted)] font-semibold">{sp.daysLabel}</span>
               </div>
-              <div className="font-heading mt-1 text-lg sm:text-xl font-bold text-[#141A17] line-clamp-1">
+              <div className="font-heading mt-1.5 text-lg sm:text-xl font-bold text-[var(--ink-primary)] line-clamp-1">
                 {sp.title}
               </div>
               {isCurrent && !paused && (
                 <span
                   key={`bar-${active}`}
-                  className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#059669] to-[#D97706] animate-carousel-progress"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, var(--accent-gold-deep), var(--accent-gold-bright))"
+                  }}
+                  className="absolute bottom-0 left-0 h-1 w-full animate-carousel-progress"
                 />
               )}
             </button>
@@ -53,27 +57,30 @@ export function AutomatedCurriculumCarousel() {
         })}
       </div>
 
-      <div className="pm-card rounded-3xl p-6 sm:p-9">
+      <div className="surface-card rounded-3xl p-6 sm:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-center">
-          <div className="lg:col-span-5 space-y-3">
-            <span className="inline-block rounded-full bg-[#ECFDF5] border border-[#047857]/20 px-3.5 py-1 font-mono-tech text-xs font-semibold text-[#047857]">
-              {sprint.sprintCode} · {sprint.weeksLabel}
+          <div className="lg:col-span-5 space-y-3.5">
+            <span className="inline-block rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3.5 py-1 font-mono-tech text-xs font-bold text-[var(--accent-gold)]">
+              {sprint.sprintCode} · {sprint.daysLabel}
             </span>
-            <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[#141A17] leading-snug">
+            <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--ink-primary)] leading-snug">
               {sprint.title}
             </h3>
-            <div className="rounded-xl border border-[#047857]/25 bg-[#ECFDF5] px-4 py-3 text-xs font-semibold text-[#065F46]">
+            <div className="rounded-xl border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] px-4 py-3 text-sm font-bold text-[var(--accent-gold)]">
               ✓ {sprint.output}
             </div>
           </div>
 
-          <div className="lg:col-span-7 space-y-2.5">
+          <div className="lg:col-span-7 space-y-3">
             {sprint.points.map((pt, i) => (
               <div
                 key={pt}
-                className="flex items-center gap-3.5 rounded-xl border border-[#047857]/12 bg-[#F8FAF9] px-4 py-3 text-sm font-medium text-[#141A17]"
+                className="surface-well flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-[15px] sm:text-base font-medium text-[var(--ink-primary)] hover:translate-x-1"
               >
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#047857] text-xs font-bold text-white">
+                <span
+                  style={{ background: "var(--cta-bg)", color: "var(--cta-text)" }}
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                >
                   {i + 1}
                 </span>
                 <span>{pt}</span>
@@ -88,7 +95,6 @@ export function AutomatedCurriculumCarousel() {
 
 /**
  * Highlighted 3D Glassy Automated Quotes Carousel ("What Students & Working Professionals Say").
- * Renders all 3 cards in true 3D perspective on md+ screens and crisp animated stack on mobile.
  */
 export function AutomatedQuotesCarousel() {
   const [active, setActive] = useState(0);
@@ -118,8 +124,8 @@ export function AutomatedQuotesCarousel() {
     >
       {/* Desktop 3D Revolving Glassy Stage */}
       <div
-        className="hidden md:block relative h-[350px] w-full overflow-visible"
-        style={{ perspective: "1400px" }}
+        className="hidden md:block relative h-[360px] w-full overflow-visible"
+        style={{ perspective: "1450px" }}
       >
         <div
           className="relative h-full w-full flex items-center justify-center"
@@ -130,7 +136,7 @@ export function AutomatedQuotesCarousel() {
             const isCenter = slot === 0;
             const transform =
               slot === 0
-                ? "translate3d(0px, 0px, 70px) rotateY(0deg) scale(1.03)"
+                ? "translate3d(0px, 0px, 75px) rotateY(0deg) scale(1.03)"
                 : slot === -1
                   ? "translate3d(-58%, 12px, -95px) rotateY(22deg) scale(0.86)"
                   : "translate3d(58%, 12px, -95px) rotateY(-22deg) scale(0.86)";
@@ -148,15 +154,18 @@ export function AutomatedQuotesCarousel() {
                   transition:
                     "transform 680ms cubic-bezier(0.22, 1, 0.36, 1), opacity 520ms ease"
                 }}
-                className={`glass-quote-card absolute w-full max-w-[540px] rounded-3xl p-8 overflow-hidden ${
-                  isCenter ? "cursor-default" : "cursor-pointer hover:opacity-85"
+                className={`glass-quote-card absolute w-full max-w-[560px] rounded-3xl p-8 overflow-hidden ${
+                  isCenter ? "cursor-default" : "cursor-pointer hover:opacity-90"
                 }`}
               >
                 <div className="flex items-center justify-between gap-3 mb-4">
-                  <span className="rounded-full border border-[#D97706]/35 bg-[#FEF3C7] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#B45309]">
+                  <span className="rounded-full border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[var(--accent-gold)]">
                     {review.tag}
                   </span>
-                  <div className="flex items-center gap-0.5 text-[#D97706] text-sm" aria-label="5 out of 5 stars">
+                  <div
+                    className="flex items-center gap-0.5 text-[var(--accent-gold-bright)] text-base"
+                    aria-label="5 out of 5 stars"
+                  >
                     <span>★</span>
                     <span>★</span>
                     <span>★</span>
@@ -165,16 +174,18 @@ export function AutomatedQuotesCarousel() {
                   </div>
                 </div>
 
-                <blockquote className="font-heading text-[21px] lg:text-[23px] font-semibold text-[#141A17] leading-[1.45]">
+                <blockquote className="font-heading text-[22px] lg:text-[24px] font-semibold text-[var(--ink-primary)] leading-[1.45]">
                   &ldquo;{review.quote}&rdquo;
                 </blockquote>
 
-                <div className="mt-6 flex items-center justify-between border-t border-[#047857]/12 pt-4">
+                <div className="mt-6 flex items-center justify-between border-t border-[var(--border-subtle)] pt-4">
                   <div>
-                    <div className="text-sm font-bold text-[#141A17]">{review.name}</div>
-                    <div className="text-xs text-[#4B5550] mt-0.5">{review.role}</div>
+                    <div className="text-base font-bold text-[var(--ink-primary)]">{review.name}</div>
+                    <div className="text-xs sm:text-sm text-[var(--ink-secondary)] mt-0.5">
+                      {review.role}
+                    </div>
                   </div>
-                  <span className="font-mono-tech text-[10px] font-semibold uppercase tracking-wider text-[#047857] bg-[#ECFDF5] border border-[#047857]/20 px-2.5 py-1 rounded-full">
+                  <span className="font-mono-tech text-[11px] font-semibold uppercase tracking-wider text-[var(--accent-gold)] bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3 py-1 rounded-full">
                     Verified Learner
                   </span>
                 </div>
@@ -182,7 +193,11 @@ export function AutomatedQuotesCarousel() {
                 {isCenter && !paused && (
                   <span
                     key={`quote-sweep-${active}`}
-                    className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#D97706] via-[#059669] to-[#047857] animate-carousel-progress"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, var(--accent-gold-deep), var(--accent-gold-bright))"
+                    }}
+                    className="absolute bottom-0 left-0 h-1 w-full animate-carousel-progress"
                   />
                 )}
               </article>
@@ -198,22 +213,24 @@ export function AutomatedQuotesCarousel() {
           return (
             <article className="glass-quote-card relative overflow-hidden rounded-3xl p-6">
               <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="rounded-full border border-[#D97706]/35 bg-[#FEF3C7] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#B45309]">
+                <span className="rounded-full border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--accent-gold)]">
                   {current.tag}
                 </span>
-                <div className="text-[#D97706] text-xs" aria-label="5 out of 5 stars">★★★★★</div>
+                <div className="text-[var(--accent-gold-bright)] text-sm" aria-label="5 out of 5 stars">
+                  ★★★★★
+                </div>
               </div>
 
-              <blockquote className="font-heading text-lg font-semibold text-[#141A17] leading-[1.48]">
+              <blockquote className="font-heading text-xl font-semibold text-[var(--ink-primary)] leading-[1.45]">
                 &ldquo;{current.quote}&rdquo;
               </blockquote>
 
-              <div className="mt-5 border-t border-[#047857]/12 pt-3 flex items-center justify-between gap-2">
+              <div className="mt-5 border-t border-[var(--border-subtle)] pt-3.5 flex items-center justify-between gap-2">
                 <div>
-                  <div className="text-sm font-bold text-[#141A17]">{current.name}</div>
-                  <div className="text-xs text-[#4B5550]">{current.role}</div>
+                  <div className="text-sm font-bold text-[var(--ink-primary)]">{current.name}</div>
+                  <div className="text-xs text-[var(--ink-secondary)]">{current.role}</div>
                 </div>
-                <span className="font-mono-tech text-[10px] font-semibold uppercase tracking-wider text-[#047857] bg-[#ECFDF5] px-2 py-1 rounded-full">
+                <span className="font-mono-tech text-[10px] font-semibold uppercase tracking-wider text-[var(--accent-gold)] bg-[var(--pill-gold-bg)] px-2.5 py-1 rounded-full">
                   Verified
                 </span>
               </div>
@@ -221,7 +238,11 @@ export function AutomatedQuotesCarousel() {
               {!paused && (
                 <span
                   key={`mobile-quote-sweep-${active}`}
-                  className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#D97706] to-[#047857] animate-carousel-progress"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, var(--accent-gold-deep), var(--accent-gold-bright))"
+                  }}
+                  className="absolute bottom-0 left-0 h-1 w-full animate-carousel-progress"
                 />
               )}
             </article>
@@ -235,7 +256,7 @@ export function AutomatedQuotesCarousel() {
           type="button"
           aria-label="Previous student quote"
           onClick={() => setActive((prev) => (prev - 1 + total) % total)}
-          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#047857]/25 bg-white text-sm font-bold text-[#047857] shadow-xs hover:border-[#047857] hover:bg-[#ECFDF5]"
+          className="btn-outline-3d flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-base font-bold text-[var(--accent-gold)]"
         >
           ‹
         </button>
@@ -247,8 +268,10 @@ export function AutomatedQuotesCarousel() {
               type="button"
               aria-label={`View quote from ${r.name}`}
               onClick={() => setActive(idx)}
-              className={`h-2 cursor-pointer rounded-full transition-all duration-300 ${
-                idx === active ? "w-8 bg-[#047857]" : "w-2 bg-[#D97706]/40 hover:bg-[#D97706]/70"
+              className={`h-2.5 cursor-pointer rounded-full transition-all duration-300 ${
+                idx === active
+                  ? "w-8 bg-[var(--accent-gold)]"
+                  : "w-2.5 bg-[var(--border-gold)] hover:opacity-90"
               }`}
             />
           ))}
@@ -258,7 +281,7 @@ export function AutomatedQuotesCarousel() {
           type="button"
           aria-label="Next student quote"
           onClick={() => setActive((prev) => (prev + 1) % total)}
-          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#047857]/25 bg-white text-sm font-bold text-[#047857] shadow-xs hover:border-[#047857] hover:bg-[#ECFDF5]"
+          className="btn-outline-3d flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-base font-bold text-[var(--accent-gold)]"
         >
           ›
         </button>

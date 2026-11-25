@@ -54,21 +54,23 @@ export function LiveSeatAndCountdownCard({
 
   return (
     <div
-      className={`rounded-2xl border border-[#047857]/20 bg-white shadow-[0_14px_34px_rgba(4,120,87,0.06)] ${
+      className={`surface-card-featured rounded-2xl ${
         compact ? "p-3.5 space-y-3" : "p-4 sm:p-5 space-y-4"
       }`}
     >
       {/* Live Seat Progress */}
       <div>
-        <div className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
-          <span className="flex items-center gap-2 font-bold text-[#141A17]">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#059669] animate-pulse" />
+        <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
+          <span className="flex items-center gap-2 font-bold text-[var(--ink-primary)]">
+            <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent-gold-bright)] animate-pulse" />
             <span>
               <span className="tabular-nums">{enrolledSeats}</span> Booked · Only{" "}
-              <span className="text-[#047857] tabular-nums">{remaining} Seats Left</span>
+              <span className="text-[var(--accent-gold)] tabular-nums">
+                {remaining} Seats Left
+              </span>
             </span>
           </span>
-          <span className="font-mono-tech text-xs font-semibold text-[#4B5550] tabular-nums">
+          <span className="font-mono-tech text-xs font-semibold text-[var(--ink-secondary)] tabular-nums">
             {enrolledSeats}/{totalSeats} Seats
           </span>
         </div>
@@ -79,36 +81,40 @@ export function LiveSeatAndCountdownCard({
           aria-valuemin={0}
           aria-valuemax={totalSeats}
           aria-label="Booked seats"
-          className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-[#ECFDF5]"
+          className="mt-2.5 h-2.5 w-full overflow-hidden rounded-full bg-[var(--bg-well)]"
         >
           <div
-            style={{ width: `${fillPercent}%` }}
-            className="h-full rounded-full bg-gradient-to-r from-[#059669] to-[#D97706] transition-all duration-500"
+            style={{
+              width: `${fillPercent}%`,
+              background: "linear-gradient(90deg, var(--accent-gold-deep), var(--accent-gold-bright))"
+            }}
+            className="h-full rounded-full transition-all duration-500"
           />
         </div>
       </div>
 
       {/* Live Countdown to 12th December 2026 */}
-      <div className="border-t border-[#047857]/12 pt-3">
-        <div className="flex flex-wrap items-center justify-between gap-1 text-xs mb-2">
-          <span className="font-semibold text-[#4B5550]">
-            Batch Starts: <strong className="text-[#047857]">12th December 2026</strong>
+      <div className="border-t border-[var(--border-subtle)] pt-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm mb-2.5">
+          <span className="font-semibold text-[var(--ink-secondary)]">
+            Batch Starts:{" "}
+            <strong className="text-[var(--accent-gold)]">12th December 2026</strong>
           </span>
-          <span className="font-mono-tech text-[10px] font-semibold text-[#B45309] bg-[#FEF3C7] px-2 py-0.5 rounded-full">
+          <span className="font-mono-tech text-[10px] font-bold tracking-wider text-[var(--accent-gold)] bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-2.5 py-0.5 rounded-full">
             TIME REMAINING
           </span>
         </div>
 
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-2.5">
           {boxes.map((b) => (
             <div
               key={b.label}
-              className="flex flex-col items-center justify-center rounded-xl border border-[#047857]/15 bg-[#F0F7F4] py-2 px-1"
+              className="surface-well flex flex-col items-center justify-center rounded-xl py-2.5 px-1 hover:-translate-y-0.5"
             >
-              <span className="font-heading text-xl sm:text-2xl font-bold text-[#141A17] tabular-nums leading-none">
+              <span className="font-heading text-2xl sm:text-[26px] font-bold text-[var(--ink-primary)] tabular-nums leading-none">
                 {b.value}
               </span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#4B5550] mt-1">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--ink-muted)] mt-1">
                 {b.label}
               </span>
             </div>

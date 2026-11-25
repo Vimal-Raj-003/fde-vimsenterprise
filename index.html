@@ -19,9 +19,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("vims_fde_theme");
+          var mode = saved === "dark" ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", mode);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
 
     <!-- Meta Pixel Code (Datasets: 4439327462948047, 1395642289095466, and VIMS FDE Course 1606721668164457) -->
     <script>
@@ -41,7 +52,7 @@
     </script>
     <!-- End Meta Pixel Code -->
   </head>
-  <body class="bg-[#F8FAF9] text-[#141A17] antialiased selection:bg-[#047857]/15 selection:text-[#047857]">
+  <body class="antialiased">
     <noscript>
       <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4439327462948047&ev=PageView&noscript=1" alt="" />
       <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1395642289095466&ev=PageView&noscript=1" alt="" />

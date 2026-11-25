@@ -119,7 +119,7 @@ export function EnrollmentFormWidget({
           amount: orderData.amount,
           currency: orderData.currency || "INR",
           name: "VIMS Academy",
-          description: "FDE Live Batch (Starts 12th Dec)",
+          description: "1-Week FDE Live Intensive (Starts 12th Dec)",
           order_id: orderData.orderId,
           prefill: {
             name: name.trim(),
@@ -127,7 +127,7 @@ export function EnrollmentFormWidget({
             contact: `+91${phone.replace(/\D/g, "").slice(-10)}`
           },
           theme: {
-            color: "#047857"
+            color: "#9E6E1A"
           },
           handler: async (response: Record<string, string>) => {
             await completeVerification(regId, {
@@ -264,7 +264,7 @@ export function EnrollmentFormWidget({
   }
 
   const inputClass =
-    "h-11 w-full rounded-xl border border-[#047857]/20 bg-[#F8FAF9] px-3.5 text-sm text-[#141A17] placeholder:text-[#6B7570] focus:border-[#047857] focus:bg-white focus:outline-none";
+    "h-12 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-well)] px-4 text-[15px] text-[var(--ink-primary)] placeholder:text-[var(--ink-muted)] focus:border-[var(--accent-gold)] focus:bg-[var(--bg-surface)] focus:outline-none transition-colors";
 
   return (
     <div className="space-y-4">
@@ -282,7 +282,7 @@ export function EnrollmentFormWidget({
           {generalError && (
             <div
               role="alert"
-              className="rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-xs font-medium text-red-700"
+              className="rounded-xl border border-red-400/50 bg-red-500/10 px-4 py-2.5 text-sm font-medium text-red-500"
             >
               {generalError}
             </div>
@@ -300,8 +300,8 @@ export function EnrollmentFormWidget({
           />
 
           <div>
-            <label className="block text-xs font-semibold text-[#4B5550] mb-1">
-              Full Name <span className="text-[#047857]">*</span>
+            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
+              Full Name <span className="text-[var(--accent-gold)]">*</span>
             </label>
             <input
               type="text"
@@ -311,13 +311,13 @@ export function EnrollmentFormWidget({
               placeholder="Enter your full name"
               className={inputClass}
             />
-            {fieldErrors.name && <p className="mt-1 text-xs text-red-600">{fieldErrors.name}</p>}
+            {fieldErrors.name && <p className="mt-1 text-xs text-red-500">{fieldErrors.name}</p>}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-[#4B5550] mb-1">
-                WhatsApp / Mobile <span className="text-[#047857]">*</span>
+              <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
+                WhatsApp / Mobile <span className="text-[var(--accent-gold)]">*</span>
               </label>
               <input
                 type="tel"
@@ -329,12 +329,14 @@ export function EnrollmentFormWidget({
                 className={inputClass}
               />
               {fieldErrors.phone && (
-                <p className="mt-1 text-xs text-red-600">{fieldErrors.phone}</p>
+                <p className="mt-1 text-xs text-red-500">{fieldErrors.phone}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#4B5550] mb-1">City</label>
+              <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
+                City
+              </label>
               <input
                 type="text"
                 value={city}
@@ -346,8 +348,8 @@ export function EnrollmentFormWidget({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#4B5550] mb-1">
-              Email ID <span className="text-[#047857]">*</span>
+            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
+              Email ID <span className="text-[var(--accent-gold)]">*</span>
             </label>
             <input
               type="email"
@@ -357,11 +359,13 @@ export function EnrollmentFormWidget({
               placeholder="you@example.com (Receipt & link sent here)"
               className={inputClass}
             />
-            {fieldErrors.email && <p className="mt-1 text-xs text-red-600">{fieldErrors.email}</p>}
+            {fieldErrors.email && <p className="mt-1 text-xs text-red-500">{fieldErrors.email}</p>}
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#4B5550] mb-1">I am a</label>
+            <label className="block text-sm font-semibold text-[var(--ink-secondary)] mb-1">
+              I am a
+            </label>
             <select
               value={profile}
               onChange={(e) => setProfile(e.target.value)}
@@ -373,11 +377,15 @@ export function EnrollmentFormWidget({
             </select>
           </div>
 
-          <div className="rounded-xl border border-[#047857]/20 bg-[#F0F7F4] px-3.5 py-2.5 text-xs flex items-center justify-between">
-            <span className="text-[#4B5550]">
-              Fee: <strong className="text-[#141A17]">₹{pricing.baseInr.toLocaleString("en-IN")}</strong> + 18% GST
+          <div className="surface-well rounded-xl px-4 py-3 text-sm flex items-center justify-between">
+            <span className="text-[var(--ink-secondary)]">
+              Fee:{" "}
+              <strong className="text-[var(--ink-primary)]">
+                ₹{pricing.baseInr.toLocaleString("en-IN")}
+              </strong>{" "}
+              + 18% GST
             </span>
-            <span className="font-mono-tech font-bold text-[#047857] tabular-nums">
+            <span className="font-mono-tech font-bold text-[var(--accent-gold)] tabular-nums">
               Total: ₹{pricing.totalInr.toLocaleString("en-IN")}
             </span>
           </div>
@@ -385,7 +393,7 @@ export function EnrollmentFormWidget({
           <button
             type="submit"
             disabled={isSubmitting || remainingSeats <= 0}
-            className="btn-emerald flex min-h-12 w-full cursor-pointer items-center justify-center rounded-xl px-6 py-3 text-sm sm:text-base font-bold disabled:opacity-50"
+            className="btn-gold-3d flex min-h-12 w-full cursor-pointer items-center justify-center rounded-xl px-6 py-3.5 text-base font-bold disabled:opacity-50"
           >
             {isSubmitting
               ? "Opening Razorpay Payment..."
@@ -394,7 +402,7 @@ export function EnrollmentFormWidget({
                 : `Reserve Seat Now · ₹${pricing.baseInr.toLocaleString("en-IN")} + GST`}
           </button>
 
-          <p className="text-center text-[11px] text-[#4B5550]">
+          <p className="text-center text-xs text-[var(--ink-muted)]">
             100% Secure Razorpay Live Checkout · UPI (GPay, PhonePe, Paytm), Cards &amp; NetBanking
           </p>
         </form>
@@ -402,9 +410,10 @@ export function EnrollmentFormWidget({
 
       {step === "sandbox_checkout" && (
         <div className="space-y-3.5">
-          <div className="rounded-xl border border-[#047857]/20 bg-[#F0F7F4] p-3 text-xs text-[#141A17]">
-            <strong>Checkout Preview:</strong> Order <code className="font-mono-tech">{orderId}</code>{" "}
-            created for ₹{pricing.totalInr.toLocaleString("en-IN")}. Select payment method below:
+          <div className="surface-well rounded-xl p-3.5 text-sm text-[var(--ink-primary)]">
+            <strong>Checkout Preview:</strong> Order{" "}
+            <code className="font-mono-tech">{orderId}</code> created for ₹
+            {pricing.totalInr.toLocaleString("en-IN")}. Select payment method below:
           </div>
 
           <div className="space-y-2">
@@ -415,10 +424,10 @@ export function EnrollmentFormWidget({
             ].map((m) => (
               <label
                 key={m.id}
-                className={`flex min-h-11 cursor-pointer items-center justify-between rounded-xl border px-4 py-2 text-sm font-medium ${
+                className={`flex min-h-12 cursor-pointer items-center justify-between rounded-xl border px-4 py-2 text-sm font-semibold ${
                   sandboxMethod === m.id
-                    ? "border-[#047857] bg-[#ECFDF5] text-[#141A17]"
-                    : "border-[#047857]/15 bg-white text-[#4B5550]"
+                    ? "border-[var(--accent-gold)] bg-[var(--pill-gold-bg)] text-[var(--ink-primary)]"
+                    : "border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--ink-secondary)]"
                 }`}
               >
                 <span>{m.label}</span>
@@ -426,7 +435,7 @@ export function EnrollmentFormWidget({
                   type="radio"
                   checked={sandboxMethod === m.id}
                   onChange={() => setSandboxMethod(m.id)}
-                  className="accent-[#047857]"
+                  className="accent-[var(--accent-gold)]"
                 />
               </label>
             ))}
@@ -442,7 +451,7 @@ export function EnrollmentFormWidget({
                   sandbox_method: sandboxMethod
                 })
               }
-              className="btn-emerald min-h-11 cursor-pointer rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold"
+              className="btn-gold-3d min-h-12 cursor-pointer rounded-xl px-4 py-2.5 text-sm font-bold"
             >
               {isSubmitting ? "Confirming..." : `Pay ₹${pricing.totalInr.toLocaleString("en-IN")}`}
             </button>
@@ -458,7 +467,7 @@ export function EnrollmentFormWidget({
                   body: JSON.stringify({ registrationId, reason: "sandbox_cancelled" })
                 });
               }}
-              className="min-h-11 cursor-pointer rounded-xl border border-[#047857]/25 bg-white px-4 py-2.5 text-xs sm:text-sm font-semibold text-[#4B5550]"
+              className="btn-outline-3d min-h-12 cursor-pointer rounded-xl px-4 py-2.5 text-sm font-semibold"
             >
               Cancel
             </button>
@@ -468,7 +477,7 @@ export function EnrollmentFormWidget({
 
       {step === "abandoned" && (
         <div className="space-y-3.5">
-          <div className="rounded-xl border border-[#D97706]/30 bg-[#FEF3C7]/60 p-3.5 text-xs text-[#141A17]">
+          <div className="rounded-xl border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] p-4 text-sm text-[var(--ink-primary)]">
             Your details are saved! Only <strong>{remainingSeats} seats</strong> remain for the 12th
             December batch. Complete payment below to lock your seat.
           </div>
@@ -476,7 +485,7 @@ export function EnrollmentFormWidget({
             type="button"
             disabled={isSubmitting}
             onClick={() => startPaymentForRegistration(registrationId)}
-            className="btn-emerald min-h-11 w-full cursor-pointer rounded-xl px-5 py-2.5 text-sm font-bold"
+            className="btn-gold-3d min-h-12 w-full cursor-pointer rounded-xl px-5 py-3 text-base font-bold"
           >
             Resume Payment · ₹{pricing.totalInr.toLocaleString("en-IN")}
           </button>
@@ -484,47 +493,50 @@ export function EnrollmentFormWidget({
       )}
 
       {step === "confirmed" && receipt && (
-        <div className="space-y-3.5 text-center">
-          <div className="rounded-xl border border-[#047857]/30 bg-[#ECFDF5] p-4">
-            <div className="mx-auto mb-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-[#047857] text-white font-bold">
+        <div className="space-y-4 text-center">
+          <div className="rounded-2xl border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] p-5">
+            <div
+              style={{ background: "var(--cta-bg)", color: "var(--cta-text)" }}
+              className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-full font-bold"
+            >
               ✓
             </div>
-            <div className="font-mono-tech text-xs font-bold text-[#047857]">
+            <div className="font-mono-tech text-xs font-bold text-[var(--accent-gold)]">
               SEAT #{receipt.seatNumber} / {totalSeats} CONFIRMED
             </div>
-            <div className="font-heading mt-1 text-xl font-bold text-[#141A17]">
+            <div className="font-heading mt-1 text-2xl font-bold text-[var(--ink-primary)]">
               Welcome, {name}! See you live on 12th December.
             </div>
           </div>
 
-          <div className="rounded-xl border border-[#047857]/15 bg-[#F0F7F4] p-3.5 text-xs space-y-1.5 text-left">
+          <div className="surface-well rounded-xl p-4 text-sm space-y-2 text-left">
             <div className="flex justify-between">
-              <span className="text-[#4B5550]">Seat Number</span>
-              <span className="font-mono-tech font-bold text-[#047857]">
+              <span className="text-[var(--ink-secondary)]">Seat Number</span>
+              <span className="font-mono-tech font-bold text-[var(--accent-gold)]">
                 #{receipt.seatNumber} of {totalSeats}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#4B5550]">Registration ID</span>
-              <span className="font-mono-tech font-semibold text-[#141A17]">
+              <span className="text-[var(--ink-secondary)]">Registration ID</span>
+              <span className="font-mono-tech font-semibold text-[var(--ink-primary)]">
                 {receipt.registrationId}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#4B5550]">Payment Reference</span>
-              <span className="font-mono-tech font-semibold text-[#141A17]">
+              <span className="text-[var(--ink-secondary)]">Payment Reference</span>
+              <span className="font-mono-tech font-semibold text-[var(--ink-primary)]">
                 {receipt.paymentId}
               </span>
             </div>
-            <div className="flex justify-between border-t border-[#047857]/12 pt-1.5">
-              <span className="text-[#4B5550]">Amount Paid</span>
-              <span className="font-mono-tech font-bold text-[#047857]">
+            <div className="flex justify-between border-t border-[var(--border-subtle)] pt-2">
+              <span className="text-[var(--ink-secondary)]">Amount Paid</span>
+              <span className="font-mono-tech font-bold text-[var(--accent-gold)]">
                 ₹{receipt.amountInr.toLocaleString("en-IN")}
               </span>
             </div>
           </div>
 
-          <p className="text-[11px] text-[#4B5550]">
+          <p className="text-xs text-[var(--ink-muted)]">
             A confirmation receipt email has been sent to <strong>{email}</strong>.
           </p>
 
@@ -532,7 +544,7 @@ export function EnrollmentFormWidget({
             <button
               type="button"
               onClick={onDoneClose}
-              className="btn-emerald min-h-11 w-full cursor-pointer rounded-xl px-5 py-2.5 text-xs font-bold"
+              className="btn-gold-3d min-h-11 w-full cursor-pointer rounded-xl px-5 py-2.5 text-sm font-bold"
             >
               Done
             </button>
@@ -578,18 +590,21 @@ export default function RegistrationModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="fde-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#141A17]/60 p-4 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative my-auto w-full max-w-lg rounded-3xl border border-[#047857]/25 bg-white text-[#141A17] shadow-2xl overflow-hidden">
-        <div className="flex items-center justify-between gap-4 border-b border-[#047857]/12 bg-[#F0F7F4] px-6 py-4">
+      <div className="surface-card-featured relative my-auto w-full max-w-lg rounded-3xl overflow-hidden">
+        <div className="flex items-center justify-between gap-4 border-b border-[var(--border-subtle)] bg-[var(--bg-well)] px-6 py-4">
           <div>
-            <span className="font-mono-tech text-[11px] font-bold uppercase text-[#047857]">
-              STARTS 12TH DECEMBER · LIVE IN TAMIL
+            <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
+              1-WEEK INTENSIVE · STARTS 12TH DEC · LIVE IN TAMIL
             </span>
-            <h2 id="fde-modal-title" className="font-heading text-2xl font-bold text-[#141A17]">
+            <h2
+              id="fde-modal-title"
+              className="font-heading text-2xl font-bold text-[var(--ink-primary)]"
+            >
               Register Your Seat
             </h2>
           </div>
@@ -597,13 +612,13 @@ export default function RegistrationModal({
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#047857]/25 bg-white text-xs text-[#4B5550] hover:text-[#047857]"
+            className="btn-outline-3d inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-sm font-bold"
           >
             ✕
           </button>
         </div>
 
-        <div className="p-6 max-h-[82vh] overflow-y-auto">
+        <div className="p-6 max-h-[82vh] overflow-y-auto bg-[var(--bg-surface)]">
           <EnrollmentFormWidget
             pricing={pricing}
             enrolledSeats={enrolledSeats}

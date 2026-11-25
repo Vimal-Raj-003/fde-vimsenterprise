@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 export function damp(current: number, target: number, rate: number, dt: number): number {
   return current + (target - current) * (1 - Math.exp(-dt * rate));
@@ -12,8 +12,8 @@ export function project3D(
   cy: number,
   yaw: number,
   pitch: number,
-  focal = 560,
-  camZ = 700
+  focal = 620,
+  camZ = 760
 ) {
   const cry = Math.cos(yaw);
   const sry = Math.sin(yaw);
@@ -24,7 +24,7 @@ export function project3D(
   const z1 = -x * sry + z * cry;
   const y2 = y * crx - z1 * srx;
   const z2 = y * srx + z1 * crx;
-  const denom = Math.max(140, z2 + camZ);
+  const denom = Math.max(150, z2 + camZ);
   const k = focal / denom;
 
   return {
@@ -35,40 +35,88 @@ export function project3D(
   };
 }
 
-const NODES = [
-  { x: -320, y: -140, z: -100, gold: true },
-  { x: -165, y: -200, z: 90, gold: false },
-  { x: -225, y: 95, z: 75, gold: false },
-  { x: -40, y: -40, z: -135, gold: true },
-  { x: 35, y: 140, z: 115, gold: false },
-  { x: 155, y: -135, z: 55, gold: true },
-  { x: 215, y: 50, z: -110, gold: false },
-  { x: 325, y: -65, z: 85, gold: true },
-  { x: 300, y: 150, z: -40, gold: false },
-  { x: -95, y: 185, z: -90, gold: true }
+// 3D Octahedron vertices + nested orbital ring geometry
+const CORE_VERTS = [
+  { x: 0, y: -195, z: 0 },
+  { x: 185, y: 0, z: 0 },
+  { x: 0, y: 0, z: 185 },
+  { x: -185, y: 0, z: 0 },
+  { x: 0, y: 0, z: -185 },
+  { x: 0, y: 195, z: 0 }
 ];
 
-const EDGES: Array<[number, number]> = [
+const CORE_EDGES: Array<[number, number]> = [
   [0, 1],
   [0, 2],
-  [1, 3],
+  [0, 3],
+  [0, 4],
+  [5, 1],
+  [5, 2],
+  [5, 3],
+  [5, 4],
+  [1, 2],
   [2, 3],
-  [2, 4],
-  [3, 5],
   [3, 4],
-  [4, 6],
-  [5, 7],
-  [6, 8],
-  [7, 8],
-  [9, 4]
+  [4, 1]
 ];
 
+const CORE_FACES: Array<[number, number, number]> = [
+  [0, 1, 2],
+  [0, 2, 3],
+  [0, 3, 4],
+  [0, 4, 1],
+  [5, 2, 1],
+  [5, 3, 2],
+  [5, 4, 3],
+  [5, 1, 4]
+];
+
+const AMBIENT_NODES = [
+  { x: -390, y: -150, z: -90, gold: true },
+  { x: -245, y: 175, z: 110, gold: false },
+  { x: -125, y: -235, z: 140, gold: true },
+  { x: 155, y: -205, z: -130, gold: false },
+  { x: 355, y: -120, z: 85, gold: true },
+  { x: 385, y: 155, z: -65, gold: false },
+  { x: 195, y: 225, z: 120, gold: true },
+  { x: -330, y: 35, z: -140, gold: true }
+];
+
+function buildRingPoints(radius: number, count: number, tiltX: number, tiltZ: number) {
+  const pts: Array<{ x: number; y: number; z: number }> = [];
+  const cx = Math.cos(tiltX);
+  const sx = Math.sin(tiltX);
+  const cz = Math.cos(tiltZ);
+  const sz = Math.sin(tiltZ);
+
+  for (let i = 0; i < count; i++) {
+    const t = (i / count) * Math.PI * 2;
+    const rx = Math.cos(t) * radius;
+    const ry = 0;
+    const rz = Math.sin(t) * radius;
+
+    const y1 = ry * cx - rz * sx;
+    const z1 = ry * sx + rz * cx;
+
+    const x2 = rx * cz - y1 * sz;
+    const y2 = rx * sz + y1 * cz;
+
+    pts.push({ x: x2, y: y2, z: z1 });
+  }
+  return pts;
+}
+
+const OUTER_RING = buildRingPoints(295, 42, 0.58, -0.28);
+const INNER_RING = buildRingPoints(235, 36, -0.72, 0.42);
+
 /**
- * Continuous Pearl-Mint White (#F8FAF9) 3D Constellation with Soft Emerald & Warm Amber Gold washes.
- * Keeps section transitions completely seamless with zero harsh bands.
+ * Interactive 3D Metallic Gold & Alabaster/Obsidian Geometry Canvas.
+ * Smoothly rotates in 3D space with cursor parallax, vertical scroll inertia, and high-DPI crispness.
  */
-export function FullPageLuxuryCanvas() {
+export function FullPageLuxuryCanvas({ theme }: { theme: "light" | "dark" }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -82,17 +130,17 @@ export function FullPageLuxuryCanvas() {
     let rafId = 0;
     let lastTime = performance.now();
 
-    let baseYaw = 0.2;
+    let baseYaw = 0.35;
     let ptrX = 0;
     let ptrY = 0;
     let smoothX = 0;
     let smoothY = 0;
+    let smoothScroll = window.scrollY * 0.0012;
 
-    const pulses = EDGES.map((_, idx) => ({
+    const pulses = CORE_EDGES.map((_, idx) => ({
       edgeIdx: idx,
-      progress: (idx * 0.19) % 1,
-      speed: 0.13 + (idx % 4) * 0.035,
-      gold: idx % 2 === 0
+      progress: (idx * 0.14) % 1,
+      speed: 0.16 + (idx % 3) * 0.04
     }));
 
     const onPointerMove = (e: PointerEvent) => {
@@ -107,51 +155,63 @@ export function FullPageLuxuryCanvas() {
       ctx.clearRect(0, 0, width, height);
       if (width < 40 || height < 40) return;
 
-      baseYaw += dt * 0.06;
-      smoothX = damp(smoothX, ptrX, 2.8, dt || 0.016);
-      smoothY = damp(smoothY, ptrY, 2.8, dt || 0.016);
+      const isDark = themeRef.current === "dark";
+      baseYaw += dt * 0.12;
+      smoothX = damp(smoothX, ptrX, 3.2, dt || 0.016);
+      smoothY = damp(smoothY, ptrY, 3.2, dt || 0.016);
+      smoothScroll = damp(smoothScroll, window.scrollY * 0.0012, 4.0, dt || 0.016);
 
-      // Soft emerald-mint top-right ambient wash
+      // Ambient warm champagne-gold volumetric spotlights tailored to Light vs Dark surface
       const g1 = ctx.createRadialGradient(
-        width * 0.8,
+        width * 0.78,
         height * 0.18,
-        20,
-        width * 0.8,
+        24,
+        width * 0.78,
         height * 0.18,
-        Math.max(width, height) * 0.56
+        Math.max(width, height) * 0.58
       );
-      g1.addColorStop(0, "rgba(5, 150, 105, 0.065)");
-      g1.addColorStop(0.55, "rgba(217, 119, 6, 0.035)");
-      g1.addColorStop(1, "rgba(248, 250, 249, 0)");
+      if (isDark) {
+        g1.addColorStop(0, "rgba(227, 180, 82, 0.12)");
+        g1.addColorStop(0.5, "rgba(192, 139, 39, 0.045)");
+        g1.addColorStop(1, "rgba(12, 11, 10, 0)");
+      } else {
+        g1.addColorStop(0, "rgba(184, 134, 43, 0.085)");
+        g1.addColorStop(0.55, "rgba(218, 186, 120, 0.045)");
+        g1.addColorStop(1, "rgba(246, 244, 239, 0)");
+      }
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, width, height);
 
-      // Warm amber-gold lower-left ambient wash
       const g2 = ctx.createRadialGradient(
-        width * 0.16,
-        height * 0.78,
+        width * 0.18,
+        height * 0.8,
         20,
-        width * 0.16,
-        height * 0.78,
+        width * 0.18,
+        height * 0.8,
         Math.max(width, height) * 0.52
       );
-      g2.addColorStop(0, "rgba(217, 119, 6, 0.045)");
-      g2.addColorStop(0.6, "rgba(4, 120, 87, 0.03)");
-      g2.addColorStop(1, "rgba(248, 250, 249, 0)");
+      if (isDark) {
+        g2.addColorStop(0, "rgba(227, 180, 82, 0.075)");
+        g2.addColorStop(1, "rgba(12, 11, 10, 0)");
+      } else {
+        g2.addColorStop(0, "rgba(158, 110, 26, 0.055)");
+        g2.addColorStop(1, "rgba(246, 244, 239, 0)");
+      }
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, width, height);
 
-      const yaw = baseYaw + smoothX * 0.2;
-      const pitch = -0.12 + smoothY * 0.12;
-      const cx = width * 0.5;
-      const cy = height * 0.46;
-      const scaleFactor = width < 640 ? 0.68 : 1.08;
+      const yaw = baseYaw + smoothX * 0.35 + smoothScroll * 0.85;
+      const pitch = -0.22 + smoothY * 0.22 + Math.sin(smoothScroll) * 0.12;
+      const cx = width < 640 ? width * 0.5 : width * 0.52;
+      const cy = height * 0.48;
+      const scaleFactor = width < 640 ? 0.62 : 1.06;
 
-      const projected = NODES.map((n) =>
+      // Project rotating 3D octahedral core
+      const projCore = CORE_VERTS.map((v) =>
         project3D(
-          n.x * scaleFactor,
-          n.y * scaleFactor,
-          n.z * scaleFactor,
+          v.x * scaleFactor,
+          v.y * scaleFactor,
+          v.z * scaleFactor,
           cx,
           cy,
           yaw,
@@ -159,47 +219,121 @@ export function FullPageLuxuryCanvas() {
         )
       );
 
-      for (const [aIdx, bIdx] of EDGES) {
-        const a = projected[aIdx]!;
-        const b = projected[bIdx]!;
-        const midX = (a.x + b.x) * 0.5;
-        const midY = (a.y + b.y) * 0.5 - 18;
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.quadraticCurveTo(midX, midY, b.x, b.y);
-        ctx.strokeStyle = "rgba(4, 120, 87, 0.075)";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
+      // Depth-sorted translucent triangular facets
+      const sortedFaces = CORE_FACES.map(([i, j, k]) => {
+        const a = projCore[i]!;
+        const b = projCore[j]!;
+        const c = projCore[k]!;
+        return {
+          a,
+          b,
+          c,
+          avgZ: (a.z + b.z + c.z) / 3
+        };
+      }).sort((f1, f2) => f2.avgZ - f1.avgZ);
 
-      for (const pkt of pulses) {
-        pkt.progress = (pkt.progress + dt * pkt.speed) % 1;
-        const [aIdx, bIdx] = EDGES[pkt.edgeIdx]!;
-        const a = projected[aIdx]!;
-        const b = projected[bIdx]!;
-        const midX = (a.x + b.x) * 0.5;
-        const midY = (a.y + b.y) * 0.5 - 18;
-        const u = pkt.progress;
-        const q = 1 - u;
-        const px = q * q * a.x + 2 * q * u * midX + u * u * b.x;
-        const py = q * q * a.y + 2 * q * u * midY + u * u * b.y;
-
+      for (const face of sortedFaces) {
+        const depthAlpha = Math.max(0.015, Math.min(0.075, (250 - face.avgZ) / 6000));
         ctx.beginPath();
-        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = pkt.gold
-          ? "rgba(217, 119, 6, 0.42)"
-          : "rgba(5, 150, 105, 0.4)";
+        ctx.moveTo(face.a.x, face.a.y);
+        ctx.lineTo(face.b.x, face.b.y);
+        ctx.lineTo(face.c.x, face.c.y);
+        ctx.closePath();
+        ctx.fillStyle = isDark
+          ? `rgba(227, 180, 82, ${(depthAlpha * 1.15).toFixed(3)})`
+          : `rgba(168, 120, 32, ${depthAlpha.toFixed(3)})`;
         ctx.fill();
       }
 
-      for (let i = 0; i < projected.length; i++) {
-        const p = projected[i]!;
-        const node = NODES[i]!;
+      // Draw octahedral 3D structural edges
+      for (const [aIdx, bIdx] of CORE_EDGES) {
+        const a = projCore[aIdx]!;
+        const b = projCore[bIdx]!;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 2.8 * p.scale, 0, Math.PI * 2);
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = isDark
+          ? "rgba(227, 180, 82, 0.22)"
+          : "rgba(158, 110, 26, 0.16)";
+        ctx.lineWidth = 1.15;
+        ctx.stroke();
+      }
+
+      // Draw nested tilted 3D orbital rings
+      const drawRing = (
+        ring: Array<{ x: number; y: number; z: number }>,
+        yawMul: number,
+        strokeColor: string
+      ) => {
+        ctx.beginPath();
+        ring.forEach((pt, idx) => {
+          const p = project3D(
+            pt.x * scaleFactor,
+            pt.y * scaleFactor,
+            pt.z * scaleFactor,
+            cx,
+            cy,
+            yaw * yawMul,
+            pitch * 0.9
+          );
+          if (idx === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      };
+
+      drawRing(
+        OUTER_RING,
+        0.65,
+        isDark ? "rgba(248, 245, 238, 0.12)" : "rgba(22, 20, 18, 0.085)"
+      );
+      drawRing(
+        INNER_RING,
+        -0.85,
+        isDark ? "rgba(227, 180, 82, 0.18)" : "rgba(158, 110, 26, 0.13)"
+      );
+
+      // Travelling energy pulses along core edges
+      for (const pkt of pulses) {
+        pkt.progress = (pkt.progress + dt * pkt.speed) % 1;
+        const [aIdx, bIdx] = CORE_EDGES[pkt.edgeIdx]!;
+        const a = projCore[aIdx]!;
+        const b = projCore[bIdx]!;
+        const u = pkt.progress;
+        const px = a.x + (b.x - a.x) * u;
+        const py = a.y + (b.y - a.y) * u;
+
+        ctx.beginPath();
+        ctx.arc(px, py, 2.3, 0, Math.PI * 2);
+        ctx.fillStyle = isDark
+          ? "rgba(244, 206, 116, 0.55)"
+          : "rgba(158, 110, 26, 0.42)";
+        ctx.fill();
+      }
+
+      // Floating depth satellite nodes
+      for (const node of AMBIENT_NODES) {
+        const p = project3D(
+          node.x * scaleFactor,
+          node.y * scaleFactor,
+          node.z * scaleFactor,
+          cx,
+          cy,
+          yaw * 0.5,
+          pitch
+        );
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.6 * p.scale, 0, Math.PI * 2);
         ctx.fillStyle = node.gold
-          ? "rgba(217, 119, 6, 0.34)"
-          : "rgba(4, 120, 87, 0.22)";
+          ? isDark
+            ? "rgba(227, 180, 82, 0.42)"
+            : "rgba(158, 110, 26, 0.34)"
+          : isDark
+            ? "rgba(248, 245, 238, 0.24)"
+            : "rgba(22, 20, 18, 0.16)";
         ctx.fill();
       }
     };
@@ -211,7 +345,7 @@ export function FullPageLuxuryCanvas() {
       canvas.width = Math.max(1, Math.round(width * dpr));
       canvas.height = Math.max(1, Math.round(height * dpr));
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (reducedMotion) paint(0);
+      paint(0);
     };
 
     window.addEventListener("resize", resize);
@@ -243,10 +377,13 @@ export function FullPageLuxuryCanvas() {
   );
 }
 
+/**
+ * Interactive 3D Perspective Card with cursor-tracked specular sheen.
+ */
 export function Tilt3DCard({
   children,
   className = "",
-  maxTiltDeg = 3.5
+  maxTiltDeg = 5.5
 }: {
   children: ReactNode;
   className?: string;
@@ -260,18 +397,22 @@ export function Tilt3DCard({
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const rect = el.getBoundingClientRect();
-    const nx = (e.clientX - rect.left) / rect.width;
-    const ny = (e.clientY - rect.top) / rect.height;
+    const px = e.clientX - rect.left;
+    const py = e.clientY - rect.top;
+    const nx = px / rect.width;
+    const ny = py / rect.height;
     const rotY = (nx - 0.5) * 2 * maxTiltDeg;
     const rotX = (0.5 - ny) * 2 * maxTiltDeg;
 
-    el.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(3px)`;
+    el.style.setProperty("--mx", `${px.toFixed(1)}px`);
+    el.style.setProperty("--my", `${py.toFixed(1)}px`);
+    el.style.transform = `perspective(1100px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(8px)`;
   };
 
   const handlePointerLeave = () => {
     const el = cardRef.current;
     if (!el) return;
-    el.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
+    el.style.transform = "perspective(1100px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
   };
 
   return (
@@ -283,8 +424,48 @@ export function Tilt3DCard({
         transformStyle: "preserve-3d",
         transition: "transform 280ms cubic-bezier(0.22, 1, 0.36, 1)"
       }}
-      className={`relative ${className}`}
+      className={`tilt-card-host relative ${className}`}
     >
+      <span aria-hidden="true" className="tilt-sheen" />
+      <div className="relative z-10 h-full">{children}</div>
+    </div>
+  );
+}
+
+/**
+ * Clean 3D entrance animation triggered once when entering viewport.
+ */
+export function Reveal3D({
+  children,
+  className = ""
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.08 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={`reveal-3d ${visible ? "is-visible" : ""} ${className}`}>
       {children}
     </div>
   );
