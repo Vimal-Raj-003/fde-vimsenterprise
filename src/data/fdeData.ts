@@ -95,7 +95,7 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     title: "LLMs, RAG & Vector Search",
     shortLine:
       "Build grounded company AI assistants using embeddings and Vector DBs without hallucinations.",
-    image: "/images/fde-llm-rag-systems.jpg"
+    image: "/images/fde-llm-rag-systems-v2.jpg"
   },
   {
     id: "cloud-api",
@@ -103,7 +103,7 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     title: "Live FastAPI & Docker Deployment",
     shortLine:
       "Package Python LLM backends cleanly with FastAPI and Docker onto live Cloud URLs.",
-    image: "/images/fde-cloud-fastapi-docker.jpg"
+    image: "/images/fde-cloud-fastapi-docker-v2.jpg"
   },
   {
     id: "ai-agents",
@@ -111,7 +111,7 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     title: "Autonomous Enterprise AI Agents",
     shortLine:
       "Design tool-calling multi-step AI Agents that solve real engineering workflows end to end.",
-    image: "/images/fde-autonomous-agents.jpg"
+    image: "/images/fde-autonomous-agents-v2.jpg"
   },
   {
     id: "career-bench",
@@ -119,7 +119,7 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     title: "Portfolio, Resume & Mock Interviews",
     shortLine:
       "Graduate with deployed GitHub project links and an official VIMS Academy certificate.",
-    image: "/images/fde-career-portfolio.jpg"
+    image: "/images/fde-career-portfolio-v2.jpg"
   }
 ];
 

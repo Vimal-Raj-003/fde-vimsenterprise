@@ -231,53 +231,48 @@ export default function App() {
               type="button"
               data-testid="theme-toggle"
               onClick={toggleTheme}
+              title={`Switch to ${theme === "light" ? "Dark" : "Light"} theme`}
               aria-label={`Switch to ${theme === "light" ? "Dark" : "Light"} theme`}
-              className="btn-outline-3d inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-full px-3.5 sm:px-4 text-xs sm:text-sm font-bold whitespace-nowrap"
+              className="btn-outline-3d inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
             >
               {theme === "light" ? (
-                <>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-[var(--accent-gold)]"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                  </svg>
-                  <span>Dark</span>
-                </>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-[var(--accent-gold)]"
+                  aria-hidden="true"
+                >
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                </svg>
               ) : (
-                <>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-[var(--accent-gold)]"
-                    aria-hidden="true"
-                  >
-                    <circle cx="12" cy="12" r="4" />
-                    <path d="M12 2v2" />
-                    <path d="M12 20v2" />
-                    <path d="m4.93 4.93 1.41 1.41" />
-                    <path d="m17.66 17.66 1.41 1.41" />
-                    <path d="M2 12h2" />
-                    <path d="M20 12h2" />
-                    <path d="m6.34 17.66-1.41 1.41" />
-                    <path d="m19.07 4.93-1.41 1.41" />
-                  </svg>
-                  <span>Light</span>
-                </>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-[var(--accent-gold)]"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2" />
+                  <path d="M12 20v2" />
+                  <path d="m4.93 4.93 1.41 1.41" />
+                  <path d="m17.66 17.66 1.41 1.41" />
+                  <path d="M2 12h2" />
+                  <path d="M20 12h2" />
+                  <path d="m6.34 17.66-1.41 1.41" />
+                  <path d="m19.07 4.93-1.41 1.41" />
+                </svg>
               )}
             </button>
 
@@ -322,7 +317,7 @@ export default function App() {
                 <strong className="text-[var(--ink-primary)]">first 2 days</strong>.
               </p>
 
-              <div className="pt-1 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="pt-1">
                 <button
                   type="button"
                   onClick={() => openRegisterModal("hero_cta")}
@@ -330,9 +325,6 @@ export default function App() {
                 >
                   Register Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
                 </button>
-                <span className="text-xs sm:text-sm font-medium text-[var(--ink-muted)]">
-                  Instant Razorpay UPI / Card seat confirmation
-                </span>
               </div>
             </div>
 
@@ -451,7 +443,7 @@ export default function App() {
               {VISUAL_PROJECTS.map((card) => (
                 <Tilt3DCard key={card.id} maxTiltDeg={6.5} className="rounded-2xl h-full">
                   <article className="surface-card h-full rounded-2xl overflow-hidden flex flex-col">
-                    <div className="aspect-[16/10] w-full overflow-hidden bg-[#11100E]">
+                    <div className="aspect-[16/10] w-full overflow-hidden bg-[var(--bg-well)]">
                       <img
                         src={card.image}
                         alt={card.title}
