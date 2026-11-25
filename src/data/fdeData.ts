@@ -6,6 +6,7 @@ export interface VisualProjectCard {
   title: string;
   points: string[];
   image: string;
+  fit?: "contain" | "cover";
 }
 
 export interface RapidMasteryStep {
@@ -53,7 +54,7 @@ export const CLASS_SCHEDULE = {
   dateLabel: "Saturday, 12th December 2026",
   timeLabel: "10:00 AM IST Onwards (Live Online)",
   targetIso: "2026-12-12T10:00:00+05:30",
-  languageLabel: "நேரடி தமிழ் வகுப்பு",
+  languageLabel: "Live Class in Tamil (தமிழ்)",
   audienceLabel: "College Students & Working Professionals",
   durationLabel: "1-Week Intensive Program"
 };
@@ -62,38 +63,38 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
   {
     icon: "rocket",
     dayLabel: "DAY 1 · RAPID CLARITY",
-    phase: "தொடக்கம் முதலே தெளிவு",
+    phase: "Day 1-லயே Clear Understanding",
     title: "Grasp Full AI Stack & Live APIs",
     points: [
-      "அடிப்படை FDE கட்டமைப்பை எளிமையாகப் புரிந்துகொள்ளுதல்",
-      "உங்கள் முதல் FastAPI + LLM Live API உருவாக்கம்",
-      "புரியாத ஆங்கில வார்த்தைகள் இன்றி நேரடி demo"
+      "FDE Architecture & AI flow-ஐ zero-ல இருந்து ஈஸியா புரியும்",
+      "உங்கள் முதல் FastAPI + LLM Live API-ஐ build பண்ணுவீங்க",
+      "Confusing theory இல்லாம 100% live hands-on demo in Tamil"
     ],
-    milestone: "Day 1 இரவே உங்கள் முதல் Live AI API ரெடி"
+    milestone: "Day 1-லயே உங்கள் முதல் Live AI API Ready!"
   },
   {
     icon: "database",
     dayLabel: "DAY 2 · CORE MASTERY",
-    phase: "நேரடி ப்ராஜெக்ட் பயிற்சி",
+    phase: "Real-World RAG Build",
     title: "Build Real RAG & Vector Systems",
     points: [
-      "PDF கோப்புகள் & Company Data-வை AI உடன் இணைத்தல்",
-      "தவறான பதில்கள் இல்லாமல் துல்லியமான RAG output",
-      "48 மணி நேரத்தில் செயல்படும் AI Assistant"
+      "PDFs & Company Database-ஐ AI கூட connect பண்றது",
+      "Wrong answers (hallucinations) இல்லாத accurate RAG output",
+      "48 hours-லயே working Enterprise AI Assistant"
     ],
-    milestone: "2 நாட்களில் Live Data AI Assistant ரெடி"
+    milestone: "2 Days-லயே Live Data AI Assistant Ready!"
   },
   {
     icon: "cloud",
     dayLabel: "DAYS 3 - 7 · DEPLOY",
-    phase: "லைவ் கிளவுட் & வேலைவாய்ப்பு",
+    phase: "Cloud Deploy & Career",
     title: "Ship AI Agents & Live Portfolio",
     points: [
-      "வேலைகளைத் தானாகச் செய்யும் Enterprise AI Agents",
-      "Docker & HTTPS மூலம் நேரடியாக Cloud Deploy",
-      "GitHub Portfolio + VIMS Academy சான்றிதழ்"
+      "Daily office tasks-ஐ automate பண்ற Enterprise AI Agents",
+      "Docker & HTTPS-ல நேரடியா Public Cloud-ல deploy பண்றது",
+      "Active GitHub Portfolio + VIMS Academy Certificate"
     ],
-    milestone: "Public Cloud URLs + VIMS சான்றிதழ்"
+    milestone: "Live Cloud URLs + VIMS Certificate"
   }
 ];
 
@@ -103,123 +104,127 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     tag: "RAG Architecture",
     title: "LLMs, RAG & Vector Search",
     points: [
-      "PDF & Database-ஐ தேடி பதில் தரும் RAG pipeline",
-      "Hallucination இல்லாத Enterprise Knowledge AI"
+      "PDF & Database search பண்ணி accurate பதில் தரும் RAG pipeline",
+      "Zero-hallucination Enterprise Knowledge AI system"
     ],
-    image: "/images/realtime-rag-architecture.jpg"
+    image: "/images/realtime-rag-architecture.jpg",
+    fit: "contain"
   },
   {
     id: "cloud-api",
     tag: "FastAPI & Cloud",
-    title: "Live FastAPI & Swagger Endpoints",
+    title: "Live FastAPI & Cloud APIs",
     points: [
-      "Production Python REST APIs with Swagger /docs",
-      "Docker மூலம் Live HTTPS Cloud Deployment"
+      "Production Python REST APIs with interactive /docs",
+      "Docker containerization & Live HTTPS Cloud deployment"
     ],
-    image: "/images/realtime-fastapi-swagger.png"
+    image: "/images/realtime-fastapi-cloud-wide.png",
+    fit: "cover"
   },
   {
     id: "ai-agents",
     tag: "AI Agent Workflow",
     title: "Autonomous Enterprise AI Agents",
     points: [
-      "Gmail, Slack & Tools இணைக்கும் real AI Agents",
-      "Multi-step office workflows-ஐ automate செய்தல்"
+      "Gmail, Slack & API tools connect பண்ற real AI Agents",
+      "Multi-step business workflows-ஐ end-to-end automate பண்ணுங்க"
     ],
-    image: "/images/realtime-ai-agent-workflow.png"
+    image: "/images/realtime-ai-agent-workflow.png",
+    fit: "cover"
   },
   {
     id: "career-bench",
-    tag: "GitHub Portfolio",
-    title: "Live GitHub & Career Readiness",
+    tag: "GitHub & Career",
+    title: "Live GitHub Portfolio & Career",
     points: [
-      "Hiring teams செக் செய்யும் Active GitHub profile",
-      "Resume, Mock Interview & VIMS சான்றிதழ்"
+      "Recruiters verify பண்ற live deployed GitHub projects",
+      "Resume, Mock Interview & VIMS Academy Certificate"
     ],
-    image: "/images/realtime-github-activity.png"
+    image: "/images/realtime-github-portfolio-wide.png",
+    fit: "cover"
   }
 ];
 
 export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
   {
     sprintCode: "DAYS 1 - 2",
-    daysLabel: "முதல் 2 நாட்கள்: அடிப்படை",
+    daysLabel: "First 2 Days: Clarity",
     title: "Full FDE Architecture, APIs & RAG",
     points: [
       {
         icon: "brain",
-        text: "FDE architecture & AI workflow-ஐ முழுமையாகத் தமிழில் புரிந்துகொள்ளுதல்"
+        text: "FDE Architecture & AI workflow-ஐ தமிழ்லயே சுலபமா கத்துக்கலாம்"
       },
       {
         icon: "code",
-        text: "FastAPI backend + Real LLM APIs & Structured JSON நேரடி பயிற்சி"
+        text: "FastAPI backend + Real LLM APIs & Structured JSON hands-on"
       },
       {
         icon: "database",
-        text: "PDFs & Company Data-வை Vector Search உடன் Day 2-லேயே இணைத்தல்"
+        text: "PDFs & Company Data-வை Vector Search கூட Day 2-லயே connect பண்ணுங்க"
       }
     ],
-    output: "48 மணி நேரத்தில்: உங்கள் முதல் Live Knowledge AI API ரெடி"
+    output: "Within 48 Hours: உங்கள் முதல் Live Knowledge AI API Ready"
   },
   {
     sprintCode: "DAYS 3 - 4",
-    daysLabel: "Enterprise RAG பயிற்சி",
+    daysLabel: "Enterprise RAG",
     title: "Citation Accuracy & Production Tuning",
     points: [
       {
         icon: "shield",
-        text: "AI தவறான பதில்களைத் தடுக்கும் Source Citation நுட்பங்கள்"
+        text: "AI wrong answers தடுக்க Source Citations & grounding setup"
       },
       {
         icon: "rocket",
-        text: "வேகமான பதில் மற்றும் multi-document retrieval optimization"
+        text: "Fast response speed & multi-document retrieval tuning"
       },
       {
         icon: "check",
-        text: "கம்பெனி தரத்தில் AI accuracy testing மற்றும் production tuning"
+        text: "Real company-level accuracy testing & prompt evaluation"
       }
     ],
-    output: "நடு வார Build: Production Grounded Document Assistant"
+    output: "Mid-Week Build: Production Document AI Assistant"
   },
   {
     sprintCode: "DAYS 5 - 6",
-    daysLabel: "AI Agents & Live Cloud",
+    daysLabel: "AI Agents & Cloud",
     title: "Autonomous Agents & Docker Cloud",
     points: [
       {
         icon: "agent",
-        text: "வேலைகளைத் தானாகச் செய்யும் Tool-Calling AI Agents உருவாக்கம்"
+        text: "Automatic task execution பண்ற Tool-Calling AI Agents"
       },
       {
         icon: "cloud",
-        text: "Docker மூலம் package செய்து Public HTTPS Cloud URL-இல் Live செய்தல்"
+        text: "Docker package பண்ணி Public HTTPS Cloud URL-ல Live Deploy"
       },
       {
         icon: "shield",
-        text: "API பாதுகாப்பு, செலவு கட்டுப்பாடு மற்றும் live monitoring"
+        text: "API Security, cost control & live usage monitoring"
       }
     ],
     output: "Live Cloud Build: Public HTTPS AI Agent System"
   },
   {
     sprintCode: "DAY 7",
-    daysLabel: "வேலைவாய்ப்பு & சான்றிதழ்",
+    daysLabel: "Portfolio & Career",
     title: "Capstone Review & Interview Readiness",
     points: [
       {
         icon: "portfolio",
-        text: "உங்கள் 1 வார AI ப்ராஜெக்ட்களை GitHub Portfolio-வாக வெளியிடுதல்"
+        text: "உங்கள் 1-Week AI Projects-ஐ live GitHub Portfolio-ல publish பண்ணுங்க"
       },
       {
         icon: "rocket",
-        text: "Students & Working Pros-க்கான Resume + Interview வழிகாட்டல்"
+        text: "Students & Working Pros-க்கான Resume + Mock Interview guide"
       },
       {
         icon: "award",
-        text: "அதிகாரப்பூர்வ VIMS Academy Completion Certificate பெறுதல்"
+        text: "Official VIMS Academy Completion Certificate"
       }
     ],
-    output: "நிறைவு: Live Portfolio + VIMS Academy சான்றிதழ்"
+    output: "Final Outcome: Live Portfolio + VIMS Academy Certificate"
   }
 ];
 
@@ -283,18 +288,18 @@ export const STUDENT_REVIEWS: StudentReview[] = [
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "1 வாரத்தில் Beginners கூட கத்துக்க முடியுமா?",
+    question: "1 Week-ல Beginners கூட ஈஸியா கத்துக்க முடியுமா?",
     answer:
-      "நிச்சயமாக! அடிப்படைகளில் இருந்து முழுமையாகத் தமிழ்லயே கத்துக்கலாம். முதல் 2 நாட்களிலேயே FastAPI, LLMs & RAG workflow புரிந்துவிடும்; Days 3 முதல் 7-க்குள் Live Cloud AI Agents & Portfolio முடித்துவிடுவீர்கள்."
+      "கண்டிப்பா முடியும்! Basic-ல இருந்து full-ஆ தமிழ்லயே சொல்லித் தருவோம். First 2 Days-லயே FastAPI, LLMs & RAG clear-ஆ புரிஞ்சிடும்; Days 3 to 7-ல Live Cloud AI Agents & Portfolio முடிச்சிடுவீங்க."
   },
   {
     question: "Who should join this FDE live class?",
     answer:
-      "Tailored for College Students, Freshers, and Working Professionals (both IT and Core engineers) who want production-deployed AI projects rather than passive theory."
+      "Ideal for College Students, Working Professionals, Industrialists, and anyone who wants real deployed AI projects instead of passive theory."
   },
   {
-    question: "வகுப்பு எப்போது தொடங்கும்? Recordings கிடைக்குமா?",
+    question: "Class எப்போ start ஆகும்? Recordings கிடைக்குமா?",
     answer:
-      "Saturday, 12th December 2026 காலை 10:00 AM IST-க்கு நேரலை வகுப்பு தொடங்கும். Full HD recordings, source code, மற்றும் VIMS Academy Certificate வழங்கப்படும்."
+      "Saturday, 12th December 2026 காலை 10:00 AM IST-க்கு Live Online Class start ஆகும். Full HD recordings, complete source code, and VIMS Academy Certificate included."
   }
 ];

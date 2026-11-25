@@ -53,11 +53,11 @@ const DEFAULT_COHORT: CohortStatus = {
   remainingSeats: 40,
   isSoldOut: false,
   pricing: {
-    baseInr: 2,
-    gstPercent: 0,
-    gstInr: 0,
-    totalInr: 2,
-    totalPaise: 200
+    baseInr: 1999,
+    gstPercent: 18,
+    gstInr: 360,
+    totalInr: 2359,
+    totalPaise: 235900
   },
   window: {
     startIso: (import.meta.env.VITE_REG_START_ISO as string) || "2026-11-24T16:00:00+05:30",
@@ -201,7 +201,7 @@ export default function App() {
         className="relative z-40 px-3 sm:px-4 py-2 text-center text-[11px] sm:text-[13px] font-semibold border-b border-[var(--border-gold)]"
       >
         <span style={{ color: "#E3B452" }}>Award-Winning VIMS Academy</span> ·{" "}
-        <strong>12th Dec நேரடி வகுப்பு</strong> · மீதமுள்ள இடங்கள்:{" "}
+        <strong>12th Dec Live Class in Tamil</strong> · Seats Left:{" "}
         <span style={{ color: "#E3B452" }} className="underline tabular-nums">
           {cohort.remainingSeats}
         </span>
@@ -302,7 +302,7 @@ export default function App() {
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent-gold-bright)]" />
                 <span>
                   1-Week Intensive · Students &amp; Working Pros ·{" "}
-                  <span className="text-[var(--accent-gold)]">நேரடி தமிழ் வகுப்பு</span>
+                  <span className="text-[var(--accent-gold)]">Live Class in Tamil</span>
                 </span>
               </div>
 
@@ -321,16 +321,16 @@ export default function App() {
                     Master <strong className="text-[var(--ink-primary)]">LLMs, RAG, AI Agents</strong>{" "}
                     &amp; Cloud{" "}
                     <span className="font-semibold text-[var(--accent-gold)]">
-                      (அடிப்படை முதல் தெளிவாக தமிழ்லயே கத்துக்கலாம்!)
+                      (தமிழ்லயே ரொம்ப ஈஸியா கத்துக்கலாம்!)
                     </span>
                   </>,
                   <>
-                    <strong className="text-[var(--ink-primary)]">முதல் 2 நாட்களில் தெளிவு:</strong>{" "}
+                    <strong className="text-[var(--ink-primary)]">First 2 Days-லயே Full Clarity:</strong>{" "}
                     Build Live API &amp; AI systems step-by-step from zero
                   </>,
                   <>
                     <strong className="text-[var(--ink-primary)]">1-Week Outcome:</strong>{" "}
-                    Deployed GitHub Portfolio &amp; VIMS Academy சான்றிதழ்
+                    Deployed GitHub Portfolio &amp; VIMS Academy Certificate
                   </>
                 ].map((bullet, i) => (
                   <li key={i} className="flex items-start gap-2.5">
@@ -371,18 +371,18 @@ export default function App() {
                     {[
                       {
                         icon: "calendar" as const,
-                        title: "தொடங்கும் நாள்: 12th December 2026",
-                        sub: "சனிக்கிழமை காலை 10:00 AM IST · Live Online"
+                        title: "Starts: 12th December 2026",
+                        sub: "Saturday, 10:00 AM IST · Live Online"
                       },
                       {
                         icon: "language" as const,
-                        title: "நேரடி தமிழ் பயிற்சி (Live Class)",
-                        sub: "புரியாத வார்த்தைகள் இல்லை, எளிமையாகக் கற்றுக்கொள்ளலாம்"
+                        title: "Live Class in Tamil (தமிழ்லயே கத்துக்கலாம்)",
+                        sub: "Beginner-ஆ இருந்தாலும் சுலபமா புரியும்"
                       },
                       {
                         icon: "award" as const,
-                        title: "VIMS Academy சான்றிதழ் & GitHub Projects",
-                        sub: "Full HD recordings மற்றும் source code இலவசம்"
+                        title: "VIMS Academy Certificate & GitHub Projects",
+                        sub: "Full HD Recordings + Complete Source Code Included"
                       }
                     ].map((row) => (
                       <div
@@ -464,10 +464,10 @@ export default function App() {
             <div className="mt-7 surface-card-featured rounded-2xl p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
                 <div className="font-heading text-lg sm:text-xl font-bold text-[var(--ink-primary)]">
-                  2 நாட்களிலேயே முழு தெளிவு · உங்கள் AI பயணத்தை இன்றே தொடங்குங்கள்
+                  First 2 Days-லயே Full Clarity · இன்னைக்கே AI Journey-ஐ ஸ்டார்ட் பண்ணுங்க
                 </div>
                 <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
-                  12th December நேரடி வகுப்பு · மீதமுள்ள இடங்கள்: {cohort.remainingSeats} மட்டுமே
+                  12th Dec Live Class · Only {cohort.remainingSeats} Seats Left
                 </div>
               </div>
               <button
@@ -486,7 +486,7 @@ export default function App() {
           <Reveal3D>
             <div className="text-center max-w-5xl mx-auto mb-7">
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                நீங்கள் நேரடியாக கற்று உருவாக்குபவை
+                HANDS-ON REAL PROJECTS
               </span>
               <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
                 What You Will Build &amp; Deploy Live
@@ -497,12 +497,18 @@ export default function App() {
               {VISUAL_PROJECTS.map((card) => (
                 <Tilt3DCard key={card.id} maxTiltDeg={5.5} className="rounded-2xl h-full">
                   <article className="surface-card h-full rounded-2xl overflow-hidden flex flex-col">
-                    <div className="aspect-[16/10] w-full overflow-hidden bg-white p-2 border-b border-[var(--border-subtle)] flex items-center justify-center">
+                    <div
+                      className={`aspect-[16/10] w-full overflow-hidden border-b border-[var(--border-subtle)] flex items-center justify-center ${
+                        card.fit === "cover" ? "bg-[var(--bg-well)] p-0" : "bg-white p-2"
+                      }`}
+                    >
                       <img
                         src={card.image}
                         alt={card.title}
                         loading="lazy"
-                        className="h-full w-full object-contain transition-transform duration-300 hover:scale-103"
+                        className={`h-full w-full ${
+                          card.fit === "cover" ? "object-cover object-top" : "object-contain"
+                        } transition-transform duration-300 hover:scale-103`}
                       />
                     </div>
                     <div className="p-4 sm:p-5 flex-1 flex flex-col">
@@ -534,14 +540,14 @@ export default function App() {
             <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
               <div>
                 <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                  1 வாரம் · நாள் வாரியான பயிற்சி அட்டவணை
+                  1-WEEK PRACTICAL ROADMAP
                 </span>
                 <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
                   1-Week Day-by-Day Practical Roadmap
                 </h2>
               </div>
               <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-4 py-1.5 text-xs sm:text-sm font-bold text-[var(--accent-gold)]">
-                முதல் 2 நாட்களில் முழு தெளிவு
+                First 2 Days-லயே Full Clarity
               </span>
             </div>
 
@@ -551,10 +557,10 @@ export default function App() {
             <div className="mt-7 surface-card-featured rounded-2xl p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
                 <div className="font-heading text-lg sm:text-xl font-bold text-[var(--ink-primary)]">
-                  1 வாரத்தில் உங்கள் முதல் Live AI ப்ராஜெக்டை Deploy செய்யத் தயாரா?
+                  1 Week-ல உங்கள் முதல் Live AI Project-ஐ Deploy பண்ண Ready-ஆ?
                 </div>
                 <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
-                  தமிழ் நேரலை வழிகாட்டல் + HD Recordings + Source Code உடனே கிடைக்கும்
+                  Live Tamil Mentorship + Full HD Recordings + Complete Source Code
                 </div>
               </div>
               <button
@@ -607,9 +613,9 @@ export default function App() {
                         </strong>
                       </>,
                       <>
-                        அனுபவமிக்க பொறியாளர்கள் நேரடியாக{" "}
-                        <strong className="text-[var(--ink-primary)]">தமிழ்</strong>-இல்
-                        பயிற்சி அளிக்கிறார்கள்
+                        Real Industry Engineers நேரடியா{" "}
+                        <strong className="text-[var(--ink-primary)]">தமிழ்லயே</strong>{" "}
+                        சொல்லித் தருவாங்க
                       </>,
                       <>
                         Production training proven across{" "}
@@ -662,7 +668,7 @@ export default function App() {
           <Reveal3D>
             <div className="text-center max-w-5xl mx-auto mb-8">
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                வழிகாட்டும் வல்லுநர்கள்
+                YOUR MENTORS
               </span>
               <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
                 Guided by Real Industry Practitioners
@@ -704,13 +710,13 @@ export default function App() {
             <div className="reviews-showcase-frame rounded-[32px] px-4 sm:px-8 py-9 sm:py-12">
               <div className="text-center max-w-5xl mx-auto mb-7 space-y-2">
                 <span className="inline-block rounded-full border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] px-4 py-1 font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--accent-gold)]">
-                  மாணவர்கள் &amp; பொறியாளர்களின் கருத்துக்கள்
+                  LEARNER REVIEWS
                 </span>
                 <h2 className="font-heading text-[24px] sm:text-[34px] lg:text-[38px] xl:text-[42px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] leading-tight">
                   What Students &amp; Working Professionals Say
                 </h2>
                 <p className="text-sm sm:text-base text-[var(--ink-secondary)]">
-                  VIMS Academy-இல் கற்ற மாணவர்கள் மற்றும் தொழில்நுட்பப் பொறியாளர்களின் நேரடி அனுபவம்.
+                  VIMS Academy-ல படிச்ச Students &amp; Working Professionals-ஓட real feedback.
                 </p>
               </div>
 
@@ -735,7 +741,7 @@ export default function App() {
           <Reveal3D>
             <div className="text-center mb-7">
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                கேள்வி &amp; பதில்
+                QUICK FAQ
               </span>
               <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
                 Quick Answers Before You Enroll
@@ -777,7 +783,7 @@ export default function App() {
               <Tilt3DCard maxTiltDeg={3} className="rounded-3xl">
                 <div className="surface-card-featured rounded-3xl p-6 sm:p-10 text-center space-y-4">
                   <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--accent-gold)]">
-                    இன்றே உங்கள் இடத்தை உறுதி செய்யுங்கள்! · Only {cohort.remainingSeats} of{" "}
+                    இன்றே உங்கள் Seat-ஐ Book பண்ணுங்க! · Only {cohort.remainingSeats} of{" "}
                     {cohort.totalSeats} Seats Left
                   </div>
                   <h3 className="font-heading text-2xl sm:text-4xl font-bold text-[var(--ink-primary)]">

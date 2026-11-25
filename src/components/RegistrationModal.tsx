@@ -344,9 +344,10 @@ export function EnrollmentFormWidget({
               onChange={(e) => setProfile(e.target.value)}
               className={inputClass}
             >
-              <option value="student">College Student / Recent Graduate</option>
-              <option value="working_it">Working Professional (IT / Software)</option>
-              <option value="working_core">Working Professional (Core / Non-IT)</option>
+              <option value="student">Student</option>
+              <option value="professional">Professional</option>
+              <option value="industrialist">Industrialist</option>
+              <option value="others">Others</option>
             </select>
           </div>
 
