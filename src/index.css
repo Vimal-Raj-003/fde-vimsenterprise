@@ -44,8 +44,8 @@
     --sheen-color: rgba(200, 148, 46, 0.14);
     --pill-gold-bg: #f9efda;
 
-    --font-heading: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
-    --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+    --font-heading: "Bricolage Grotesque", "Noto Sans Tamil", system-ui, -apple-system, sans-serif;
+    --font-sans: "Manrope", "Noto Sans Tamil", system-ui, -apple-system, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
   }
 

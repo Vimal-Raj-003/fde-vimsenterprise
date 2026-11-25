@@ -4,7 +4,7 @@ export interface VisualProjectCard {
   id: string;
   tag: string;
   title: string;
-  shortLine: string;
+  points: string[];
   image: string;
 }
 
@@ -13,7 +13,7 @@ export interface RapidMasteryStep {
   dayLabel: string;
   phase: string;
   title: string;
-  summary: string;
+  points: string[];
   milestone: string;
 }
 
@@ -53,7 +53,7 @@ export const CLASS_SCHEDULE = {
   dateLabel: "Saturday, 12th December 2026",
   timeLabel: "10:00 AM IST Onwards (Live Online)",
   targetIso: "2026-12-12T10:00:00+05:30",
-  languageLabel: "Live in Tamil",
+  languageLabel: "Live in தமிழ்",
   audienceLabel: "College Students & Working Professionals",
   durationLabel: "1-Week Intensive Program"
 };
@@ -62,10 +62,13 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
   {
     icon: "rocket",
     dayLabel: "DAY 1 · RAPID CLARITY",
-    phase: "Zero-Jargon Tamil Breakdown",
+    phase: "தமிழில் எளிய விளக்கம்",
     title: "Grasp Full AI Stack & Live APIs",
-    summary:
-      "Even as a complete beginner, understand the full Forward Deployment Engineer architecture clearly in Tamil on Day 1 and ship your first FastAPI + LLM endpoint.",
+    points: [
+      "Clear beginner-friendly FDE basics (தமிழில்)",
+      "Build your first FastAPI + LLM live endpoint",
+      "Zero confusing jargon, 100% practical demo"
+    ],
     milestone: "First Live AI Endpoint Running on Day 1"
   },
   {
@@ -73,8 +76,11 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
     dayLabel: "DAY 2 · CORE MASTERY",
     phase: "Hands-On Immersion",
     title: "Build Real RAG & Vector Systems",
-    summary:
-      "Inside Day 2, connect PDFs, company databases, and structured JSON responses with zero hallucinations so every production concept clicks cleanly.",
+    points: [
+      "Connect real PDFs & company SQL databases",
+      "Accurate answers with zero hallucinations",
+      "Working AI assistant built inside 48 hours"
+    ],
     milestone: "Knowledge AI Assistant Built in 48 Hours"
   },
   {
@@ -82,8 +88,11 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
     dayLabel: "DAYS 3 - 7 · DEPLOY",
     phase: "Agents, Cloud & Readiness",
     title: "Ship AI Agents & Live Portfolio",
-    summary:
-      "Complete your 1-week sprint by deploying Dockerized AI Agents onto live Cloud URLs with GitHub walkthroughs and VIMS Academy certification.",
+    points: [
+      "Build task-automating Enterprise AI Agents",
+      "Deploy live to Cloud with Docker & HTTPS",
+      "GitHub showcase + VIMS Academy Certificate"
+    ],
     milestone: "Public Cloud Portfolio + Certificate"
   }
 ];
@@ -93,33 +102,41 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
     id: "llm-rag",
     tag: "Real-World AI",
     title: "LLMs, RAG & Vector Search",
-    shortLine:
-      "Build grounded company AI assistants using embeddings and Vector DBs without hallucinations.",
-    image: "/images/fde-llm-rag-systems-v2.jpg"
+    points: [
+      "Embeddings & Vector DB grounded Q&A",
+      "Built for real company PDFs & data"
+    ],
+    image: "/images/real-fde-rag-code.jpg"
   },
   {
     id: "cloud-api",
     tag: "Cloud & APIs",
     title: "Live FastAPI & Docker Deployment",
-    shortLine:
-      "Package Python LLM backends cleanly with FastAPI and Docker onto live Cloud URLs.",
-    image: "/images/fde-cloud-fastapi-docker-v2.jpg"
+    points: [
+      "Production Python APIs with FastAPI",
+      "Dockerized live HTTPS cloud URLs"
+    ],
+    image: "/images/real-fde-cloud-deploy.jpg"
   },
   {
     id: "ai-agents",
     tag: "AI Agents",
     title: "Autonomous Enterprise AI Agents",
-    shortLine:
-      "Design tool-calling multi-step AI Agents that solve real engineering workflows end to end.",
-    image: "/images/fde-autonomous-agents-v2.jpg"
+    points: [
+      "Multi-step tool-calling AI workflows",
+      "Real-world engineering automation"
+    ],
+    image: "/images/real-fde-agents-team.jpg"
   },
   {
     id: "career-bench",
     tag: "Job Readiness",
-    title: "Portfolio, Resume & Mock Interviews",
-    shortLine:
-      "Graduate with deployed GitHub project links and an official VIMS Academy certificate.",
-    image: "/images/fde-career-portfolio-v2.jpg"
+    title: "Portfolio, Resume & Interviews",
+    points: [
+      "Live GitHub projects hiring teams test",
+      "Official VIMS Academy Certificate"
+    ],
+    image: "/images/real-fde-career-interview.jpg"
   }
 ];
 
@@ -131,7 +148,7 @@ export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
     points: [
       {
         icon: "brain",
-        text: "Complete FDE system mental model explained crystal clearly in Tamil"
+        text: "Complete FDE system mental model (நீங்க தமிழ்லயே கத்துக்கலாம்)"
       },
       {
         icon: "code",
@@ -244,7 +261,7 @@ export const STUDENT_REVIEWS: StudentReview[] = [
     role: "Final-Year Engineering Student · Chennai",
     tag: "College Student",
     quote:
-      "I watched playlists for months with zero confidence. Here, inside the first two days in Tamil, everything from FastAPI to live Cloud deployment clicked."
+      "I watched playlists for months with zero confidence. Here, inside the first two days in தமிழ், everything from FastAPI to live Cloud deployment clicked."
   },
   {
     id: "r2",
@@ -268,7 +285,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: "How much can beginners learn in a 1-Week program?",
     answer:
-      "All concepts are taught step-by-step in clear Tamil from scratch. Within the first 2 days, you grasp the full FDE stack (FastAPI, LLMs & RAG), and spend Days 3 to 7 shipping Cloud AI Agents and portfolio projects."
+      "நீங்க தமிழ்லயே அடிப்படைகளில் இருந்து கத்துக்கலாம். Within the first 2 days, you grasp the full FDE stack (FastAPI, LLMs & RAG), and spend Days 3 to 7 shipping Cloud AI Agents and portfolio projects."
   },
   {
     question: "Who should join this FDE live class?",

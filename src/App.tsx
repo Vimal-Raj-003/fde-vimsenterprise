@@ -193,7 +193,7 @@ export default function App() {
       {/* HIGH-TRUST TOP ANNOUNCEMENT STRIP */}
       <div
         style={{ backgroundColor: "var(--bg-strip)", color: "var(--ink-strip)" }}
-        className="relative z-40 px-4 py-2 text-center text-xs sm:text-[13px] font-semibold border-b border-[var(--border-gold)]"
+        className="relative z-40 px-3 sm:px-4 py-2 text-center text-[11px] sm:text-[13px] font-semibold border-b border-[var(--border-gold)]"
       >
         <span style={{ color: "#E3B452" }}>Award-Winning VIMS Academy</span> · Live Batch Starts{" "}
         <strong>12th December 2026</strong> · Only{" "}
@@ -202,43 +202,43 @@ export default function App() {
         </span>
       </div>
 
-      {/* CLEAN NAV-FREE FUNNEL HEADER WITH LIGHT / DARK SWITCH */}
+      {/* MOBILE-SAFE NAV-FREE HEADER (ICON-ONLY THEME TOGGLE + FULL VISIBLE CTA ON 360px+) */}
       <header
         style={{ backgroundColor: "var(--bg-header)" }}
         className="sticky top-0 z-40 w-full backdrop-blur-xl border-b border-[var(--border-subtle)]"
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <a href="#top" className="inline-flex items-center gap-3 shrink-0 group">
+        <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between gap-2 sm:gap-4 px-3.5 sm:px-6 lg:px-8">
+          <a href="#top" className="inline-flex min-w-0 items-center gap-2 sm:gap-3 group">
             <img
               src="/images/vims-logo.png"
               alt="VIMS Academy Logo"
               width={40}
               height={40}
-              className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-8 w-8 sm:h-10 sm:w-10 shrink-0 rounded-xl object-contain transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="leading-tight">
-              <div className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-[var(--ink-primary)]">
+            <div className="min-w-0 leading-tight">
+              <div className="font-heading text-[17px] sm:text-2xl font-bold tracking-tight text-[var(--ink-primary)] whitespace-nowrap">
                 VIMS <span className="text-[var(--accent-gold)]">Academy</span>
               </div>
-              <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ink-muted)]">
+              <div className="hidden sm:block text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ink-muted)]">
                 Forward Deployment Program
               </div>
             </div>
           </a>
 
-          <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <button
               type="button"
               data-testid="theme-toggle"
               onClick={toggleTheme}
               title={`Switch to ${theme === "light" ? "Dark" : "Light"} theme`}
               aria-label={`Switch to ${theme === "light" ? "Dark" : "Light"} theme`}
-              className="btn-outline-3d inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
+              className="btn-outline-3d inline-flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 cursor-pointer items-center justify-center rounded-full"
             >
               {theme === "light" ? (
                 <svg
-                  width="18"
-                  height="18"
+                  width="17"
+                  height="17"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -252,8 +252,8 @@ export default function App() {
                 </svg>
               ) : (
                 <svg
-                  width="18"
-                  height="18"
+                  width="17"
+                  height="17"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -279,7 +279,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => openRegisterModal("header_cta")}
-              className="btn-gold-3d inline-flex min-h-10 cursor-pointer items-center rounded-full px-4 sm:px-6 text-xs sm:text-sm font-bold whitespace-nowrap"
+              className="btn-gold-3d inline-flex min-h-9 sm:min-h-10 shrink-0 cursor-pointer items-center rounded-full px-3.5 sm:px-6 text-xs sm:text-sm font-bold whitespace-nowrap"
             >
               Register Now
             </button>
@@ -287,41 +287,64 @@ export default function App() {
         </div>
       </header>
 
-      {/* CONCISE ZERO-REPETITION PERFORMANCE MARKETING FLOW */}
-      <main className="relative z-10 space-y-12 sm:space-y-16 pt-7 sm:pt-11 pb-16">
-        {/* 1. HERO: CLEAN VALUE PROP + REGISTER NOW CTA + LIVE COHORT SNAPSHOT CARD */}
+      {/* MOBILE-FIRST HIGH-CONVERTING LANDING FLOW */}
+      <main className="relative z-10 space-y-12 sm:space-y-14 lg:space-y-16 pt-6 sm:pt-10 pb-14">
+        {/* 1. HERO: SOLVE REAL-WORLD PROBLEMS + BULLET CLARITY + REGISTER NOW CTA */}
         <section id="overview" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border-gold)] bg-[var(--bg-surface)] px-4 py-1.5 text-xs sm:text-sm font-bold text-[var(--ink-primary)] shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
+            <div className="lg:col-span-7 space-y-5">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border-gold)] bg-[var(--bg-surface)] px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold text-[var(--ink-primary)] shadow-sm">
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent-gold-bright)]" />
                 <span>
-                  1-Week Intensive · Students &amp; Working Professionals ·{" "}
-                  <span className="text-[var(--accent-gold)]">Live in Tamil</span>
+                  1-Week Intensive · Students &amp; Working Pros ·{" "}
+                  <span className="text-[var(--accent-gold)]">Live in தமிழ்</span>
                 </span>
               </div>
 
-              <h1 className="font-heading text-[36px] sm:text-[48px] lg:text-[54px] font-extrabold tracking-tight text-[var(--ink-primary)] leading-[1.06]">
+              <h1 className="font-heading text-[30px] sm:text-[42px] lg:text-[52px] font-extrabold tracking-tight text-[var(--ink-primary)] leading-[1.08]">
                 Become a{" "}
                 <span className="text-[var(--accent-gold)]">
                   Forward Deployment Engineer (FDE)
                 </span>{" "}
-                &amp; Deploy Real-World AI.
+                &amp; Solve Real-World Problems.
               </h1>
 
-              <p className="text-[17px] sm:text-[19px] text-[var(--ink-secondary)] leading-relaxed max-w-2xl">
-                Learn <strong className="text-[var(--ink-primary)]">LLMs, RAG, AI Agents</strong>{" "}
-                and live Cloud deployment step-by-step in{" "}
-                <strong className="text-[var(--ink-primary)]">Tamil</strong>. Structured so even
-                beginners grasp the entire core system right in the{" "}
-                <strong className="text-[var(--ink-primary)]">first 2 days</strong>.
-              </p>
+              {/* Scannable Bullet Points instead of dense paragraph */}
+              <ul className="space-y-2.5 text-[15px] sm:text-[17px] text-[var(--ink-secondary)] max-w-2xl">
+                {[
+                  <>
+                    Master <strong className="text-[var(--ink-primary)]">LLMs, RAG, AI Agents</strong>{" "}
+                    &amp; Cloud{" "}
+                    <span className="font-semibold text-[var(--accent-gold)]">
+                      (நீங்க தமிழ்லயே எளிமையா கத்துக்கலாம்!)
+                    </span>
+                  </>,
+                  <>
+                    <strong className="text-[var(--ink-primary)]">First 2 Days Clarity:</strong>{" "}
+                    Build live API &amp; AI systems cleanly from zero jargon
+                  </>,
+                  <>
+                    <strong className="text-[var(--ink-primary)]">1-Week Outcome:</strong>{" "}
+                    Deployed GitHub links &amp; VIMS Academy Certificate
+                  </>
+                ].map((bullet, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span
+                      style={{ background: "var(--cta-bg)", color: "var(--cta-text)" }}
+                      className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold"
+                    >
+                      ✓
+                    </span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
 
               <div className="pt-1">
                 <button
                   type="button"
                   onClick={() => openRegisterModal("hero_cta")}
-                  className="btn-gold-3d inline-flex min-h-14 cursor-pointer items-center justify-center rounded-full px-9 py-3.5 text-base sm:text-lg font-bold"
+                  className="btn-gold-3d inline-flex min-h-13 sm:min-h-14 w-full sm:w-auto cursor-pointer items-center justify-center rounded-full px-6 sm:px-9 py-3 text-[15px] sm:text-lg font-bold"
                 >
                   Register Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
                 </button>
@@ -329,9 +352,9 @@ export default function App() {
             </div>
 
             {/* Right 5 Cols: Elevated 3D Cohort Snapshot Card */}
-            <div className="lg:col-span-5 space-y-4">
+            <div className="lg:col-span-5">
               <Tilt3DCard maxTiltDeg={3} className="rounded-3xl">
-                <div className="surface-card-featured rounded-3xl p-5 sm:p-6 space-y-4">
+                <div className="surface-card-featured rounded-3xl p-4 sm:p-6 space-y-4">
                   <LiveSeatAndCountdownCard
                     targetIso={CLASS_SCHEDULE.targetIso}
                     enrolledSeats={cohort.enrolledSeats}
@@ -348,8 +371,8 @@ export default function App() {
                       },
                       {
                         icon: "language" as const,
-                        title: "Taught Live in Simple Tamil",
-                        sub: "Grasp core AI workflows inside the first 2 days"
+                        title: "தமிழில் நேரடி வகுப்பு (Live in தமிழ்)",
+                        sub: "நீங்க தமிழ்லயே சுலபமா புரிஞ்சுக்கலாம்"
                       },
                       {
                         icon: "award" as const,
@@ -359,10 +382,10 @@ export default function App() {
                     ].map((row) => (
                       <div
                         key={row.title}
-                        className="group surface-well flex items-center gap-3.5 rounded-2xl px-4 py-3"
+                        className="group surface-well flex items-center gap-3.5 rounded-2xl px-3.5 sm:px-4 py-3"
                       >
                         <Icon3D name={row.icon} size="sm" />
-                        <div>
+                        <div className="min-w-0">
                           <div className="text-sm sm:text-[15px] font-bold text-[var(--ink-primary)] leading-snug">
                             {row.title}
                           </div>
@@ -377,14 +400,14 @@ export default function App() {
           </div>
         </section>
 
-        {/* 2. FIRST-2-DAYS RAPID MASTERY TRUST BLUEPRINT */}
+        {/* 2. FIRST-2-DAYS RAPID MASTERY TRUST BLUEPRINT (SCANNABLE BULLETS) */}
         <section id="fast-mastery" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="text-center max-w-5xl mx-auto mb-7">
               <span className="font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--accent-gold)] bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3.5 py-1 rounded-full">
                 WHY LEARNERS SUCCEED SO FAST
               </span>
-              <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-3">
+              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-3">
                 Master Core FDE Skills in the First 2 Days
               </h2>
             </div>
@@ -393,7 +416,7 @@ export default function App() {
               {RAPID_MASTERY_STEPS.map((step, idx) => (
                 <Tilt3DCard key={step.dayLabel} maxTiltDeg={6} className="rounded-3xl h-full">
                   <article
-                    className={`group h-full rounded-3xl p-6 sm:p-7 flex flex-col justify-between ${
+                    className={`group h-full rounded-3xl p-5 sm:p-7 flex flex-col justify-between ${
                       idx === 1 ? "surface-card-featured" : "surface-card"
                     }`}
                   >
@@ -409,12 +432,19 @@ export default function App() {
                           </div>
                         </div>
                       </div>
-                      <h3 className="font-heading mt-4 text-2xl font-bold text-[var(--ink-primary)]">
+
+                      <h3 className="font-heading mt-4 text-xl sm:text-2xl font-bold text-[var(--ink-primary)]">
                         {step.title}
                       </h3>
-                      <p className="mt-2.5 text-[15px] sm:text-base text-[var(--ink-secondary)] leading-relaxed">
-                        {step.summary}
-                      </p>
+
+                      <ul className="mt-3 space-y-2 text-sm sm:text-[15px] text-[var(--ink-secondary)]">
+                        {step.points.map((pt) => (
+                          <li key={pt} className="flex items-start gap-2">
+                            <span className="font-bold text-[var(--accent-gold)]">•</span>
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
                     <div className="mt-5 rounded-xl border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] px-3.5 py-2.5 text-xs sm:text-sm font-bold text-[var(--accent-gold)]">
@@ -424,17 +454,36 @@ export default function App() {
                 </Tilt3DCard>
               ))}
             </div>
+
+            {/* STRATEGIC MID-PAGE CTA #1 */}
+            <div className="mt-7 surface-card-featured rounded-2xl p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div>
+                <div className="font-heading text-lg sm:text-xl font-bold text-[var(--ink-primary)]">
+                  நீங்க தமிழ்லயே கத்துக்கலாம் · Start Building Real Solutions in 2 Days
+                </div>
+                <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
+                  Batch begins Saturday, 12th December · Only {cohort.remainingSeats} seats remaining
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => openRegisterModal("post_mastery_cta")}
+                className="btn-gold-3d inline-flex min-h-11 w-full sm:w-auto shrink-0 cursor-pointer items-center justify-center rounded-full px-6 text-sm font-bold whitespace-nowrap"
+              >
+                Book Your Seat Now
+              </button>
+            </div>
           </Reveal3D>
         </section>
 
-        {/* 3. REAL FDE AI PROJECT VISUALS GALLERY */}
+        {/* 3. REAL-WORLD PROJECT PHOTOGRAPHY GALLERY (BULLET POINTS) */}
         <section id="projects" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="text-center max-w-5xl mx-auto mb-7">
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
                 WHAT YOU WILL LEARN &amp; SHIP
               </span>
-              <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
                 What You Will Build &amp; Deploy Live
               </h2>
             </div>
@@ -448,19 +497,24 @@ export default function App() {
                         src={card.image}
                         alt={card.title}
                         loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-108"
+                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-106"
                       />
                     </div>
-                    <div className="p-5 flex-1 flex flex-col">
+                    <div className="p-4 sm:p-5 flex-1 flex flex-col">
                       <span className="self-start inline-block rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-3 py-0.5 text-xs font-bold text-[var(--accent-gold)]">
                         {card.tag}
                       </span>
                       <h3 className="font-heading mt-2.5 text-xl font-bold text-[var(--ink-primary)]">
                         {card.title}
                       </h3>
-                      <p className="mt-1.5 text-sm text-[var(--ink-secondary)] leading-relaxed">
-                        {card.shortLine}
-                      </p>
+                      <ul className="mt-2 space-y-1.5 text-sm text-[var(--ink-secondary)]">
+                        {card.points.map((pt) => (
+                          <li key={pt} className="flex items-start gap-2">
+                            <span className="font-bold text-[var(--accent-gold)]">•</span>
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </article>
                 </Tilt3DCard>
@@ -469,7 +523,7 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 4. AUTOMATED 1-WEEK SYLLABUS CAROUSEL (SCULPTED 3D ICONS) */}
+        {/* 4. AUTOMATED 1-WEEK SYLLABUS CAROUSEL (SCULPTED 3D ICONS + MID-PAGE CTA #2) */}
         <section id="curriculum" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
@@ -477,23 +531,42 @@ export default function App() {
                 <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
                   1-WEEK INTENSIVE SYLLABUS
                 </span>
-                <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+                <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
                   1-Week Day-by-Day Practical Roadmap
                 </h2>
               </div>
-              <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-4 py-1.5 text-sm font-bold text-[var(--accent-gold)]">
+              <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-4 py-1.5 text-xs sm:text-sm font-bold text-[var(--accent-gold)]">
                 Heavy Core Learning in First 2 Days
               </span>
             </div>
 
             <AutomatedCurriculumCarousel />
+
+            {/* STRATEGIC MID-PAGE CTA #2 */}
+            <div className="mt-7 surface-card-featured rounded-2xl p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div>
+                <div className="font-heading text-lg sm:text-xl font-bold text-[var(--ink-primary)]">
+                  Ready to Build &amp; Deploy Real Projects in 1 Week?
+                </div>
+                <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
+                  Live Tamil guidance + HD recordings + Source code included
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => openRegisterModal("post_curriculum_cta")}
+                className="btn-gold-3d inline-flex min-h-11 w-full sm:w-auto shrink-0 cursor-pointer items-center justify-center rounded-full px-6 text-sm font-bold whitespace-nowrap"
+              >
+                Register Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
+              </button>
+            </div>
           </Reveal3D>
         </section>
 
-        {/* 5. INSTITUTIONAL PROOF & AWARD-WINNING CREDIBILITY */}
+        {/* 5. INSTITUTIONAL PROOF & AWARD-WINNING CREDIBILITY (BULLET FORMAT) */}
         <section id="credibility" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
-            <div className="surface-card rounded-3xl p-6 sm:p-9">
+            <div className="surface-card rounded-3xl p-5 sm:p-9">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-6">
                   <Tilt3DCard maxTiltDeg={4} className="rounded-2xl">
@@ -516,42 +589,58 @@ export default function App() {
                   <span className="font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--accent-gold)]">
                     TRUSTED &amp; AWARD-WINNING INSTITUTION
                   </span>
-                  <h2 className="font-heading text-[26px] sm:text-[32px] lg:text-[36px] font-bold text-[var(--ink-primary)] leading-tight">
+                  <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] font-bold text-[var(--ink-primary)] leading-tight">
                     Backed by Award-Winning VIMS Academy
                   </h2>
-                  <p className="text-[15px] sm:text-[17px] text-[var(--ink-secondary)] leading-relaxed">
-                    Honored with the{" "}
-                    <strong className="text-[var(--ink-primary)]">
-                      Social Eagle Award at TN Digital Summit 2026
-                    </strong>
-                    , VIMS builds real-world software solutions and trains college students and
-                    working engineers across{" "}
-                    <a
-                      href="https://embskills.vimsenterprise.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-bold text-[var(--accent-gold)] underline"
-                    >
-                      embskills.vimsenterprise.com
-                    </a>{" "}
-                    and VIMS Academy.
-                  </p>
+
+                  <ul className="space-y-2.5 text-[15px] sm:text-base text-[var(--ink-secondary)]">
+                    {[
+                      <>
+                        Winner of the{" "}
+                        <strong className="text-[var(--ink-primary)]">
+                          Social Eagle Award at TN Digital Summit 2026
+                        </strong>
+                      </>,
+                      <>
+                        Real engineering mentors teaching practically in{" "}
+                        <strong className="text-[var(--ink-primary)]">தமிழ்</strong> for Students &amp;
+                        Working Pros
+                      </>,
+                      <>
+                        Production training proven across{" "}
+                        <a
+                          href="https://embskills.vimsenterprise.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-bold text-[var(--accent-gold)] underline"
+                        >
+                          embskills.vimsenterprise.com
+                        </a>{" "}
+                        and VIMS Academy
+                      </>
+                    ].map((pt, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="font-bold text-[var(--accent-gold)]">✓</span>
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
 
                   <div className="pt-2">
                     <div className="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)] mb-3">
                       Trusted by Industry Partners
                     </div>
-                    <div className="grid grid-cols-4 gap-3 items-center">
+                    <div className="grid grid-cols-4 gap-2.5 sm:gap-3 items-center">
                       {CLIENT_LOGOS.map((logo) => (
                         <div
                           key={logo.name}
-                          className="flex h-13 items-center justify-center rounded-xl border border-[var(--border-gold)] bg-white p-2 shadow-xs transition-transform duration-200 hover:-translate-y-1"
+                          className="flex h-12 sm:h-13 items-center justify-center rounded-xl border border-[var(--border-gold)] bg-white p-2 shadow-xs transition-transform duration-200 hover:-translate-y-1"
                         >
                           <img
                             src={logo.src}
                             alt={logo.name}
                             loading="lazy"
-                            className="max-h-7 w-auto object-contain"
+                            className="max-h-6 sm:max-h-7 w-auto object-contain"
                           />
                         </div>
                       ))}
@@ -563,14 +652,14 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 6. YOUR MENTORS: SINGLE-LINE HEADING + EXACT 3 FULL-FRAME STUDIO PORTRAITS */}
+        {/* 6. YOUR MENTORS: FULL-FRAME STUDIO PORTRAITS */}
         <section id="mentors" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="text-center max-w-5xl mx-auto mb-8">
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
                 PROGRAM FACULTY
               </span>
-              <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
                 Guided by Real Industry Practitioners
               </h2>
             </div>
@@ -604,7 +693,7 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 7. HIGHLIGHTED 3D GLASSY AUTOMATED QUOTES SHOWCASE */}
+        {/* 7. HIGHLIGHTED 3D GLASSY AUTOMATED QUOTES SHOWCASE + MID-PAGE CTA #3 */}
         <section id="reviews" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="reviews-showcase-frame rounded-[32px] px-4 sm:px-8 py-9 sm:py-12">
@@ -612,7 +701,7 @@ export default function App() {
                 <span className="inline-block rounded-full border border-[var(--border-gold)] bg-[var(--pill-gold-bg)] px-4 py-1 font-mono-tech text-xs font-bold uppercase tracking-wider text-[var(--accent-gold)]">
                   HIGHLIGHTED LEARNER OUTCOMES
                 </span>
-                <h2 className="font-heading text-[26px] sm:text-[36px] lg:text-[42px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] leading-tight">
+                <h2 className="font-heading text-[24px] sm:text-[34px] lg:text-[38px] xl:text-[42px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] leading-tight">
                   What Students &amp; Working Professionals Say
                 </h2>
                 <p className="text-sm sm:text-base text-[var(--ink-secondary)]">
@@ -622,6 +711,17 @@ export default function App() {
               </div>
 
               <AutomatedQuotesCarousel />
+
+              {/* STRATEGIC MID-PAGE CTA #3 */}
+              <div className="mt-8 text-center">
+                <button
+                  type="button"
+                  onClick={() => openRegisterModal("post_reviews_cta")}
+                  className="btn-gold-3d inline-flex min-h-12 w-full sm:w-auto cursor-pointer items-center justify-center rounded-full px-8 py-3 text-sm sm:text-base font-bold"
+                >
+                  Reserve My Seat Now · Only {cohort.remainingSeats} Seats Left
+                </button>
+              </div>
             </div>
           </Reveal3D>
         </section>
@@ -633,7 +733,7 @@ export default function App() {
               <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
                 FAQ
               </span>
-              <h2 className="font-heading text-[26px] sm:text-[34px] lg:text-[40px] lg:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
+              <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] xl:whitespace-nowrap font-bold text-[var(--ink-primary)] mt-1">
                 Quick Answers Before You Enroll
               </h2>
             </div>
@@ -671,17 +771,17 @@ export default function App() {
 
             <div className="mt-9 max-w-4xl mx-auto">
               <Tilt3DCard maxTiltDeg={3} className="rounded-3xl">
-                <div className="surface-card-featured rounded-3xl p-7 sm:p-10 text-center space-y-4">
+                <div className="surface-card-featured rounded-3xl p-6 sm:p-10 text-center space-y-4">
                   <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--accent-gold)]">
                     Only {cohort.remainingSeats} of {cohort.totalSeats} Seats Left for 12th December
                   </div>
-                  <h3 className="font-heading text-3xl sm:text-4xl font-bold text-[var(--ink-primary)]">
-                    Ready to Build &amp; Deploy Real-World AI?
+                  <h3 className="font-heading text-2xl sm:text-4xl font-bold text-[var(--ink-primary)]">
+                    Ready to Solve Real-World Problems with AI?
                   </h3>
                   <button
                     type="button"
                     onClick={() => openRegisterModal("bottom_cta")}
-                    className="btn-gold-3d inline-flex min-h-13 cursor-pointer items-center justify-center rounded-full px-10 py-3.5 text-base font-bold"
+                    className="btn-gold-3d inline-flex min-h-13 w-full sm:w-auto cursor-pointer items-center justify-center rounded-full px-8 sm:px-10 py-3.5 text-base font-bold"
                   >
                     Register Now · ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
                   </button>
@@ -692,8 +792,8 @@ export default function App() {
         </section>
       </main>
 
-      {/* MINIMAL FUNNEL FOOTER */}
-      <footer className="relative z-10 border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] py-8">
+      {/* MINIMAL FUNNEL FOOTER (EXTRA BOTTOM PADDING FOR STICKY MOBILE BAR) */}
+      <footer className="relative z-10 border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] pt-8 pb-24 md:pb-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--ink-secondary)]">
           <div className="flex items-center gap-3">
             <img
@@ -726,6 +826,31 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* STICKY MOBILE BOTTOM CONVERSION BAR */}
+      <div
+        data-testid="mobile-sticky-cta"
+        style={{ backgroundColor: "var(--bg-header)" }}
+        className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-[var(--border-gold)] backdrop-blur-xl px-3.5 py-2.5 shadow-[0_-8px_28px_rgba(0,0,0,0.14)]"
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0 leading-tight">
+            <div className="text-[11px] font-bold text-[var(--accent-gold)] tabular-nums">
+              Only {cohort.remainingSeats} Seats Left · Dec 12
+            </div>
+            <div className="text-sm font-extrabold text-[var(--ink-primary)] tabular-nums">
+              ₹{cohort.pricing.baseInr.toLocaleString("en-IN")} + GST
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => openRegisterModal("mobile_sticky_cta")}
+            className="btn-gold-3d inline-flex min-h-10 shrink-0 cursor-pointer items-center justify-center rounded-full px-5 text-xs font-bold whitespace-nowrap"
+          >
+            Register Now
+          </button>
+        </div>
+      </div>
 
       <RegistrationModal
         isOpen={modalOpen}
