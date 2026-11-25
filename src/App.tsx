@@ -273,11 +273,13 @@ export default function App() {
         <section id="overview" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[#D97706]/35 bg-white px-4 py-1.5 text-xs font-bold text-[#141A17] shadow-2xs">
-                <span className="h-2 w-2 rounded-full bg-[#059669]" />
-                <span>Specially for College Students &amp; Working Professionals</span>
-                <span className="text-[#D97706]">·</span>
-                <span className="text-[#047857]">Live in Tamil</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#D97706]/35 bg-white px-3.5 sm:px-4 py-1.5 text-[11px] sm:text-xs font-bold text-[#141A17] shadow-2xs">
+                <span className="h-2 w-2 shrink-0 rounded-full bg-[#059669]" />
+                <span>
+                  For College Students &amp; Working Professionals{" "}
+                  <span className="text-[#D97706]">·</span>{" "}
+                  <span className="text-[#047857]">Live in Tamil</span>
+                </span>
               </div>
 
               <h1 className="font-heading text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#141A17] leading-[1.08]">
@@ -629,12 +631,12 @@ export default function App() {
             {MENTORS.map((m) => (
               <Tilt3DCard key={m.id} className="rounded-3xl">
                 <article className="pm-card rounded-3xl overflow-hidden text-center p-5">
-                  <div className="mx-auto aspect-[4/5] w-full max-w-[240px] overflow-hidden rounded-2xl border border-[#047857]/20 bg-[#F0F7F4]">
+                  <div className="relative mx-auto aspect-[4/5] w-full max-w-[250px] overflow-hidden rounded-2xl border border-[#047857]/20 bg-[#F0F7F4]">
                     <img
                       src={m.photo}
                       alt={m.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover object-[50%_18%]"
+                      decoding="sync"
+                      className="absolute inset-0 block h-full w-full object-cover object-[50%_15%]"
                     />
                   </div>
 
