@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forward Deployment Engineer (FDE) Live Class · Starts Dec 12 | VIMS Academy</title>
+    <title>3-Day Forward Deployment Engineer (FDE) Live Workshop · Starts Dec 12 | VIMS Academy</title>
     <meta
       name="description"
-      content="Live Forward Deployment Engineer (FDE) Program for College Students & Working Professionals starting 12th December 2026. Learn LLMs, RAG, AI Agents & Cloud Deployment in Tamil by award-winning VIMS Enterprise."
+      content="3-Day Forward Deployment Engineer (FDE) Live Workshop for College Students & Working Professionals starting 12th December 2026. Learn LLMs, RAG, AI Agents & Cloud Deployment in Tamil by award-winning VIMS Enterprise."
     />
     <meta property="og:title" content="Forward Deployment Engineer (FDE) · Starts 12th Dec | VIMS Academy" />
     <meta
@@ -26,7 +26,12 @@
       (function () {
         try {
           var saved = localStorage.getItem("vims_fde_theme");
-          var mode = saved === "dark" ? "dark" : "light";
+          var mode =
+            saved === "dark" || saved === "light"
+              ? saved
+              : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
           document.documentElement.setAttribute("data-theme", mode);
         } catch (e) {
           document.documentElement.setAttribute("data-theme", "light");

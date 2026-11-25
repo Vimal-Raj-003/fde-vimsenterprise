@@ -194,7 +194,7 @@ export async function notifyPaymentConfirmed(reg, cohort) {
       <div style="background:#FFFFFF;border:1px solid #E8DFD3;border-radius:10px;padding:16px;margin:18px 0;">
         <div style="font-size:12px;font-weight:bold;color:#6A244C;text-transform:uppercase;margin-bottom:8px;">Program &amp; Payment Summary</div>
         <p style="margin:4px 0;font-size:13px;color:#22191D;"><strong>Start Date:</strong> Saturday, 12th December 2026 · 10:00 AM IST</p>
-        <p style="margin:4px 0;font-size:13px;color:#22191D;"><strong>Medium:</strong> Live Online in Tamil (8 Weeks)</p>
+        <p style="margin:4px 0;font-size:13px;color:#22191D;"><strong>Medium:</strong> 3-Day Live Online Workshop in Tamil</p>
         <p style="margin:4px 0;font-size:13px;color:#22191D;"><strong>Assigned Seat:</strong> #${reg.seatNumber} / ${cohort.totalSeats}</p>
         <p style="margin:4px 0;font-size:13px;color:#22191D;"><strong>Registration ID:</strong> ${reg.id}</p>
         <p style="margin:4px 0;font-size:13px;color:#22191D;"><strong>Razorpay Payment ID:</strong> ${reg.paymentId}</p>
@@ -216,7 +216,7 @@ export async function notifyPaymentConfirmed(reg, cohort) {
     }),
     sendEmail({
       to: reg.email,
-      subject: `Seat Confirmed (#${reg.seatNumber}): Forward Deployment Engineer (FDE) Batch — VIMS Academy`,
+      subject: `Seat Confirmed (#${reg.seatNumber}): Forward Deployment Engineer (FDE) Batch · VIMS Academy`,
       text: `Hi ${reg.name}, your seat #${reg.seatNumber} for the VIMS Academy FDE Live Program starting 12th December 2026 is confirmed. Payment Ref: ${reg.paymentId}. Total Paid: ₹${reg.totalInr}.`,
       html: studentHtml
     }),

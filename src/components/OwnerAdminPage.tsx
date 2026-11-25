@@ -103,7 +103,7 @@ export default function OwnerAdminPage({
     const digits = phone.replace(/\D/g, "");
     const clean = digits.length === 10 ? `91${digits}` : digits;
     const msg = encodeURIComponent(
-      `Hi ${name}, welcome to VIMS Academy! Thank you for registering for the 1-Week Forward Deployment Engineer (FDE) Live Class starting 12th December 2026.`
+      `Hi ${name}, welcome to VIMS Academy! Thank you for registering for the 3-Day Forward Deployment Engineer (FDE) Live Workshop starting 12th December 2026.`
     );
     return `https://wa.me/${clean}?text=${msg}`;
   }

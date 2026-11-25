@@ -111,7 +111,7 @@ export function EnrollmentFormWidget({
           amount: orderData.amount,
           currency: orderData.currency || "INR",
           name: "VIMS Academy",
-          description: "1-Week FDE Live Intensive (Starts 12th Dec)",
+          description: "3-Day FDE Live Workshop (Starts 12th Dec)",
           order_id: orderData.orderId,
           prefill: {
             name: name.trim(),

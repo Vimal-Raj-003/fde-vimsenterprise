@@ -56,13 +56,13 @@ export const CLASS_SCHEDULE = {
   targetIso: "2026-12-12T10:00:00+05:30",
   languageLabel: "Live Online · Taught in Tamil",
   audienceLabel: "College Students & Working Professionals",
-  durationLabel: "1-Week Intensive Program"
+  durationLabel: "3-Day Intensive Workshop"
 };
 
 export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
   {
     icon: "rocket",
-    dayLabel: "DAY 1 · RAPID CLARITY",
+    dayLabel: "DAY 1 · FOUNDATION & APIS",
     phase: "Instant Clarity",
     title: "Grasp Full AI Stack & Live APIs",
     points: [
@@ -74,27 +74,27 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
   },
   {
     icon: "database",
-    dayLabel: "DAY 2 · CORE MASTERY",
+    dayLabel: "DAY 2 · CORE RAG SYSTEMS",
     phase: "Real-World RAG Build",
     title: "Build Real RAG & Vector Systems",
     points: [
       "Connect PDFs & Company Databases to live AI models",
       "Eliminate wrong answers with accurate RAG retrieval",
-      "Ship a working Enterprise AI Assistant in 48 hours"
+      "Ship a working Enterprise AI Assistant by Day 2"
     ],
     milestone: "Day 2 Output: Live Data AI Assistant"
   },
   {
     icon: "cloud",
-    dayLabel: "DAYS 3 - 7 · DEPLOY",
-    phase: "Cloud Deploy & Career",
+    dayLabel: "DAY 3 · AGENTS & DEPLOY",
+    phase: "Cloud Deploy & Mastery",
     title: "Ship AI Agents & Live Portfolio",
     points: [
       "Build Enterprise AI Agents that automate daily tasks",
       "Deploy live to Public Cloud using Docker & HTTPS",
       "Graduate with GitHub Portfolio & VIMS Certificate"
     ],
-    milestone: "Final Output: Live Cloud URLs + Certificate"
+    milestone: "Day 3 Output: Live Cloud URLs + Certificate"
   }
 ];
 
@@ -147,9 +147,9 @@ export const VISUAL_PROJECTS: VisualProjectCard[] = [
 
 export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
   {
-    sprintCode: "DAYS 1 - 2",
-    daysLabel: "First 2 Days",
-    title: "Full FDE Architecture, APIs & RAG",
+    sprintCode: "DAY 1",
+    daysLabel: "Foundation & APIs",
+    title: "Full FDE Architecture & Live APIs",
     points: [
       {
         icon: "brain",
@@ -160,71 +160,51 @@ export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
         text: "Build FastAPI backends with real LLM APIs & Structured JSON"
       },
       {
-        icon: "database",
-        text: "Connect PDFs & company data to Vector Search by Day 2"
+        icon: "rocket",
+        text: "Run and test your first production-ready AI endpoint live"
       }
     ],
-    output: "Within 48 Hours: Your First Live Knowledge AI API"
+    output: "Day 1 Output: Your First Live AI API"
   },
   {
-    sprintCode: "DAYS 3 - 4",
+    sprintCode: "DAY 2",
     daysLabel: "Enterprise RAG",
-    title: "Citation Accuracy & Production Tuning",
+    title: "RAG, Vector Search & Citations",
     points: [
+      {
+        icon: "database",
+        text: "Connect PDFs & company data to Vector Search live"
+      },
       {
         icon: "shield",
         text: "Prevent hallucinations using Source Citations & grounding"
       },
       {
-        icon: "rocket",
-        text: "Optimize response speed & multi-document retrieval"
-      },
-      {
         icon: "check",
-        text: "Production accuracy testing & real-world prompt evaluation"
+        text: "Optimize speed, retrieval accuracy & real-world prompt evaluation"
       }
     ],
-    output: "Mid-Week Build: Production Document AI Assistant"
+    output: "Day 2 Output: Production Document AI Assistant"
   },
   {
-    sprintCode: "DAYS 5 - 6",
-    daysLabel: "AI Agents & Cloud",
-    title: "Autonomous Agents & Docker Cloud",
+    sprintCode: "DAY 3",
+    daysLabel: "Agents, Cloud & Career",
+    title: "AI Agents, Cloud Deploy & Portfolio",
     points: [
       {
         icon: "agent",
-        text: "Build Tool-Calling AI Agents that execute real tasks"
+        text: "Build Tool-Calling AI Agents that automate real workflows"
       },
       {
         icon: "cloud",
         text: "Package with Docker and ship to a Public HTTPS Cloud URL"
       },
       {
-        icon: "shield",
-        text: "Configure API security, cost controls & live monitoring"
-      }
-    ],
-    output: "Live Cloud Build: Public HTTPS AI Agent System"
-  },
-  {
-    sprintCode: "DAY 7",
-    daysLabel: "Portfolio & Career",
-    title: "Capstone Review & Interview Readiness",
-    points: [
-      {
-        icon: "portfolio",
-        text: "Publish your 1-week live AI projects to a GitHub Portfolio"
-      },
-      {
-        icon: "rocket",
-        text: "Resume refinement & Mock Interview prep for FDE roles"
-      },
-      {
         icon: "award",
-        text: "Earn your verified VIMS Academy Completion Certificate"
+        text: "Publish your GitHub Portfolio, Resume tips & VIMS Certificate"
       }
     ],
-    output: "Final Outcome: Live Portfolio + VIMS Academy Certificate"
+    output: "Day 3 Mastery: Live Cloud URLs + Portfolio + Certificate"
   }
 ];
 
@@ -272,7 +252,7 @@ export const STUDENT_REVIEWS: StudentReview[] = [
     name: "Priya Dharshini",
     role: "Software Developer · Coimbatore",
     tag: "Working Pro",
-    quote: "Built and deployed my first live AI project in one week!"
+    quote: "Built and deployed my first live AI project in just 3 days!"
   },
   {
     id: "r3",
@@ -285,9 +265,9 @@ export const STUDENT_REVIEWS: StudentReview[] = [
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "Can complete beginners learn this in 1 week?",
+    question: "Can complete beginners master this in 3 days?",
     answer:
-      "Yes! Every topic is taught live in simple Tamil from the basics. You will gain full clarity on FastAPI, LLMs, and RAG in the first 2 days, and ship live Cloud AI Agents by Day 7."
+      "Yes! Every topic is taught live in simple Tamil from the basics. By Day 2 you will build live FastAPI and RAG systems, and by Day 3 you will deploy Cloud AI Agents with a live GitHub portfolio."
   },
   {
     question: "Who should join this FDE live class?",
@@ -295,8 +275,8 @@ export const FAQ_ITEMS: FaqItem[] = [
       "Ideal for College Students, Working Professionals, Industrialists, and anyone who wants real deployed AI projects instead of passive theory."
   },
   {
-    question: "When does the class start, and are recordings included?",
+    question: "When does the workshop start, and are recordings included?",
     answer:
-      "The live online batch starts Saturday, 12th December 2026 at 10:00 AM IST. Full HD recordings, complete source code, and your VIMS Academy Certificate are included."
+      "The 3-day live online workshop starts Saturday, 12th December 2026 at 10:00 AM IST. Full HD recordings, complete source code, and your VIMS Academy Certificate are included."
   }
 ];

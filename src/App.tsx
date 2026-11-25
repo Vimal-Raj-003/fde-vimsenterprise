@@ -104,6 +104,26 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      try {
+        const saved = localStorage.getItem("vims_fde_theme");
+        if (saved === "dark" || saved === "light") return;
+      } catch {
+        // ignore storage errors
+      }
+      setTheme(e.matches ? "dark" : "light");
+    };
+    if (mql.addEventListener) {
+      mql.addEventListener("change", handleSystemThemeChange);
+      return () => mql.removeEventListener("change", handleSystemThemeChange);
+    }
+    mql.addListener(handleSystemThemeChange);
+    return () => mql.removeListener(handleSystemThemeChange);
+  }, []);
+
+  useEffect(() => {
     if (isAdminRoute) return;
     initMetaPixels(DEFAULT_COHORT.pricing.baseInr);
 
@@ -201,7 +221,7 @@ export default function App() {
         className="relative z-40 px-3 sm:px-4 py-2 text-center text-[11px] sm:text-[13px] font-semibold border-b border-[var(--border-gold)]"
       >
         <span style={{ color: "#E3B452" }}>Award-Winning VIMS Academy</span> ·{" "}
-        <strong>12th Dec Live Class in Tamil</strong> · Seats Left:{" "}
+        <strong>12th Dec · 3-Day Live Workshop</strong> · Seats Left:{" "}
         <span style={{ color: "#E3B452" }} className="underline tabular-nums">
           {cohort.remainingSeats}
         </span>
@@ -301,7 +321,7 @@ export default function App() {
               <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border-gold)] bg-[var(--bg-surface)] px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-bold text-[var(--ink-primary)] shadow-sm">
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent-gold-bright)]" />
                 <span>
-                  1-Week Intensive · Students &amp; Working Pros ·{" "}
+                  3-Day Live Workshop · Students &amp; Working Pros ·{" "}
                   <span className="text-[var(--accent-gold)]">Live in Tamil (தமிழ்)</span>
                 </span>
               </div>
@@ -325,11 +345,11 @@ export default function App() {
                     </span>
                   </>,
                   <>
-                    <strong className="text-[var(--ink-primary)]">First 2 Days Clarity:</strong>{" "}
-                    Build Live API &amp; AI systems step-by-step from zero
+                    <strong className="text-[var(--ink-primary)]">Master in 3 Days:</strong>{" "}
+                    Build Live API, RAG &amp; AI Agent systems step-by-step from zero
                   </>,
                   <>
-                    <strong className="text-[var(--ink-primary)]">1-Week Outcome:</strong>{" "}
+                    <strong className="text-[var(--ink-primary)]">3-Day Outcome:</strong>{" "}
                     Deployed GitHub Portfolio &amp; VIMS Academy Certificate
                   </>
                 ].map((bullet, i) => (
@@ -413,7 +433,7 @@ export default function App() {
                 WHY LEARNERS SUCCEED SO FAST
               </span>
               <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] font-bold text-[var(--ink-primary)] mt-3">
-                Master Core FDE Skills in the First 2 Days
+                Master Core FDE Skills in Just 3 Days
               </h2>
             </div>
 
@@ -464,10 +484,10 @@ export default function App() {
             <div className="mt-7 surface-card-featured rounded-2xl p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
                 <div className="font-heading text-lg sm:text-xl font-bold text-[var(--ink-primary)]">
-                  Get Full Clarity in Just 2 Days · Start Your AI Journey Today
+                  Master Real-World AI in 3 Days · Start Your Journey Today
                 </div>
                 <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
-                  12th Dec Live Class · Only {cohort.remainingSeats} Seats Left
+                  12th Dec · 3-Day Live Workshop · Only {cohort.remainingSeats} Seats Left
                 </div>
               </div>
               <button
@@ -534,20 +554,20 @@ export default function App() {
           </Reveal3D>
         </section>
 
-        {/* 4. AUTOMATED 1-WEEK SYLLABUS CAROUSEL (TAMIL + SCULPTED 3D ICONS + CTA #2) */}
+        {/* 4. AUTOMATED 3-DAY SYLLABUS CAROUSEL (TAMIL + SCULPTED 3D ICONS + CTA #2) */}
         <section id="curriculum" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal3D>
             <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
               <div>
                 <span className="font-mono-tech text-xs font-bold uppercase text-[var(--accent-gold)]">
-                  1-WEEK PRACTICAL ROADMAP
+                  3-DAY PRACTICAL ROADMAP
                 </span>
                 <h2 className="font-heading text-[24px] sm:text-[32px] lg:text-[36px] xl:text-[40px] font-bold text-[var(--ink-primary)] mt-1">
-                  1-Week Day-by-Day Practical Roadmap
+                  3-Day Practical Workshop Roadmap
                 </h2>
               </div>
               <span className="rounded-full bg-[var(--pill-gold-bg)] border border-[var(--border-gold)] px-4 py-1.5 text-xs sm:text-sm font-bold text-[var(--accent-gold)]">
-                Full Clarity in First 2 Days
+                Master FDE in 3 Days
               </span>
             </div>
 
@@ -557,7 +577,7 @@ export default function App() {
             <div className="mt-7 surface-card-featured rounded-2xl p-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div>
                 <div className="font-heading text-lg sm:text-xl font-bold text-[var(--ink-primary)]">
-                  Ready to Deploy Your First Live AI Project in 1 Week?
+                  Ready to Deploy Your First Live AI Project in 3 Days?
                 </div>
                 <div className="text-xs sm:text-sm text-[var(--ink-secondary)]">
                   Live Tamil Mentorship + Full HD Recordings + Complete Source Code
