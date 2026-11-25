@@ -322,7 +322,7 @@ export default function App() {
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--accent-gold-bright)]" />
                 <span>
                   3-Day Live Workshop · Students &amp; Working Pros ·{" "}
-                  <span className="text-[var(--accent-gold)]">Live in Tamil (தமிழ்)</span>
+                  <span className="text-[var(--accent-gold)]">Live in Tamil</span>
                 </span>
               </div>
 
@@ -340,8 +340,8 @@ export default function App() {
                   <>
                     Master <strong className="text-[var(--ink-primary)]">LLMs, RAG, AI Agents</strong>{" "}
                     &amp; Cloud{" "}
-                    <span className="font-semibold text-[var(--accent-gold)]">
-                      (தமிழ்லயே ஈஸியா சொல்லித் தருவோம்)
+                    <span className="font-normal text-[var(--ink-secondary)]">
+                      (தமிழ்ல easy-ஆ சொல்லித் தருவோம்)
                     </span>
                   </>,
                   <>
@@ -397,7 +397,7 @@ export default function App() {
                       {
                         icon: "language" as const,
                         title: "Live Interactive Class in Tamil",
-                        sub: "தமிழ்லயே எளிமையா சொல்லித் தருவாங்க · Beginner-friendly"
+                        sub: "Beginner-friendly · தமிழ்ல step-by-step கத்துக்கலாம்"
                       },
                       {
                         icon: "award" as const,
@@ -414,7 +414,9 @@ export default function App() {
                           <div className="text-sm sm:text-[15px] font-bold text-[var(--ink-primary)] leading-snug">
                             {row.title}
                           </div>
-                          <div className="text-xs text-[var(--ink-secondary)]">{row.sub}</div>
+                          <div className="text-xs font-normal text-[var(--ink-secondary)]">
+                            {row.sub}
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -633,9 +635,8 @@ export default function App() {
                         </strong>
                       </>,
                       <>
-                        Real Industry Engineers teaching live in{" "}
-                        <strong className="text-[var(--ink-primary)]">simple Tamil</strong> from
-                        the basics
+                        Real Industry Engineers teaching live from basics, தமிழ்ல clear-ஆ சொல்லித்
+                        தருவாங்க
                       </>,
                       <>
                         Production training proven across{" "}

@@ -68,7 +68,7 @@ export const RAPID_MASTERY_STEPS: RapidMasteryStep[] = [
     points: [
       "Understand the complete FDE architecture from zero",
       "Build and run your first FastAPI + LLM Live API",
-      "100% live hands-on coding explained simply in Tamil"
+      "100% live hands-on coding, தமிழ்ல clear-ஆ explain பண்ணுவோம்"
     ],
     milestone: "Day 1 Output: Your First Live AI API"
   },
@@ -153,7 +153,7 @@ export const CURRICULUM_SPRINTS: CurriculumSprint[] = [
     points: [
       {
         icon: "brain",
-        text: "Master FDE architecture & AI workflows from scratch in simple Tamil"
+        text: "Learn FDE architecture & AI workflows from basics (தமிழ்ல simple-ஆ புரியும்)"
       },
       {
         icon: "code",
@@ -267,7 +267,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: "Can complete beginners master this in 3 days?",
     answer:
-      "Yes! Every topic is taught live in simple Tamil from the basics. By Day 2 you will build live FastAPI and RAG systems, and by Day 3 you will deploy Cloud AI Agents with a live GitHub portfolio."
+      "Yes, கண்டிப்பா முடியும்! Basic-ல இருந்து தமிழ்ல easy-ஆ சொல்லித் தருவோம். By Day 2 you will build live FastAPI and RAG systems, and by Day 3 you will deploy Cloud AI Agents with a live GitHub portfolio."
   },
   {
     question: "Who should join this FDE live class?",
