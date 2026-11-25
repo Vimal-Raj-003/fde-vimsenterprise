@@ -255,6 +255,11 @@ export function EnrollmentFormWidget({
     }
   }
 
+  const buttonPriceText =
+    pricing.gstPercent > 0
+      ? `₹${pricing.baseInr.toLocaleString("en-IN")} + GST`
+      : `₹${pricing.baseInr.toLocaleString("en-IN")}`;
+
   const inputClass =
     "h-12 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-well)] px-4 text-[15px] text-[var(--ink-primary)] placeholder:text-[var(--ink-muted)] focus:border-[var(--accent-gold)] focus:bg-[var(--bg-surface)] focus:outline-none transition-colors";
 
@@ -354,7 +359,7 @@ export function EnrollmentFormWidget({
               ? "Opening Razorpay Payment..."
               : remainingSeats <= 0
                 ? "All 50 Seats Booked"
-                : `Reserve Seat Now · ₹${pricing.baseInr.toLocaleString("en-IN")} + GST`}
+                : `Reserve Seat Now · ${buttonPriceText}`}
           </button>
 
           <p className="text-center text-xs text-[var(--ink-muted)]">

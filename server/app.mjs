@@ -13,8 +13,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const TOTAL_SEATS = Number(process.env.TOTAL_SEATS || 50);
 const INITIAL_ENROLLED_SEATS = Number(process.env.INITIAL_ENROLLED_SEATS || 10);
-const BASE_FEE_INR = Number(process.env.COURSE_BASE_FEE_INR || 2999);
-const GST_PERCENT = Number(process.env.COURSE_GST_PERCENT || 18);
+const BASE_FEE_INR =
+  process.env.COURSE_BASE_FEE_INR !== undefined && process.env.COURSE_BASE_FEE_INR !== ""
+    ? Number(process.env.COURSE_BASE_FEE_INR)
+    : 1999;
+const GST_PERCENT =
+  process.env.COURSE_GST_PERCENT !== undefined && process.env.COURSE_GST_PERCENT !== ""
+    ? Number(process.env.COURSE_GST_PERCENT)
+    : 18;
 const GST_INR = Math.round((BASE_FEE_INR * GST_PERCENT) / 100);
 const TOTAL_INR = BASE_FEE_INR + GST_INR;
 const TOTAL_PAISE = TOTAL_INR * 100;
